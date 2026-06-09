@@ -117,6 +117,108 @@
             box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
         }
 
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed #F97316;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #FFF7ED;
+        }
+
+        .file-upload-area:hover {
+            background: #FFEDD5;
+            border-color: #EA580C;
+        }
+
+        .file-upload-area.drag-over {
+            background: #FFEDD5;
+            border-color: #EA580C;
+            transform: scale(1.02);
+        }
+
+        .file-upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-text {
+            color: #374151;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-upload-subtext {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .uploaded-files {
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            background: #F3F4F6;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .file-item-name {
+            color: #1F2937;
+            font-weight: 500;
+        }
+
+        .file-item-remove {
+            background: #EF4444;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        /* Budget Display */
+        .budget-display {
+            background: #F0FDF4;
+            border: 2px solid #10B981;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .budget-display h3 {
+            color: #059669;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .budget-amount {
+            color: #10B981;
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .budget-subtext {
+            color: #6B7280;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
         /* Checkbox Grid */
         .checkbox-grid {
             display: grid;
@@ -151,6 +253,44 @@
             margin: 0;
             cursor: pointer;
             font-weight: 500;
+        }
+
+        /* Grade/Subject Grid */
+        .grade-subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grade-subject-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .grade-subject-item:hover {
+            border-color: #F97316;
+            background: #FFF7ED;
+        }
+
+        .grade-subject-item input {
+            width: auto;
+            margin: 0;
+            transform: scale(1.1);
+        }
+
+        .grade-subject-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         /* Urgency Buttons */
@@ -312,6 +452,15 @@
             flex: 1;
         }
 
+        /* Hidden Fields */
+        .hidden-field {
+            display: none;
+        }
+
+        .hidden-field.visible {
+            display: block;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -321,6 +470,9 @@
                 padding: 1.5rem;
             }
             .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            .grade-subject-grid {
                 grid-template-columns: 1fr;
             }
             .inline-form {
@@ -356,7 +508,7 @@
                 </div>
                 <div class="form-group">
                     <label>School Type *</label>
-                    <select id="schoolType">
+                    <select id="schoolType" onchange="updateSchoolType()">
                         <option value="">Select</option>
                         <option value="Primary">Primary</option>
                         <option value="Secondary">Secondary</option>
@@ -365,8 +517,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Learner Count</label>
-                    <select id="learnerCount">
+                    <label>Learner Count *</label>
+                    <select id="learnerCount" onchange="calculateBudget()">
                         <option value="">Select range</option>
                         <option value="<100">< 100</option>
                         <option value="100-300">100–300</option>
@@ -386,26 +538,78 @@
                 <h2 style="margin-bottom: 1.5rem;">What does your school need?</h2>
                 <div class="checkbox-grid">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="needLTSM" value="LTSM (Textbooks, eBooks, CAPS material)">
+                        <input type="checkbox" id="needLTSM" value="LTSM (Textbooks, eBooks, CAPS material)" onchange="calculateBudget()">
                         <label>📘 LTSM (Textbooks, eBooks, CAPS)</label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="needICT" value="ICT Infrastructure (devices, labs, connectivity)">
+                        <input type="checkbox" id="needICT" value="ICT Infrastructure (devices, labs, connectivity)" onchange="calculateBudget()">
                         <label>💻 ICT Infrastructure</label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="needTraining" value="Teacher Training & CPD">
+                        <input type="checkbox" id="needTraining" value="Teacher Training & CPD" onchange="calculateBudget()">
                         <label>🎓 Teacher Training & CPD</label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="needAI" value="AI / Digital Transformation">
+                        <input type="checkbox" id="needAI" value="AI / Digital Transformation" onchange="calculateBudget()">
                         <label>🤖 AI / Digital Transformation</label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="needCompliance" value="Compliance / Administration Systems">
+                        <input type="checkbox" id="needCompliance" value="Compliance / Administration Systems" onchange="calculateBudget()">
                         <label>🧾 Compliance / Administration</label>
                     </div>
                 </div>
+
+                <!-- Grade/Subject Selection for Secondary Schools -->
+                <div id="gradeSubjectSection" class="hidden-field">
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Which grades will benefit? (Select all that apply)</h3>
+                    <div class="grade-subject-grid">
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="grade8" value="Grade 8">
+                            <label>Grade 8</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="grade9" value="Grade 9">
+                            <label>Grade 9</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="grade10" value="Grade 10">
+                            <label>Grade 10</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="grade11" value="Grade 11">
+                            <label>Grade 11</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="grade12" value="Grade 12">
+                            <label>Grade 12</label>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Key subjects (Select all that apply)</h3>
+                    <div class="grade-subject-grid">
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="subjectMath" value="Mathematics">
+                            <label>Mathematics</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="subjectScience" value="Science">
+                            <label>Science</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="subjectLanguage" value="Language">
+                            <label>Languages</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="subjectTech" value="Technology">
+                            <label>Technology</label>
+                        </div>
+                        <div class="grade-subject-item">
+                            <input type="checkbox" id="subjectHumanities" value="Humanities">
+                            <label>Humanities</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
                     <button class="btn btn-primary" onclick="nextStep(3)">Next →</button>
@@ -430,7 +634,16 @@
 
             <!-- Step 4: Budget Range -->
             <div class="form-step" id="step4">
-                <h2 style="margin-bottom: 1.5rem;">Approximate Budget (Optional)</h2>
+                <h2 style="margin-bottom: 1.5rem;">Estimated Budget Need</h2>
+                
+                <!-- Dynamic Budget Display -->
+                <div class="budget-display" id="budgetDisplay" style="display: none;">
+                    <h3>Estimated Range Based on Your Inputs</h3>
+                    <div class="budget-amount" id="budgetEstimate">R0</div>
+                    <div class="budget-subtext" id="budgetExplanation"></div>
+                </div>
+
+                <h3 style="margin-bottom: 1rem;">Or confirm/adjust your budget</h3>
                 <div class="budget-group" id="budgetGroup">
                     <div class="budget-btn" data-budget="< R50k">< R50k</div>
                     <div class="budget-btn" data-budget="R50k – R250k">R50k – R250k</div>
@@ -444,14 +657,39 @@
                 </div>
             </div>
 
-            <!-- Step 5: Outcome Capture -->
+            <!-- Step 5: File Uploads & Additional Details -->
             <div class="form-step" id="step5">
-                <h2 style="margin-bottom: 1.5rem;">Describe what you are trying to achieve</h2>
-                <div class="form-group">
-                    <textarea id="notes" rows="4" placeholder="e.g., We need 120 tablets for Grade 10 maths, plus CAPS-aligned eBooks..."></textarea>
+                <h2 style="margin-bottom: 1.5rem;">Supporting Documents (Optional)</h2>
+                <p style="margin-bottom: 1.5rem; color: #6B7280;">Upload quotes, RFQ documents, curriculum requirements, or any other relevant files</p>
+                
+                <div class="file-upload-area" id="fileUploadArea">
+                    <div class="file-upload-icon">📎</div>
+                    <div class="file-upload-text">Click to upload or drag and drop</div>
+                    <div class="file-upload-subtext">PDF, Word, Excel (max 10MB each, up to 5 files)</div>
+                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx">
                 </div>
+
+                <div class="uploaded-files" id="uploadedFiles"></div>
+
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Describe what you are trying to achieve</label>
+                    <textarea id="notes" rows="4" placeholder="e.g., We need 120 tablets for Grade 10 maths, plus CAPS-aligned eBooks. We have budget approval and need delivery within 4 weeks..."></textarea>
+                </div>
+
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(6)">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 6: Review & Submit -->
+            <div class="form-step" id="step6">
+                <h2 style="margin-bottom: 1.5rem;">Review Your Request</h2>
+                <div id="reviewSummary" style="background: #F9FAFB; padding: 1.5rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
                     <button class="btn btn-primary" onclick="submitForm()">Submit Request →</button>
                 </div>
             </div>
@@ -494,11 +732,97 @@
         let selectedUrgency = '';
         let selectedBudget = '';
         let selectedNeeds = [];
+        let uploadedFiles = [];
+
+        // Budget calculation matrix (base amounts in Rands)
+        const budgetMatrix = {
+            '<100': { basePerLearner: 150 },
+            '100-300': { basePerLearner: 120 },
+            '301-600': { basePerLearner: 100 },
+            '601-1000': { basePerLearner: 85 },
+            '>1000': { basePerLearner: 70 }
+        };
+
+        const needMultipliers = {
+            'LTSM': 1.0,
+            'ICT': 3.5,
+            'Training': 0.8,
+            'AI': 2.5,
+            'Compliance': 0.6
+        };
 
         // Update progress bar
         function updateProgress() {
-            const progress = ((currentStep - 1) / 5) * 100;
+            const totalSteps = 6;
+            const progress = ((currentStep - 1) / totalSteps) * 100;
             document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        // Show/hide grade/subject section based on school type
+        function updateSchoolType() {
+            const schoolType = document.getElementById('schoolType').value;
+            const gradeSection = document.getElementById('gradeSubjectSection');
+            
+            if (schoolType === 'Secondary') {
+                gradeSection.classList.add('visible');
+            } else {
+                gradeSection.classList.remove('visible');
+                // Clear selections if switching away from secondary
+                document.querySelectorAll('#gradeSubjectSection input[type="checkbox"]').forEach(cb => cb.checked = false);
+            }
+        }
+
+        // Calculate dynamic budget
+        function calculateBudget() {
+            const learnerCount = document.getElementById('learnerCount').value;
+            const needs = [];
+            
+            document.querySelectorAll('.checkbox-grid input[type="checkbox"]:checked').forEach(checkbox => {
+                const needText = checkbox.value;
+                for (const key in needMultipliers) {
+                    if (needText.includes(key)) {
+                        needs.push(key);
+                        break;
+                    }
+                }
+            });
+
+            if (!learnerCount || needs.length === 0) {
+                document.getElementById('budgetDisplay').style.display = 'none';
+                return;
+            }
+
+            // Parse learner count
+            let midpoint = 50;
+            if (learnerCount === '<100') midpoint = 75;
+            else if (learnerCount === '100-300') midpoint = 200;
+            else if (learnerCount === '301-600') midpoint = 450;
+            else if (learnerCount === '601-1000') midpoint = 800;
+            else if (learnerCount === '>1000') midpoint = 1500;
+
+            // Calculate base budget
+            const matrix = budgetMatrix[learnerCount];
+            let baseAmount = midpoint * matrix.basePerLearner;
+
+            // Apply multipliers for each need
+            let multiplier = 1;
+            needs.forEach(need => {
+                multiplier += (needMultipliers[need] - 1) * 0.2;
+            });
+
+            const estimatedBudget = Math.round(baseAmount * multiplier);
+            
+            // Format and display
+            const formatted = new Intl.NumberFormat('en-ZA', {
+                style: 'currency',
+                currency: 'ZAR',
+                minimumFractionDigits: 0
+            }).format(estimatedBudget);
+
+            document.getElementById('budgetEstimate').textContent = formatted;
+            document.getElementById('budgetExplanation').textContent = 
+                `Based on ${midpoint} learners + ${needs.join(', ')}`;
+            document.getElementById('budgetDisplay').style.display = 'block';
         }
 
         // Navigation
@@ -507,10 +831,24 @@
             if (currentStep === 1) {
                 const schoolName = document.getElementById('schoolName').value;
                 const schoolType = document.getElementById('schoolType').value;
-                if (!schoolName || !schoolType) {
-                    alert('Please fill in School Name and School Type');
+                const learnerCount = document.getElementById('learnerCount').value;
+                
+                if (!schoolName || !schoolType || !learnerCount) {
+                    alert('Please fill in all required fields (School Name, Type, and Learner Count)');
                     return;
                 }
+            }
+            
+            if (currentStep === 2) {
+                const needs = document.querySelectorAll('.checkbox-grid input[type="checkbox"]:checked').length;
+                if (needs === 0) {
+                    alert('Please select at least one need category');
+                    return;
+                }
+            }
+
+            if (currentStep === 6) {
+                populateReview();
             }
             
             document.getElementById(`step${currentStep}`).classList.remove('active');
@@ -524,6 +862,75 @@
             currentStep = step;
             document.getElementById(`step${currentStep}`).classList.add('active');
             updateProgress();
+        }
+
+        // File upload handling
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.add('drag-over');
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.classList.remove('drag-over');
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('drag-over');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            if (uploadedFiles.length + files.length > 5) {
+                alert('Maximum 5 files allowed');
+                return;
+            }
+
+            Array.from(files).forEach(file => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`${file.name} is too large (max 10MB)`);
+                    return;
+                }
+
+                uploadedFiles.push({
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    file: file
+                });
+            });
+
+            displayUploadedFiles();
+        }
+
+        function displayUploadedFiles() {
+            const container = document.getElementById('uploadedFiles');
+            container.innerHTML = '';
+
+            uploadedFiles.forEach((fileObj, index) => {
+                const sizeInMB = (fileObj.size / (1024 * 1024)).toFixed(1);
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span class="file-item-name">${fileObj.name} (${sizeInMB}MB)</span>
+                    <button class="file-item-remove" onclick="removeFile(${index})">Remove</button>
+                `;
+                container.appendChild(fileItem);
+            });
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            displayUploadedFiles();
         }
 
         // Urgency selection
@@ -546,84 +953,159 @@
             });
         });
 
-        // Submit form to n8n webhook
-        async function submitForm() {
-            // Collect needs
+        // Populate review step
+        function populateReview() {
+            const schoolName = document.getElementById('schoolName').value;
+            const location = document.getElementById('location').value;
+            const schoolType = document.getElementById('schoolType').value;
+            const learnerCount = document.getElementById('learnerCount').value;
+            
             const needs = [];
-            if (document.getElementById('needLTSM').checked) needs.push(document.getElementById('needLTSM').value);
-            if (document.getElementById('needICT').checked) needs.push(document.getElementById('needICT').value);
-            if (document.getElementById('needTraining').checked) needs.push(document.getElementById('needTraining').value);
-            if (document.getElementById('needAI').checked) needs.push(document.getElementById('needAI').value);
-            if (document.getElementById('needCompliance').checked) needs.push(document.getElementById('needCompliance').value);
+            document.querySelectorAll('.checkbox-grid input[type="checkbox"]:checked').forEach(cb => {
+                const shortName = cb.value.split('(')[0].trim();
+                needs.push(shortName);
+            });
 
-            if (needs.length === 0) {
-                alert('Please select at least one need category');
-                return;
+            const grades = [];
+            document.querySelectorAll('#gradeSubjectSection input[type="checkbox"]:checked').forEach(cb => {
+                grades.push(cb.value);
+            });
+
+            const notes = document.getElementById('notes').value;
+
+            let reviewHTML = `
+                <h3 style="color: #1F2937; margin-bottom: 1rem;">Your Procurement Request</h3>
+                <div style="display: grid; gap: 1rem;">
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">School</strong>
+                        <p style="margin-top: 0.25rem;">${schoolName}</p>
+                    </div>
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Type & Size</strong>
+                        <p style="margin-top: 0.25rem;">${schoolType} | ${learnerCount} learners${location ? ` | ${location}` : ''}</p>
+                    </div>
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Needs</strong>
+                        <p style="margin-top: 0.25rem;">${needs.join(', ')}</p>
+                    </div>
+            `;
+
+            if (grades.length > 0) {
+                reviewHTML += `
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Grades/Subjects</strong>
+                        <p style="margin-top: 0.25rem;">${grades.join(', ')}</p>
+                    </div>
+                `;
             }
+
+            reviewHTML += `
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Timeline</strong>
+                        <p style="margin-top: 0.25rem;">${selectedUrgency}</p>
+                    </div>
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Budget</strong>
+                        <p style="margin-top: 0.25rem;">${selectedBudget || 'Not specified'}</p>
+                    </div>
+            `;
+
+            if (notes) {
+                reviewHTML += `
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Additional Details</strong>
+                        <p style="margin-top: 0.25rem; color: #374151;">${notes}</p>
+                    </div>
+                `;
+            }
+
+            if (uploadedFiles.length > 0) {
+                reviewHTML += `
+                    <div>
+                        <strong style="color: #6B7280; font-size: 0.875rem;">Documents</strong>
+                        <p style="margin-top: 0.25rem; color: #374151;">${uploadedFiles.length} file(s) attached</p>
+                    </div>
+                `;
+            }
+
+            reviewHTML += `</div>`;
+            document.getElementById('reviewSummary').innerHTML = reviewHTML;
+        }
+
+        // Submit form
+        async function submitForm() {
+            // Collect data
+            const needs = [];
+            document.querySelectorAll('.checkbox-grid input[type="checkbox"]:checked').forEach(cb => {
+                needs.push(cb.value);
+            });
+
+            const grades = [];
+            document.querySelectorAll('#gradeSubjectSection input[type="checkbox"]:checked').forEach(cb => {
+                grades.push(cb.value);
+            });
 
             if (!selectedUrgency) {
                 alert('Please select a timeline');
                 return;
             }
 
-            // Build payload
             const payload = {
                 school_name: document.getElementById('schoolName').value,
                 location: document.getElementById('location').value,
                 type: document.getElementById('schoolType').value,
                 learner_count: document.getElementById('learnerCount').value,
                 needs: needs,
+                grades_subjects: grades,
                 urgency: selectedUrgency,
                 budget_range: selectedBudget || 'Not specified',
                 notes: document.getElementById('notes').value,
-                source_campaign: 'school_sales_hub_direct',
+                file_count: uploadedFiles.length,
+                source_campaign: 'school_sales_hub_enhanced',
                 timestamp: new Date().toISOString()
             };
 
             // Show loading
             document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep = 6;
+            currentStep = 7;
             document.getElementById('loading').classList.add('active');
             updateProgress();
 
-            // Replace with your actual n8n webhook URL
-            const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/school-intake';
+            // For demo: just simulate success after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('success').classList.add('active');
+                console.log('Form submitted:', payload);
+                console.log('Files:', uploadedFiles);
+            }, 2000);
 
+            // Uncomment below and add your n8n webhook URL when ready
+            /*
+            const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/school-intake';
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
                 if (response.ok) {
                     document.getElementById('loading').classList.remove('active');
                     document.getElementById('success').classList.add('active');
-                    
-                    // Optional: Send to Google Analytics / Facebook Pixel
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'generate_lead', {
-                            'event_category': 'procurement',
-                            'value': payload.budget_range
-                        });
-                    }
                 } else {
                     throw new Error('Network response was not ok');
                 }
             } catch (error) {
                 console.error('Submission error:', error);
                 document.getElementById('loading').classList.remove('active');
-                alert('There was an error submitting your request. Please try again or contact us directly.');
-                // Return to form
-                document.getElementById('step5').classList.add('active');
-                currentStep = 5;
+                alert('Error submitting request. Please try again.');
+                document.getElementById('step6').classList.add('active');
+                currentStep = 6;
                 updateProgress();
             }
+            */
         }
 
-        // Catalogue download with lead capture
+        // Catalogue download
         async function downloadCatalogue() {
             const email = document.getElementById('catalogueEmail').value;
             if (!email) {
@@ -633,7 +1115,6 @@
 
             document.getElementById('catalogueMessage').innerHTML = '<span style="color: #10B981;">Processing...</span>';
 
-            // Send to n8n as catalogue lead
             const payload = {
                 email: email,
                 type: 'catalogue_download',
@@ -641,27 +1122,20 @@
                 timestamp: new Date().toISOString()
             };
 
-            const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/catalogue-download';
-
-            try {
-                await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                // Simulate PDF download
+            // Demo: simulate success
+            setTimeout(() => {
                 document.getElementById('catalogueMessage').innerHTML = '<span style="color: #10B981;">✓ Check your email for the catalogue link</span>';
-                
-                // Clear after 3 seconds
                 setTimeout(() => {
                     document.getElementById('catalogueMessage').innerHTML = '';
                     document.getElementById('catalogueEmail').value = '';
                 }, 3000);
-            } catch (error) {
-                document.getElementById('catalogueMessage').innerHTML = '<span style="color: #EF4444;">Error, please try again</span>';
-            }
+            }, 1000);
+
+            console.log('Catalogue request:', payload);
         }
+
+        // Initialize
+        updateProgress();
     </script>
 </body>
 </html>
