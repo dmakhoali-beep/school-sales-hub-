@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ivy Africa | School Procurement Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A2F2A 0%, #1B3A5C 100%);
+            min-height: 100vh;
+            color: #1A2A3A;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Card Layout */
+        .card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            margin-bottom: 2rem;
+        }
+
+        /* Form Steps */
+        .form-step {
+            padding: 2.5rem;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: #E5E7EB;
+            height: 4px;
+            width: 100%;
+        }
+
+        .progress-fill {
+            background: #F97316;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1F2937;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+        }
+
+        /* Checkbox Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .checkbox-item:hover {
+            border-color: #F97316;
+            background: #FFF7ED;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Urgency Buttons */
+        .urgency-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .urgency-btn {
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 500;
+        }
+
+        .urgency-btn.selected {
+            background: #F97316;
+            border-color: #F97316;
+            color: white;
+        }
+
+        /* Budget Range */
+        .budget-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .budget-btn {
+            padding: 0.875rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 500;
+        }
+
+        .budget-btn.selected {
+            background: #F97316;
+            border-color: #F97316;
+            color: white;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #F97316;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(249,115,22,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #EA580C;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(249,115,22,0.4);
+        }
+
+        .btn-secondary {
+            background: #E5E7EB;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #D1D5DB;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .success-message h2 {
+            color: #10B981;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #F97316;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Catalogue Gate */
+        .catalogue-gate {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .catalogue-gate h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .inline-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 1.5rem auto 0;
+        }
+
+        .inline-form input {
+            flex: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .form-step {
+                padding: 1.5rem;
+            }
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            .inline-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>What does your school need this term?</h1>
+            <p>Structured procurement for textbooks, ICT infrastructure, training & compliance solutions</p>
+        </div>
+
+        <!-- Main Intake Form Card -->
+        <div class="card" id="intakeForm">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Step 1: School Profile -->
+            <div class="form-step active" id="step1">
+                <h2 style="margin-bottom: 1.5rem;">School Profile</h2>
+                <div class="form-group">
+                    <label>School Name *</label>
+                    <input type="text" id="schoolName" placeholder="e.g., St. Mary's Secondary School" required>
+                </div>
+                <div class="form-group">
+                    <label>Province / District</label>
+                    <input type="text" id="location" placeholder="e.g., Nairobi, Central Province">
+                </div>
+                <div class="form-group">
+                    <label>School Type *</label>
+                    <select id="schoolType">
+                        <option value="">Select</option>
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="TVET">TVET / Technical</option>
+                        <option value="Private">Private School</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Learner Count</label>
+                    <select id="learnerCount">
+                        <option value="">Select range</option>
+                        <option value="<100">< 100</option>
+                        <option value="100-300">100–300</option>
+                        <option value="301-600">301–600</option>
+                        <option value="601-1000">601–1000</option>
+                        <option value=">1000">> 1000</option>
+                    </select>
+                </div>
+                <div class="nav-buttons">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Needs Categories -->
+            <div class="form-step" id="step2">
+                <h2 style="margin-bottom: 1.5rem;">What does your school need?</h2>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="needLTSM" value="LTSM (Textbooks, eBooks, CAPS material)">
+                        <label>📘 LTSM (Textbooks, eBooks, CAPS)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="needICT" value="ICT Infrastructure (devices, labs, connectivity)">
+                        <label>💻 ICT Infrastructure</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="needTraining" value="Teacher Training & CPD">
+                        <label>🎓 Teacher Training & CPD</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="needAI" value="AI / Digital Transformation">
+                        <label>🤖 AI / Digital Transformation</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="needCompliance" value="Compliance / Administration Systems">
+                        <label>🧾 Compliance / Administration</label>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Urgency -->
+            <div class="form-step" id="step3">
+                <h2 style="margin-bottom: 1.5rem;">Timeline</h2>
+                <div class="urgency-group" id="urgencyGroup">
+                    <div class="urgency-btn" data-urgency="Immediate (0–30 days)">Immediate (0–30 days)</div>
+                    <div class="urgency-btn" data-urgency="This term">This term</div>
+                    <div class="urgency-btn" data-urgency="This year">This year</div>
+                    <div class="urgency-btn" data-urgency="Planning phase">Planning phase</div>
+                </div>
+                <input type="hidden" id="urgency">
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Budget Range -->
+            <div class="form-step" id="step4">
+                <h2 style="margin-bottom: 1.5rem;">Approximate Budget (Optional)</h2>
+                <div class="budget-group" id="budgetGroup">
+                    <div class="budget-btn" data-budget="< R50k">< R50k</div>
+                    <div class="budget-btn" data-budget="R50k – R250k">R50k – R250k</div>
+                    <div class="budget-btn" data-budget="R250k – R1m">R250k – R1m</div>
+                    <div class="budget-btn" data-budget="R1m+">R1m+</div>
+                </div>
+                <input type="hidden" id="budgetRange">
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(5)">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Outcome Capture -->
+            <div class="form-step" id="step5">
+                <h2 style="margin-bottom: 1.5rem;">Describe what you are trying to achieve</h2>
+                <div class="form-group">
+                    <textarea id="notes" rows="4" placeholder="e.g., We need 120 tablets for Grade 10 maths, plus CAPS-aligned eBooks..."></textarea>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+                    <button class="btn btn-primary" onclick="submitForm()">Submit Request →</button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="form-step" id="loading">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Processing your procurement request...</p>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div class="form-step" id="success">
+                <div class="success-message">
+                    <h2>✓ Request Received</h2>
+                    <p style="font-size: 1.1rem; margin: 1rem 0;">A procurement specialist will contact you within 4 hours.</p>
+                    <div style="margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="window.location.reload()">Submit Another Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catalogue Gate -->
+        <div class="catalogue-gate">
+            <h3>📚 Download Full Catalogue</h3>
+            <p>Access our complete range of ICT, LTSM, and training solutions</p>
+            <div class="inline-form">
+                <input type="email" id="catalogueEmail" placeholder="Your email address">
+                <button class="btn btn-primary" onclick="downloadCatalogue()">Download PDF →</button>
+            </div>
+            <div id="catalogueMessage" style="margin-top: 1rem; font-size: 0.875rem;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tracking
+        let currentStep = 1;
+        let selectedUrgency = '';
+        let selectedBudget = '';
+        let selectedNeeds = [];
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentStep - 1) / 5) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        // Navigation
+        function nextStep(step) {
+            // Validate current step
+            if (currentStep === 1) {
+                const schoolName = document.getElementById('schoolName').value;
+                const schoolType = document.getElementById('schoolType').value;
+                if (!schoolName || !schoolType) {
+                    alert('Please fill in School Name and School Type');
+                    return;
+                }
+            }
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+
+        // Urgency selection
+        document.querySelectorAll('.urgency-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.urgency-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedUrgency = this.getAttribute('data-urgency');
+                document.getElementById('urgency').value = selectedUrgency;
+            });
+        });
+
+        // Budget selection
+        document.querySelectorAll('.budget-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedBudget = this.getAttribute('data-budget');
+                document.getElementById('budgetRange').value = selectedBudget;
+            });
+        });
+
+        // Submit form to n8n webhook
+        async function submitForm() {
+            // Collect needs
+            const needs = [];
+            if (document.getElementById('needLTSM').checked) needs.push(document.getElementById('needLTSM').value);
+            if (document.getElementById('needICT').checked) needs.push(document.getElementById('needICT').value);
+            if (document.getElementById('needTraining').checked) needs.push(document.getElementById('needTraining').value);
+            if (document.getElementById('needAI').checked) needs.push(document.getElementById('needAI').value);
+            if (document.getElementById('needCompliance').checked) needs.push(document.getElementById('needCompliance').value);
+
+            if (needs.length === 0) {
+                alert('Please select at least one need category');
+                return;
+            }
+
+            if (!selectedUrgency) {
+                alert('Please select a timeline');
+                return;
+            }
+
+            // Build payload
+            const payload = {
+                school_name: document.getElementById('schoolName').value,
+                location: document.getElementById('location').value,
+                type: document.getElementById('schoolType').value,
+                learner_count: document.getElementById('learnerCount').value,
+                needs: needs,
+                urgency: selectedUrgency,
+                budget_range: selectedBudget || 'Not specified',
+                notes: document.getElementById('notes').value,
+                source_campaign: 'school_sales_hub_direct',
+                timestamp: new Date().toISOString()
+            };
+
+            // Show loading
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep = 6;
+            document.getElementById('loading').classList.add('active');
+            updateProgress();
+
+            // Replace with your actual n8n webhook URL
+            const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/school-intake';
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    document.getElementById('loading').classList.remove('active');
+                    document.getElementById('success').classList.add('active');
+                    
+                    // Optional: Send to Google Analytics / Facebook Pixel
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'generate_lead', {
+                            'event_category': 'procurement',
+                            'value': payload.budget_range
+                        });
+                    }
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                document.getElementById('loading').classList.remove('active');
+                alert('There was an error submitting your request. Please try again or contact us directly.');
+                // Return to form
+                document.getElementById('step5').classList.add('active');
+                currentStep = 5;
+                updateProgress();
+            }
+        }
+
+        // Catalogue download with lead capture
+        async function downloadCatalogue() {
+            const email = document.getElementById('catalogueEmail').value;
+            if (!email) {
+                document.getElementById('catalogueMessage').innerHTML = '<span style="color: #EF4444;">Please enter your email</span>';
+                return;
+            }
+
+            document.getElementById('catalogueMessage').innerHTML = '<span style="color: #10B981;">Processing...</span>';
+
+            // Send to n8n as catalogue lead
+            const payload = {
+                email: email,
+                type: 'catalogue_download',
+                source_campaign: 'catalogue_gate',
+                timestamp: new Date().toISOString()
+            };
+
+            const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/catalogue-download';
+
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Simulate PDF download
+                document.getElementById('catalogueMessage').innerHTML = '<span style="color: #10B981;">✓ Check your email for the catalogue link</span>';
+                
+                // Clear after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('catalogueMessage').innerHTML = '';
+                    document.getElementById('catalogueEmail').value = '';
+                }, 3000);
+            } catch (error) {
+                document.getElementById('catalogueMessage').innerHTML = '<span style="color: #EF4444;">Error, please try again</span>';
+            }
+        }
+    </script>
+</body>
+</html>
