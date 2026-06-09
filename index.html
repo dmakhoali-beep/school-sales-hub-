@@ -3,1391 +3,707 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ivy Africa — School Supply Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Ivy Africa | School Procurement</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════
-   DESIGN TOKENS — white-first palette
-══════════════════════════════════════════ */
-:root {
-  /* Whites & neutrals */
-  --white:    #FFFFFF;
-  --off:      #FAFAFA;
-  --ghost:    #F4F4F2;
-  --border:   #E8E8E5;
-  --border2:  #D4D4CF;
-  --ink:      #111210;
-  --ink2:     #3A3D38;
-  --muted:    #8A8D86;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green:#1A4D2E;--g2:#143d24;--orange:#E8611A;--o2:#c9541a;
+  --blue:#1B3A6B;--txt:#111;--mut:#666;--bdr:#E0E0E0;
+  --bg:#fff;--bg2:#F7F7F5;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:#fff;color:#111;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 
-  /* Green — accent only */
-  --g:        #1A4D2E;
-  --g-mid:    #2D6B44;
-  --g-soft:   rgba(26,77,46,0.07);
-  --g-line:   rgba(26,77,46,0.15);
+/* ── CURSOR BALL ── */
+#cball{
+  position:fixed;width:22px;height:22px;
+  border-radius:50%;
+  background:var(--red);
+  pointer-events:none;z-index:99999;
+  top:0;left:0;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,background .25s,opacity .25s;
+  mix-blend-mode:multiply;
+  will-change:transform;
+}
+#cball.big{width:48px;height:48px;background:var(--green);opacity:.7;}
 
-  /* Orange — CTA only */
-  --o:        #E8621A;
-  --o-hover:  #D45516;
-  --o-soft:   rgba(232,98,26,0.08);
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;}
+.nlogo{display:flex;align-items:center;gap:9px;font-family:'Source Serif 4',serif;font-size:1.1rem;font-weight:700;color:var(--green);text-decoration:none;}
+.nmark{width:30px;height:30px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;}
+.nlinks{display:flex;gap:1.75rem;align-items:center;}
+.nlinks a{color:var(--mut);text-decoration:none;font-size:.875rem;font-weight:500;transition:color .15s;}
+.nlinks a:hover{color:#111;}
+.ncta{background:var(--orange)!important;color:#fff!important;padding:.4rem 1rem;border-radius:4px;transition:background .15s!important;}
+.ncta:hover{background:var(--o2)!important;}
 
-  /* Blue — tertiary */
-  --b:        #1B3A6B;
-  --b-soft:   rgba(27,58,107,0.07);
+/* ── TICKER ── */
+.ticker-wrap{background:var(--bg2);border-bottom:1px solid var(--bdr);overflow:hidden;padding:.55rem 0;position:relative;}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none;}
+.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--bg2),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--bg2),transparent);}
+.ticker{display:flex;width:max-content;animation:tick 30s linear infinite;}
+.ticker:hover{animation-play-state:paused;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tbadge{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:3px;font-size:.75rem;font-weight:600;margin:0 .5rem;white-space:nowrap;}
+.tb-mml{background:#003B6F;color:#fff;}
+.tb-plat{background:#5B2D8E;color:#fff;}
+.tb-ox{background:#002147;color:#fff;}
+.tb-shu{background:#C8102E;color:#fff;}
+.tb-via{background:#1A4D2E;color:#fff;}
+.tdot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55;}
+.tsep{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 .75rem;white-space:nowrap;}
 
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans:  'Inter', system-ui, sans-serif;
-  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+/* ── HERO ── */
+.hero{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 3rem;display:grid;grid-template-columns:1fr 400px;gap:3.5rem;align-items:start;border-bottom:1px solid var(--bdr);}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.875rem;}
+.hero h1{font-family:'Source Serif 4',serif;font-size:2.6rem;font-weight:700;line-height:1.16;letter-spacing:-.02em;color:#111;margin-bottom:1.2rem;min-height:9rem;}
+.hero h1 span{color:var(--green);}
+.tw-cursor{display:inline-block;border-right:3px solid var(--orange);padding-right:3px;animation:blink .75s step-end infinite;}
+@keyframes blink{50%{border-color:transparent;}}
+.hero-sub{font-size:.975rem;color:var(--mut);line-height:1.75;margin-bottom:1.75rem;}
+.trust-row{display:flex;flex-wrap:wrap;gap:1.25rem;border-top:1px solid var(--bdr);padding-top:1.25rem;}
+.ti{font-size:.78rem;color:var(--mut);}
+.ti strong{display:block;font-size:.72rem;color:#111;margin-bottom:1px;}
 
-/* ══════════════════════════════════════════
-   RESET & BASE
-══════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--white);
-  color: var(--ink);
-  line-height: 1.65;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-::selection { background: var(--g); color: #fff; }
-a { color: inherit; text-decoration: none; }
-button { font-family: var(--sans); cursor: pointer; border: none; }
-input, select, textarea { font-family: var(--sans); }
+/* ── WIZARD ── */
+.wcard{border:1px solid var(--bdr);border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.whead{background:var(--green);padding:.875rem 1.125rem;display:flex;justify-content:space-between;align-items:center;}
+.whead-title{font-size:.75rem;font-weight:600;color:#fff;letter-spacing:.04em;}
+.whead-step{font-size:.68rem;color:rgba(255,255,255,.55);}
+.wbar{height:3px;background:rgba(255,255,255,.18);}
+.wbar-fill{height:100%;background:var(--orange);transition:width .35s ease;}
+.wbody{padding:1.2rem;}
+.wq{font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:#111;margin-bottom:.9rem;line-height:1.35;}
+.ws{display:none;}
+.ws.on{display:block;animation:fu .22s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.9rem;}
+.ogrid3{grid-template-columns:1fr 1fr 1fr;}
+.opt{padding:.575rem .7rem;border:1px solid var(--bdr);border-radius:4px;font-size:.8rem;font-weight:500;color:#111;background:#fff;display:flex;align-items:center;gap:7px;line-height:1.3;transition:border-color .15s,background .15s;user-select:none;}
+.opt:hover{border-color:var(--green);background:#F0F7F3;}
+.opt.sel{border-color:var(--green);background:#F0F7F3;color:var(--green);}
+.opt.sel::before{content:'✓';font-size:.68rem;font-weight:700;flex-shrink:0;}
+.oi{font-size:.95rem;flex-shrink:0;}
+.ofull{grid-column:1/-1;}
+.wlabel{display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px;}
+.winput{width:100%;padding:.575rem .7rem;border:1px solid var(--bdr);border-radius:4px;font-size:.85rem;font-family:'Inter',sans-serif;color:#111;background:#fff;outline:none;margin-bottom:7px;transition:border-color .15s;}
+.winput:focus{border-color:var(--green);}
+.wrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.wnav{display:flex;justify-content:space-between;align-items:center;margin-top:.9rem;padding-top:.875rem;border-top:1px solid var(--bdr);}
+.wbtn{padding:.475rem 1rem;border-radius:4px;font-size:.8rem;font-weight:600;border:1px solid var(--bdr);background:#fff;color:var(--mut);font-family:'Inter',sans-serif;transition:all .15s;cursor:pointer;}
+.wbtn:hover{border-color:#aaa;color:#111;}
+.wbtn.primary{background:var(--green);color:#fff;border-color:var(--green);}
+.wbtn.primary:hover{background:var(--g2);}
+.wbtn.orng{background:var(--orange);color:#fff;border-color:var(--orange);}
+.wbtn.orng:hover{background:var(--o2);}
 
-/* ══════════════════════════════════════════
-   CURSOR
-══════════════════════════════════════════ */
-.cdot {
-  position: fixed; z-index: 9999; pointer-events: none;
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--o); transform: translate(-50%,-50%);
-  transition: width .22s var(--ease), height .22s var(--ease);
-  mix-blend-mode: normal;
-}
-.cring {
-  position: fixed; z-index: 9998; pointer-events: none;
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 1px solid rgba(26,77,46,0.25);
-  transform: translate(-50%,-50%);
-  transition: width .28s var(--ease), height .28s var(--ease), border-color .28s;
-}
-body.chover .cdot { width: 12px; height: 12px; }
-body.chover .cring { width: 44px; height: 44px; border-color: rgba(26,77,46,0.18); }
-@media (hover: none) { .cdot, .cring { display: none; } }
+/* ── FILE UPLOAD ── */
+.fdrop{border:2px dashed #D0D0D0;border-radius:6px;padding:1.25rem;text-align:center;position:relative;transition:border-color .2s,background .2s;background:#fff;margin-bottom:.6rem;cursor:pointer;}
+.fdrop:hover,.fdrop.over{border-color:var(--green);background:#F0F7F3;}
+.fdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
+.fdrop-icon{font-size:1.6rem;display:block;margin-bottom:.35rem;}
+.fdrop-t{font-size:.8rem;font-weight:600;color:#111;display:block;margin-bottom:2px;}
+.fdrop-s{font-size:.72rem;color:var(--mut);}
+.fitem{display:flex;align-items:center;gap:7px;padding:.375rem .6rem;background:var(--bg2);border-radius:4px;font-size:.75rem;margin-bottom:3px;}
+.fn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;}
+.fsz{color:var(--mut);flex-shrink:0;}
+.frm{background:none;border:none;color:#aaa;font-size:1rem;cursor:pointer;padding:0 2px;line-height:1;font-family:'Inter',sans-serif;}
+.frm:hover{color:#c00;}
+.fnote{font-size:.72rem;color:var(--mut);line-height:1.5;margin-top:.4rem;}
 
-/* ══════════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════════ */
-.r {
-  opacity: 0; transform: translateY(18px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-}
-.r.vis { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: .08s; }
-.d2 { transition-delay: .16s; }
-.d3 { transition-delay: .24s; }
-.d4 { transition-delay: .32s; }
+/* ── MAIN ── */
+.main{max-width:1180px;margin:0 auto;padding:2.75rem 2rem;}
+.shead{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:.45rem;margin-bottom:1.6rem;}
+.shead h2{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:700;letter-spacing:-.01em;}
+.shead-s{font-size:.78rem;color:var(--mut);}
 
-/* ══════════════════════════════════════════
-   NAV
-══════════════════════════════════════════ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  height: 58px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: 1px solid transparent;
-  transition: border-color .3s;
-}
-nav.scrolled { border-color: var(--border); }
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
+.rv.in{opacity:1;transform:none;}
 
-.nav-logo { display: flex; align-items: center; gap: 10px; }
-.nav-mark {
-  width: 28px; height: 28px; border-radius: 5px;
-  background: var(--g);
-  display: grid; place-items: center;
-  font-family: var(--serif); font-weight: 900; font-size: 13px; color: #fff;
-}
-.nav-name {
-  font-family: var(--serif); font-size: 15.5px; font-weight: 700;
-  color: var(--ink); letter-spacing: -0.2px;
-}
-.nav-name em { font-style: normal; color: var(--g); }
+/* ── COMPLIANCE STRIP ── */
+.cstrip{background:var(--green);color:#fff;border-radius:6px;padding:1.1rem 1.4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.75rem;}
+.ci{text-align:center;}
+.ci-l{font-size:.62rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
+.ci-v{font-size:.85rem;font-weight:600;}
 
-.nav-links { display: flex; gap: 32px; }
-.nav-links a {
-  font-size: 13px; font-weight: 500; color: var(--muted);
-  position: relative; padding-bottom: 2px;
-  transition: color .2s;
-}
-.nav-links a::after {
-  content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
-  height: 1.5px; background: var(--g);
-  transition: right .24s var(--ease);
-}
-.nav-links a:hover { color: var(--ink); }
-.nav-links a:hover::after { right: 0; }
+/* ── CATALOGUE ── */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--bdr);border-radius:6px;overflow:hidden;margin-bottom:2.75rem;}
+.citem{background:#fff;padding:1.35rem 1.15rem;border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);transition:background .15s;}
+.citem:hover{background:var(--bg2);}
+.citem:nth-child(3n){border-right:none;}
+.citem:nth-last-child(-n+3){border-bottom:none;}
+.ctag{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:4px;margin-bottom:.45rem;}
+.cdot{width:7px;height:7px;border-radius:50%;}
+.ctitle{font-family:'Source Serif 4',serif;font-size:.975rem;font-weight:600;color:#111;line-height:1.3;margin-bottom:.35rem;}
+.cdesc{font-size:.78rem;color:var(--mut);line-height:1.55;margin-bottom:.8rem;}
+.cprice{font-size:.72rem;font-weight:600;color:var(--green);margin-bottom:.55rem;}
+.clink{font-size:.78rem;font-weight:600;color:var(--green);text-decoration:none;}
+.clink:hover{text-decoration:underline;}
 
-.nav-cta {
-  background: var(--g); color: #fff; border-radius: 5px;
-  padding: 9px 20px; font-size: 12.5px; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.nav-cta:hover { background: var(--g-mid); }
-.nav-cta:active { transform: scale(.96); }
+/* ── QUOTE ── */
+.qsec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:1.75rem;margin-bottom:2.75rem;}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;}
+.qlabel{display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px;}
+.qinput{width:100%;padding:.55rem .7rem;border:1px solid var(--bdr);border-radius:4px;font-size:.875rem;font-family:'Inter',sans-serif;background:#fff;color:#111;outline:none;transition:border-color .15s;}
+.qinput:focus{border-color:var(--green);}
+.qfull{grid-column:1/-1;}
+.qsubmit{margin-top:1.1rem;background:var(--green);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:4px;font-size:.875rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:background .15s;}
+.qsubmit:hover{background:var(--g2);}
+.qfdrop{border:2px dashed #D0D0D0;border-radius:5px;padding:1rem;text-align:center;position:relative;background:#fff;transition:border-color .2s,background .2s;cursor:pointer;}
+.qfdrop:hover,.qfdrop.over{border-color:var(--green);background:#F0F7F3;}
+.qfdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
 
-/* ══════════════════════════════════════════
-   HERO — white split
-══════════════════════════════════════════ */
-.hero {
-  min-height: 100vh;
-  padding-top: 58px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-}
+/* ── SUCCESS ── */
+.succ{display:none;text-align:center;padding:1.75rem 1rem;}
+.succ.on{display:block;}
+.scheck{width:42px;height:42px;border-radius:50%;background:#E6F4ED;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .9rem;animation:pop .4s ease;}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
-/* LEFT — white, editorial */
-.hero-l {
-  background: var(--white);
-  padding: 88px 72px 80px 72px;
-  display: flex; flex-direction: column; justify-content: center;
-  border-right: 1px solid var(--border);
-  position: relative;
-}
-/* subtle top accent */
-.hero-l::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--g) 0%, transparent 55%);
-}
+/* ── TOAST ── */
+#toast{position:fixed;bottom:1.75rem;left:50%;transform:translateX(-50%) translateY(60px);background:#111;color:#fff;padding:.65rem 1.35rem;border-radius:6px;font-size:.825rem;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
-.hero-kicker {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 10.5px; font-weight: 600;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 32px;
-}
-.hero-kicker-line {
-  width: 28px; height: 1.5px; background: var(--o); flex-shrink: 0;
-}
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.35rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.fl{font-size:.75rem;color:var(--mut);}
+.fl a{color:var(--green);text-decoration:none;}
+.flinks{display:flex;gap:1.35rem;}
+.flinks a{font-size:.75rem;color:var(--mut);text-decoration:none;}
+.flinks a:hover{color:#111;}
 
-.hero-h1 {
-  font-family: var(--serif);
-  font-size: clamp(44px, 4.8vw, 76px);
-  font-weight: 900; line-height: 1.0;
-  letter-spacing: -2.5px;
-  color: var(--ink);
-  margin-bottom: 26px;
-}
-.hero-h1 em { font-style: italic; color: var(--g); }
-
-.hero-p {
-  font-size: 16px; line-height: 1.75;
-  color: var(--muted); max-width: 420px;
-  margin-bottom: 48px;
-}
-
-.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.btn-orange {
-  background: var(--o); color: #fff; border-radius: 6px;
-  padding: 14px 28px; font-size: 13.5px; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase;
-  display: inline-flex; align-items: center; gap: 9px;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.btn-orange:hover { background: var(--o-hover); }
-.btn-orange:active { transform: scale(.97); }
-.btn-ghost-dark {
-  background: transparent; color: var(--ink2);
-  border: 1.5px solid var(--border2); border-radius: 6px;
-  padding: 13px 22px; font-size: 13px; font-weight: 500;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: border-color .2s, color .2s;
-}
-.btn-ghost-dark:hover { border-color: var(--g); color: var(--g); }
-
-.hero-trust-row {
-  display: flex; gap: 32px; margin-top: 56px;
-  padding-top: 32px; border-top: 1px solid var(--border);
-}
-.hero-stat-n {
-  font-family: var(--serif); font-size: 26px; font-weight: 700;
-  color: var(--ink); letter-spacing: -0.5px; line-height: 1;
-}
-.hero-stat-l {
-  font-size: 10.5px; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--muted); margin-top: 3px;
-}
-
-/* RIGHT — off-white, wizard */
-.hero-r {
-  background: var(--off);
-  padding: 80px 56px 80px 64px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-
-/* Wizard progress */
-.wiz-meta {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 28px;
-}
-.wiz-meta-label {
-  font-size: 10.5px; font-weight: 600;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
-}
-.wiz-meta-step {
-  font-size: 11px; font-weight: 500; color: var(--muted);
-}
-.wiz-meta-step span { color: var(--g); font-weight: 700; }
-.wiz-bar {
-  height: 2px; background: var(--border); border-radius: 2px;
-  margin-bottom: 40px; overflow: hidden;
-}
-.wiz-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--g), var(--g-mid));
-  border-radius: 2px;
-  transition: width .55s var(--ease);
-  width: 14.28%;
-}
-
-/* Step transitions */
-.wiz-step { display: none; animation: sIn .36s var(--ease) forwards; }
-.wiz-step.active { display: block; }
-@keyframes sIn {
-  from { opacity: 0; transform: translateX(16px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.wiz-q {
-  font-family: var(--serif);
-  font-size: clamp(17px, 1.6vw, 22px);
-  font-weight: 700; color: var(--ink);
-  letter-spacing: -.35px; line-height: 1.25;
-  margin-bottom: 5px;
-}
-.wiz-hint {
-  font-size: 13px; color: var(--muted);
-  line-height: 1.5; margin-bottom: 22px;
-}
-
-/* Tiles — white on off-white */
-.wiz-tiles {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 9px; margin-bottom: 28px;
-}
-.wiz-tiles.cols3 { grid-template-columns: 1fr 1fr 1fr; }
-.wiz-tile {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 8px; padding: 14px 13px;
-  cursor: pointer; position: relative; overflow: hidden;
-  transition: border-color .18s, box-shadow .18s, transform .18s var(--ease-spring);
-  user-select: none;
-}
-.wiz-tile:hover {
-  border-color: var(--g-line);
-  box-shadow: 0 3px 14px rgba(26,77,46,0.07);
-  transform: translateY(-1px);
-}
-.wiz-tile.sel {
-  border-color: var(--g);
-  background: var(--white);
-  box-shadow: 0 0 0 3px rgba(26,77,46,0.08);
-}
-.tile-ico { font-size: 19px; margin-bottom: 7px; }
-.tile-lbl { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-.tile-sub { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
-.tile-chk {
-  position: absolute; top: 9px; right: 9px;
-  width: 17px; height: 17px; border-radius: 50%;
-  background: var(--g);
-  display: grid; place-items: center;
-  opacity: 0; transform: scale(.4);
-  transition: opacity .18s, transform .3s var(--ease-spring);
-}
-.tile-chk svg { width: 8px; height: 8px; fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.wiz-tile.sel .tile-chk { opacity: 1; transform: scale(1); }
-
-/* Chips */
-.wiz-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.wiz-chip {
-  padding: 7px 15px; border-radius: 100px;
-  border: 1.5px solid var(--border);
-  background: var(--white);
-  font-size: 12.5px; font-weight: 500; color: var(--ink2);
-  cursor: pointer; user-select: none;
-  transition: border-color .16s, color .16s, background .16s;
-}
-.wiz-chip:hover { border-color: var(--g-line); color: var(--g); }
-.wiz-chip.sel { background: var(--g); color: #fff; border-color: var(--g); }
-
-/* Budget */
-.budget-num {
-  font-family: var(--serif);
-  font-size: 38px; font-weight: 700; letter-spacing: -1.5px;
-  color: var(--g); line-height: 1; margin-bottom: 20px;
-}
-.budget-num small {
-  font-family: var(--sans); font-size: 14px;
-  color: var(--muted); font-weight: 400; margin-left: 6px;
-}
-input[type=range] {
-  -webkit-appearance: none; width: 100%;
-  height: 2px; background: var(--border); border-radius: 2px; outline: none;
-  margin-bottom: 6px;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--white); cursor: pointer;
-  border: 2px solid var(--g);
-  box-shadow: 0 0 0 3px rgba(26,77,46,0.12), 0 2px 8px rgba(26,77,46,0.2);
-  transition: transform .2s var(--ease-spring);
-}
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-.range-ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
-
-/* Floating label inputs */
-.fl {
-  position: relative; margin-bottom: 14px;
-}
-.fl input, .fl select, .fl textarea {
-  width: 100%; padding: 18px 13px 7px;
-  background: var(--white); color: var(--ink);
-  border: 1.5px solid var(--border); border-radius: 7px;
-  font-size: 14px; outline: none;
-  transition: border-color .2s, box-shadow .2s;
-  line-height: 1.4;
-  -webkit-appearance: none;
-}
-.fl textarea { min-height: 76px; resize: vertical; padding-top: 22px; }
-.fl select { cursor: pointer; }
-.fl input:focus, .fl select:focus, .fl textarea:focus {
-  border-color: var(--g);
-  box-shadow: 0 0 0 3px rgba(26,77,46,0.07);
-}
-.fl label {
-  position: absolute; left: 13px; top: 13px;
-  font-size: 13px; color: var(--muted);
-  transition: top .16s var(--ease), font-size .16s var(--ease), color .16s;
-  pointer-events: none;
-}
-.fl input:focus ~ label,
-.fl input:not(:placeholder-shown) ~ label,
-.fl select:focus ~ label,
-.fl textarea:focus ~ label,
-.fl textarea:not(:placeholder-shown) ~ label {
-  top: 5px; font-size: 9.5px; color: var(--g);
-  font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-}
-.fl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-/* Wiz nav */
-.wiz-nav {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 20px; border-top: 1px solid var(--border);
-}
-.wiz-back {
-  font-size: 12.5px; color: var(--muted); background: none;
-  display: flex; align-items: center; gap: 5px;
-  transition: color .15s;
-}
-.wiz-back:hover { color: var(--ink); }
-.wiz-next {
-  background: var(--g); color: #fff; border-radius: 6px;
-  padding: 12px 24px; font-size: 12.5px; font-weight: 600;
-  letter-spacing: .07em; text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.wiz-next:hover { background: var(--g-mid); }
-.wiz-next:active { transform: scale(.97); }
-.wiz-sub-btn {
-  background: var(--o); color: #fff; border-radius: 6px;
-  padding: 12px 24px; font-size: 12.5px; font-weight: 600;
-  letter-spacing: .07em; text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.wiz-sub-btn:hover { background: var(--o-hover); }
-.wiz-sub-btn:active { transform: scale(.97); }
-
-/* Success */
-.wiz-ok { display: none; text-align: center; padding: 32px 0; }
-.wiz-ok.active { display: block; animation: sIn .45s var(--ease) forwards; }
-.wiz-ok-ring {
-  width: 64px; height: 64px; border-radius: 50%;
-  border: 2px solid var(--g); margin: 0 auto 20px;
-  display: grid; place-items: center;
-  animation: popIn .5s var(--ease-spring) .1s both;
-}
-@keyframes popIn {
-  from { transform: scale(.5); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-.wiz-ok-ring svg { width: 22px; height: 22px; fill: none; stroke: var(--g); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.wiz-ok h3 {
-  font-family: var(--serif); font-size: 21px; font-weight: 700;
-  color: var(--ink); letter-spacing: -.35px; margin-bottom: 9px;
-}
-.wiz-ok p { font-size: 13.5px; color: var(--muted); line-height: 1.6; max-width: 290px; margin: 0 auto 22px; }
-.wiz-restart {
-  background: none; border: 1.5px solid var(--border); border-radius: 6px;
-  padding: 9px 18px; font-size: 12.5px; color: var(--muted);
-  transition: border-color .2s, color .2s;
-}
-.wiz-restart:hover { border-color: var(--g); color: var(--g); }
-
-/* ══════════════════════════════════════════
-   TICKER
-══════════════════════════════════════════ */
-.ticker {
-  height: 40px; overflow: hidden;
-  background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-}
-.ticker-track {
-  display: flex; animation: tick 28s linear infinite; white-space: nowrap;
-}
-@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.ticker-item {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 0 28px;
-  font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--muted);
-}
-.ticker-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--o); flex-shrink: 0; }
-
-/* ══════════════════════════════════════════
-   CATALOGUE SECTION
-══════════════════════════════════════════ */
-.section { padding: 108px 0; }
-.section.bg-off { background: var(--off); }
-.container { max-width: 1160px; margin: 0 auto; padding: 0 64px; }
-
-.eyebrow {
-  display: flex; align-items: center; gap: 11px; margin-bottom: 14px;
-}
-.eyebrow-dash { width: 24px; height: 1.5px; background: var(--o); flex-shrink: 0; }
-.eyebrow-txt {
-  font-size: 10.5px; font-weight: 700;
-  letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
-}
-
-.sec-h {
-  font-family: var(--serif);
-  font-size: clamp(30px, 3.5vw, 50px);
-  font-weight: 900; letter-spacing: -1.5px; color: var(--ink);
-  line-height: 1.05; margin-bottom: 13px;
-}
-.sec-h em { font-style: italic; color: var(--g); }
-.sec-p {
-  font-size: 16px; color: var(--muted);
-  max-width: 480px; line-height: 1.72; margin-bottom: 60px;
-}
-
-/* Catalogue cards — asymmetric stagger */
-.cat-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 22px; align-items: start;
-}
-.cat-card {
-  background: var(--white);
-  border: 1.5px solid var(--border); border-radius: 10px;
-  overflow: hidden;
-  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s;
-}
-.cat-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 24px 56px rgba(17,18,16,0.08);
-  border-color: var(--border2);
-}
-.cat-card:nth-child(2) { margin-top: 36px; }
-.cat-card:nth-child(3) { margin-top: 18px; }
-.cat-stripe { height: 4px; }
-.cat-card:nth-child(1) .cat-stripe { background: var(--g); }
-.cat-card:nth-child(2) .cat-stripe { background: var(--o); }
-.cat-card:nth-child(3) .cat-stripe { background: var(--b); }
-.cat-inner { padding: 30px 26px; }
-.cat-badge {
-  display: inline-block; border-radius: 100px;
-  padding: 3px 10px; font-size: 10px; font-weight: 700;
-  letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px;
-}
-.cat-card:nth-child(1) .cat-badge { background: var(--g-soft); color: var(--g); }
-.cat-card:nth-child(2) .cat-badge { background: var(--o-soft); color: var(--o); }
-.cat-card:nth-child(3) .cat-badge { background: var(--b-soft); color: var(--b); }
-.cat-h {
-  font-family: var(--serif); font-size: 18px; font-weight: 700;
-  color: var(--ink); letter-spacing: -.25px; line-height: 1.25; margin-bottom: 9px;
-}
-.cat-p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
-.cat-items { list-style: none; margin-bottom: 24px; }
-.cat-items li {
-  font-size: 12.5px; color: var(--ink2); padding: 7px 0;
-  border-bottom: 1px solid var(--off);
-  display: flex; gap: 9px; align-items: flex-start; line-height: 1.4;
-}
-.cat-items li:last-child { border-bottom: none; }
-.cat-dot {
-  width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
-}
-.cat-card:nth-child(1) .cat-dot { background: var(--g); opacity: .45; }
-.cat-card:nth-child(2) .cat-dot { background: var(--o); opacity: .45; }
-.cat-card:nth-child(3) .cat-dot { background: var(--b); opacity: .45; }
-.cat-dl {
-  width: 100%; background: var(--off); color: var(--ink2);
-  border: 1px solid var(--border); border-radius: 6px;
-  padding: 10px 14px; font-size: 12px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  transition: background .18s, color .18s, border-color .18s;
-}
-.cat-dl:hover { background: var(--g); color: #fff; border-color: var(--g); }
-.cat-dl svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-
-/* ══════════════════════════════════════════
-   QUOTE SECTION — white bg, card floats
-══════════════════════════════════════════ */
-.quote-wrap {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
-}
-.quote-kicker { font-size: 10.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 11px; }
-.quote-kicker span { width: 24px; height: 1.5px; background: var(--o); display: inline-block; }
-
-.pillars { display: flex; flex-direction: column; gap: 22px; margin-top: 4px; }
-.pillar { display: flex; gap: 14px; align-items: flex-start; }
-.pill-icon {
-  width: 38px; height: 38px; border-radius: 8px; flex-shrink: 0;
-  background: var(--g-soft);
-  display: grid; place-items: center; font-size: 16px;
-  border: 1px solid var(--g-line);
-}
-.pill-t { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
-.pill-b { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
-
-/* Form card */
-.q-card {
-  background: var(--white); border: 1.5px solid var(--border);
-  border-radius: 12px; padding: 40px 34px;
-  box-shadow: 0 2px 24px rgba(17,18,16,0.04), 0 8px 48px rgba(17,18,16,0.04);
-}
-.q-card-t {
-  font-family: var(--serif); font-size: 20px; font-weight: 700;
-  color: var(--ink); letter-spacing: -.3px; margin-bottom: 3px;
-}
-.q-card-s { font-size: 13px; color: var(--muted); margin-bottom: 26px; }
-.ck-group { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
-.ck-row { display: flex; align-items: center; gap: 9px; cursor: pointer; }
-.ck-row input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--g); cursor: pointer; flex-shrink: 0; }
-.ck-row span { font-size: 13.5px; color: var(--ink2); }
-.q-btn {
-  width: 100%; background: var(--o); color: #fff; border-radius: 7px;
-  padding: 15px; font-size: 13.5px; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; margin-top: 6px;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.q-btn:hover { background: var(--o-hover); }
-.q-btn:active { transform: scale(.98); }
-.q-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; }
-
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
-footer {
-  background: var(--ink); padding: 72px 0 36px;
-}
-.foot-inner { max-width: 1160px; margin: 0 auto; padding: 0 64px; }
-.foot-top {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
-  padding-bottom: 52px; border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.foot-brand-name {
-  font-family: var(--serif); font-size: 17px; font-weight: 700;
-  color: #fff; letter-spacing: -.2px; margin-bottom: 9px;
-}
-.foot-brand-desc { font-size: 13px; color: rgba(255,255,255,.36); line-height: 1.7; max-width: 230px; }
-.foot-reg {
-  font-size: 10px; color: rgba(255,255,255,.18);
-  line-height: 2; letter-spacing: .03em; margin-top: 18px;
-}
-.foot-col-h {
-  font-size: 9.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(255,255,255,.25); margin-bottom: 16px;
-}
-.foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.foot-col li { font-size: 12.5px; color: rgba(255,255,255,.42); }
-.foot-col a:hover { color: rgba(255,255,255,.75); }
-.foot-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  padding-top: 26px; font-size: 11px; color: rgba(255,255,255,.2);
-}
-.foot-badges { display: flex; gap: 8px; }
-.foot-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  border: 1px solid rgba(255,255,255,.08); border-radius: 100px;
-  padding: 4px 10px; font-size: 10px; color: rgba(255,255,255,.3);
-  background: rgba(255,255,255,.03);
-}
-.foot-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--g-mid); }
-
-/* ══════════════════════════════════════════
-   MODAL
-══════════════════════════════════════════ */
-.modal-bg {
-  position: fixed; inset: 0; z-index: 800;
-  background: rgba(17,18,16,0.45);
-  backdrop-filter: blur(8px);
-  display: flex; align-items: center; justify-content: center; padding: 24px;
-  opacity: 0; pointer-events: none;
-  transition: opacity .25s;
-}
-.modal-bg.open { opacity: 1; pointer-events: all; }
-.modal-card {
-  background: var(--white); border-radius: 12px;
-  padding: 44px 38px; max-width: 420px; width: 100%;
-  position: relative;
-  transform: translateY(16px) scale(.97);
-  transition: transform .35s var(--ease-spring);
-  box-shadow: 0 32px 80px rgba(17,18,16,0.18);
-}
-.modal-bg.open .modal-card { transform: none; }
-.modal-x {
-  position: absolute; top: 14px; right: 14px;
-  background: var(--off); border-radius: 50%;
-  width: 28px; height: 28px; font-size: 15px; color: var(--muted);
-  display: grid; place-items: center;
-  transition: background .15s;
-}
-.modal-x:hover { background: var(--border); }
-.modal-badge {
-  display: inline-block; background: var(--g-soft); color: var(--g);
-  font-size: 9.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-  border-radius: 100px; padding: 3px 10px; margin-bottom: 14px;
-}
-.modal-h {
-  font-family: var(--serif); font-size: 22px; font-weight: 700;
-  color: var(--ink); letter-spacing: -.35px; margin-bottom: 5px;
-}
-.modal-p { font-size: 13.5px; color: var(--muted); margin-bottom: 22px; line-height: 1.55; }
-.modal-btn {
-  width: 100%; background: var(--g); color: #fff; border-radius: 7px;
-  padding: 14px; font-size: 13.5px; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase; margin-top: 6px;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: background .2s, transform .15s var(--ease-spring);
-}
-.modal-btn:hover { background: var(--g-mid); }
-.modal-btn:active { transform: scale(.98); }
-
-/* ══════════════════════════════════════════
-   TOAST
-══════════════════════════════════════════ */
-.toast {
-  position: fixed; bottom: 28px; left: 50%;
-  transform: translateX(-50%) translateY(60px);
-  background: var(--ink); color: #fff; border-radius: 8px;
-  padding: 11px 20px; font-size: 13.5px; font-weight: 500;
-  display: flex; align-items: center; gap: 9px;
-  box-shadow: 0 8px 30px rgba(17,18,16,0.18);
-  z-index: 900; white-space: nowrap;
-  opacity: 0; transition: transform .38s var(--ease-spring), opacity .3s;
-}
-.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-.toast-ico {
-  width: 18px; height: 18px; border-radius: 50%; background: var(--g);
-  display: grid; place-items: center; flex-shrink: 0;
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-l { border-right: none; border-bottom: 1px solid var(--border); padding: 72px 48px 64px; min-height: 65vh; }
-  .hero-r { padding: 56px 48px; }
-  .quote-wrap { grid-template-columns: 1fr; gap: 48px; }
-  .pillars { display: none; }
-  .foot-top { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 768px) {
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  .hero-l { padding: 56px 24px 48px; }
-  .hero-r { padding: 40px 24px; }
-  .wiz-tiles { grid-template-columns: 1fr; }
-  .wiz-tiles.cols3 { grid-template-columns: 1fr 1fr; }
-  .cat-grid { grid-template-columns: 1fr; }
-  .cat-card:nth-child(2), .cat-card:nth-child(3) { margin-top: 0; }
-  .container, .foot-inner { padding: 0 24px; }
-  .section { padding: 72px 0; }
-  .fl-row { grid-template-columns: 1fr; }
-  .foot-top { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; align-items: flex-start; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .cgrid{grid-template-columns:1fr 1fr;}
+  .qgrid{grid-template-columns:1fr;}
+  nav .nlinks{display:none;}
+  .cstrip{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:580px){
+  .hero{padding:2rem 1.25rem;}
+  .hero h1{font-size:2rem;min-height:auto;}
+  .cgrid{grid-template-columns:1fr;}
+  .ogrid{grid-template-columns:1fr;}
+  .main{padding:2rem 1.25rem;}
+  nav{padding:0 1.25rem;}
+  .cstrip{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
-<div class="cdot" id="cD"></div>
-<div class="cring" id="cR"></div>
+<!-- CURSOR BALL -->
+<div id="cball"></div>
 
-<!-- ═══════════ NAV ═══════════ -->
-<nav id="nav">
-  <div class="nav-logo">
-    <div class="nav-mark">IA</div>
-    <div class="nav-name">Ivy <em>Africa</em></div>
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nlogo" href="https://ivyafrica.co.za">
+    <div class="nmark">IA</div>Ivy Africa
+  </a>
+  <div class="nlinks">
+    <a href="https://ivyafrica.co.za/ltsm">LTSM</a>
+    <a href="https://ivyafrica.co.za/ict">ICT</a>
+    <a href="https://ivyafrica.co.za/training">Training</a>
+    <a href="https://ivyafrica.co.za/contact">Contact</a>
+    <a href="https://ivyafrica.co.za/quote" class="ncta">Request a Quote</a>
   </div>
-  <div class="nav-links">
-    <a href="#catalogue">Catalogue</a>
-    <a href="#quote">Get a Quote</a>
-    <a href="#footer">Contact</a>
-  </div>
-  <button class="nav-cta" onclick="scrollWiz()">Start Assessment</button>
 </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-
-  <!-- Left — editorial statement -->
-  <div class="hero-l">
-    <div class="hero-kicker">
-      <span class="hero-kicker-line"></span>
-      Authorised National Supplier · Est. 2016
-    </div>
-    <h1 class="hero-h1">
-      Everything<br>your school<br>needs,<br><em>delivered.</em>
-    </h1>
-    <p class="hero-p">
-      LTSM, ICT devices, STEM kits, and staff training programmes —
-      sourced from authorised partners, priced for public schools,
-      delivered nationwide.
-    </p>
-    <div class="hero-actions">
-      <button class="btn-orange" onclick="scrollWiz()">
-        Tell us what you need
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg>
-      </button>
-      <button class="btn-ghost-dark" onclick="openModal('general')">
-        Download catalogue
-      </button>
-    </div>
-    <div class="hero-trust-row">
-      <div>
-        <div class="hero-stat-n">Level 1</div>
-        <div class="hero-stat-l">B-BBEE Status</div>
-      </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;"></div>
-      <div>
-        <div class="hero-stat-n">10+</div>
-        <div class="hero-stat-l">Brand Authorisations</div>
-      </div>
-      <div style="width:1px;background:var(--border);align-self:stretch;"></div>
-      <div>
-        <div class="hero-stat-n">2016</div>
-        <div class="hero-stat-l">Established</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right — wizard -->
-  <div class="hero-r" id="wizPanel">
-    <div class="wiz-meta">
-      <span class="wiz-meta-label">School needs assessment</span>
-      <span class="wiz-meta-step">Step <span id="stepNum">1</span> of 7</span>
-    </div>
-    <div class="wiz-bar"><div class="wiz-fill" id="wFill"></div></div>
-
-    <!-- Step 1 -->
-    <div class="wiz-step active" id="ws1">
-      <p class="wiz-q">What are you looking to procure?</p>
-      <p class="wiz-hint">Select all that apply — we'll tailor your quote accordingly.</p>
-      <div class="wiz-tiles" id="g1">
-        <div class="wiz-tile" onclick="tile(this,'g1',true)">
-          <div class="tile-ico">📚</div><div class="tile-lbl">LTSM & Textbooks</div>
-          <div class="tile-sub">Learner support materials, stationery</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g1',true)">
-          <div class="tile-ico">💻</div><div class="tile-lbl">ICT Equipment</div>
-          <div class="tile-sub">Laptops, desktops, networking</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g1',true)">
-          <div class="tile-ico">🤖</div><div class="tile-lbl">STEM & Coding Kits</div>
-          <div class="tile-sub">Robotics, electronics, makerspaces</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g1',true)">
-          <div class="tile-ico">🎓</div><div class="tile-lbl">Training & CPD</div>
-          <div class="tile-sub">Staff development, digital literacy</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-      </div>
-      <div class="wiz-nav">
-        <div></div>
-        <button class="wiz-next" onclick="go(1,2)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="wiz-step" id="ws2">
-      <p class="wiz-q">When do you need delivery?</p>
-      <p class="wiz-hint">Helps us check stock and prioritise your quote.</p>
-      <div class="wiz-tiles" id="g2">
-        <div class="wiz-tile" onclick="tile(this,'g2',false)">
-          <div class="tile-ico">⚡</div><div class="tile-lbl">Within 2 weeks</div>
-          <div class="tile-sub">Current term / urgent need</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g2',false)">
-          <div class="tile-ico">📅</div><div class="tile-lbl">Next school term</div>
-          <div class="tile-sub">Planning for Q3 / Q4 2026</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g2',false)">
-          <div class="tile-ico">🗓️</div><div class="tile-lbl">2027 school year</div>
-          <div class="tile-sub">Annual / budget cycle planning</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g2',false)">
-          <div class="tile-ico">🔍</div><div class="tile-lbl">Just exploring</div>
-          <div class="tile-sub">Gathering pricing info</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-      </div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(2,1)">← Back</button>
-        <button class="wiz-next" onclick="go(2,3)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="wiz-step" id="ws3">
-      <p class="wiz-q">What's your approximate budget?</p>
-      <p class="wiz-hint">Helps us suggest the right products and quantities.</p>
-      <div class="budget-num" id="bNum">R 25,000 <small>approx.</small></div>
-      <div>
-        <input type="range" id="bSlider" min="0" max="14" value="4" oninput="budg(this.value)">
-        <div class="range-ends"><span>Under R5K</span><span>R2M+</span></div>
-      </div>
-      <div style="height:20px;"></div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(3,2)">← Back</button>
-        <button class="wiz-next" onclick="go(3,4)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div class="wiz-step" id="ws4">
-      <p class="wiz-q">How many learners does your school serve?</p>
-      <p class="wiz-hint">For accurate per-learner quantities in your quote.</p>
-      <div class="wiz-tiles" id="g4">
-        <div class="wiz-tile" onclick="tile(this,'g4',false)">
-          <div class="tile-lbl">Under 200</div><div class="tile-sub">Small school</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g4',false)">
-          <div class="tile-lbl">200 – 600</div><div class="tile-sub">Mid-size school</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g4',false)">
-          <div class="tile-lbl">600 – 1,200</div><div class="tile-sub">Large school</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g4',false)">
-          <div class="tile-lbl">1,200+</div><div class="tile-sub">Very large / multi-campus</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-      </div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(4,3)">← Back</button>
-        <button class="wiz-next" onclick="go(4,5)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 5 -->
-    <div class="wiz-step" id="ws5">
-      <p class="wiz-q">Which phases does your school cover?</p>
-      <p class="wiz-hint">Select all that apply.</p>
-      <div class="wiz-chips">
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">Foundation Phase (Gr R–3)</div>
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">Intermediate Phase (Gr 4–6)</div>
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">Senior Phase (Gr 7–9)</div>
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">FET Phase (Gr 10–12)</div>
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">TVET / College</div>
-        <div class="wiz-chip" onclick="this.classList.toggle('sel')">ECD / Pre-school</div>
-      </div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(5,4)">← Back</button>
-        <button class="wiz-next" onclick="go(5,6)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 6 -->
-    <div class="wiz-step" id="ws6">
-      <p class="wiz-q">Where is your school located?</p>
-      <p class="wiz-hint">Helps us assign the right rep and confirm delivery routes.</p>
-      <div class="wiz-tiles cols3" id="g6">
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">Eastern Cape</div><div class="tile-sub">Joe Gqabi District</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">Eastern Cape</div><div class="tile-sub">Other District</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">Free State</div><div class="tile-sub">&nbsp;</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">Gauteng</div><div class="tile-sub">&nbsp;</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">KwaZulu-Natal</div><div class="tile-sub">&nbsp;</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-        <div class="wiz-tile" onclick="tile(this,'g6',false)">
-          <div class="tile-lbl">Other Province</div><div class="tile-sub">&nbsp;</div>
-          <div class="tile-chk"><svg viewBox="0 0 10 8"><polyline points="1 4 4 7 9 1"/></svg></div>
-        </div>
-      </div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(6,5)">← Back</button>
-        <button class="wiz-next" onclick="go(6,7)">Continue <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Step 7 -->
-    <div class="wiz-step" id="ws7">
-      <p class="wiz-q">Where should we send your quote?</p>
-      <p class="wiz-hint">Used only to prepare and deliver your quote — never shared.</p>
-      <div class="fl-row">
-        <div class="fl">
-          <input type="text" id="c_name" placeholder=" "><label>Full Name</label>
-        </div>
-        <div class="fl">
-          <select id="c_role">
-            <option value=""></option>
-            <option>Principal</option><option>Deputy Principal</option>
-            <option>HOD / Department Head</option><option>Procurement Officer</option>
-            <option>SGB Member</option><option>Circuit Manager</option>
-          </select>
-          <label>Your Role</label>
-        </div>
-      </div>
-      <div class="fl"><input type="text" id="c_school" placeholder=" "><label>School Name</label></div>
-      <div class="fl-row">
-        <div class="fl"><input type="email" id="c_email" placeholder=" "><label>Email Address</label></div>
-        <div class="fl"><input type="tel" id="c_phone" placeholder=" "><label>Mobile / WhatsApp</label></div>
-      </div>
-      <div class="fl"><textarea id="c_notes" placeholder=" "></textarea><label>Specific products or notes (optional)</label></div>
-      <div class="wiz-nav">
-        <button class="wiz-back" onclick="go(7,6)">← Back</button>
-        <button class="wiz-sub-btn" onclick="wizSub()">Send quote request <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Success -->
-    <div class="wiz-ok" id="wizOk">
-      <div class="wiz-ok-ring">
-        <svg viewBox="0 0 24 24"><polyline points="4 12 9 17 20 7"/></svg>
-      </div>
-      <h3>Quote request received.</h3>
-      <p>We'll prepare a tailored quote and send it to your inbox within one business day.</p>
-      <button class="wiz-restart" onclick="wizReset()">Submit another request</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ TICKER ═══════════ -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item"><span class="ticker-sep"></span>Dell Technologies</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>HP Inc.</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Lenovo</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Microsoft</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Huawei</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>IBM</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Sophos</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Pinnacle Distribution</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>First Distribution</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>B-BBEE Level 1 Supplier</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>VAT No. 4910306010</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>CSD No. MAAA0862915</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Reg. 2016/041769/07</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Dell Technologies</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>HP Inc.</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Lenovo</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Microsoft</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Huawei</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>IBM</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Sophos</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Pinnacle Distribution</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>First Distribution</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>B-BBEE Level 1 Supplier</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>VAT No. 4910306010</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>CSD No. MAAA0862915</span>
-    <span class="ticker-item"><span class="ticker-sep"></span>Reg. 2016/041769/07</span>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerEl">
+    <span class="tsep">Authorised distributor —</span>
+    <span class="tbadge tb-mml"><span class="tdot"></span>Maskew Miller Longman</span>
+    <span class="tbadge tb-plat"><span class="tdot"></span>Platinum Series</span>
+    <span class="tbadge tb-ox"><span class="tdot"></span>Oxford University Press SA</span>
+    <span class="tbadge tb-shu"><span class="tdot"></span>Shuter &amp; Shooter</span>
+    <span class="tbadge tb-via"><span class="tdot"></span>Via Afrika</span>
+    <span class="tsep">CAPS-aligned &nbsp;·&nbsp; B-BBEE Level 1 &nbsp;·&nbsp; Nationwide delivery</span>
+    <span class="tbadge tb-mml"><span class="tdot"></span>Maskew Miller Longman</span>
+    <span class="tbadge tb-plat"><span class="tdot"></span>Platinum Series</span>
+    <span class="tbadge tb-ox"><span class="tdot"></span>Oxford University Press SA</span>
+    <span class="tbadge tb-shu"><span class="tdot"></span>Shuter &amp; Shooter</span>
+    <span class="tbadge tb-via"><span class="tdot"></span>Via Afrika</span>
+    <span class="tsep">CAPS-aligned &nbsp;·&nbsp; B-BBEE Level 1 &nbsp;·&nbsp; Nationwide delivery</span>
   </div>
 </div>
 
-<!-- ═══════════ CATALOGUE ═══════════ -->
-<section class="section" id="catalogue">
-  <div class="container">
-    <div class="eyebrow r"><div class="eyebrow-dash"></div><span class="eyebrow-txt">Product Ranges</span></div>
-    <h2 class="sec-h r d1">Three ways schools<br><em>work with us.</em></h2>
-    <p class="sec-p r d2">Whether you need a single line item or a full infrastructure rollout, we quote competitively and deliver to your door across South Africa.</p>
-
-    <div class="cat-grid">
-      <div class="cat-card r d1">
-        <div class="cat-stripe"></div>
-        <div class="cat-inner">
-          <span class="cat-badge">LTSM</span>
-          <h3 class="cat-h">Textbooks, stationery & curriculum resources</h3>
-          <p class="cat-p">DBE-approved and publisher-direct LTSM for all phases and subjects. Bulk orders, PAT packs, and supplementary materials.</p>
-          <ul class="cat-items">
-            <li><span class="cat-dot"></span>All subjects, Gr R–12</li>
-            <li><span class="cat-dot"></span>Afrikaans, English, IsiXhosa & Sesotho</li>
-            <li><span class="cat-dot"></span>Teacher guides & answer books</li>
-            <li><span class="cat-dot"></span>Stationery packs (bulk orders)</li>
-            <li><span class="cat-dot"></span>Library stock & supplementary readers</li>
-          </ul>
-          <button class="cat-dl" onclick="openModal('ltsm')">
-            <svg viewBox="0 0 14 14"><path d="M7 2v8M4 8l3 3 3-3M2 12h10"/></svg>
-            Download LTSM Catalogue
-          </button>
-        </div>
-      </div>
-
-      <div class="cat-card r d2">
-        <div class="cat-stripe"></div>
-        <div class="cat-inner">
-          <span class="cat-badge">ICT & STEM</span>
-          <h3 class="cat-h">Devices, networking & coding labs</h3>
-          <p class="cat-p">Authorised reseller of Dell, HP, Lenovo, Huawei and Microsoft. Full lab builds, single devices, and STEM kit bundles.</p>
-          <ul class="cat-items">
-            <li><span class="cat-dot"></span>Student & teacher laptops</li>
-            <li><span class="cat-dot"></span>Desktop lab configurations</li>
-            <li><span class="cat-dot"></span>Networking & connectivity</li>
-            <li><span class="cat-dot"></span>Coding & robotics kits (Gr 4–12)</li>
-            <li><span class="cat-dot"></span>Interactive whiteboards & projectors</li>
-          </ul>
-          <button class="cat-dl" onclick="openModal('ict')">
-            <svg viewBox="0 0 14 14"><path d="M7 2v8M4 8l3 3 3-3M2 12h10"/></svg>
-            Download ICT Catalogue
-          </button>
-        </div>
-      </div>
-
-      <div class="cat-card r d3">
-        <div class="cat-stripe"></div>
-        <div class="cat-inner">
-          <span class="cat-badge">Training</span>
-          <h3 class="cat-h">Staff development, Microsoft 365 & school websites</h3>
-          <p class="cat-p">NQF-aligned CPD programmes, Microsoft 365 licensing, and professionally built school websites — one supplier account.</p>
-          <ul class="cat-items">
-            <li><span class="cat-dot"></span>Digital literacy for educators</li>
-            <li><span class="cat-dot"></span>Coding curriculum facilitation</li>
-            <li><span class="cat-dot"></span>Microsoft 365 for Education</li>
-            <li><span class="cat-dot"></span>School website design & hosting</li>
-            <li><span class="cat-dot"></span>Management development (HODs/SMT)</li>
-          </ul>
-          <button class="cat-dl" onclick="openModal('training')">
-            <svg viewBox="0 0 14 14"><path d="M7 2v8M4 8l3 3 3-3M2 12h10"/></svg>
-            Download Training Catalogue
-          </button>
-        </div>
-      </div>
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <p class="eyebrow">School Procurement Hub</p>
+    <h1><span id="tw" class="tw-cursor"></span></h1>
+    <p class="hero-sub">One authorised supplier. All major publishers. CAPS-aligned materials from Grade R through Grade 12, plus ICT infrastructure and teacher development programmes.</p>
+    <div class="trust-row">
+      <div class="ti"><strong>B-BBEE Level 1</strong>Contributor</div>
+      <div class="ti"><strong>CSD Registered</strong>MAAA0123456</div>
+      <div class="ti"><strong>VAT Registered</strong>4580XXXXXX</div>
+      <div class="ti"><strong>8 Provinces</strong>Active delivery</div>
     </div>
   </div>
-</section>
 
-<!-- ═══════════ QUOTE ═══════════ -->
-<section class="section bg-off" id="quote">
-  <div class="container">
-    <div class="quote-wrap">
-      <!-- Left: pillars -->
-      <div>
-        <div class="eyebrow r"><div class="eyebrow-dash"></div><span class="eyebrow-txt">Formal Quote Request</span></div>
-        <h2 class="sec-h r d1">Need a quote for<br>procurement<br><em>or tender?</em></h2>
-        <p class="sec-p r d2">For SGB procurement, circuit orders, or formal tender submissions — receive a CSD-compliant PDF quotation within 24 hours.</p>
-        <div class="pillars r d3">
-          <div class="pillar">
-            <div class="pill-icon">📋</div>
-            <div><div class="pill-t">Tax Invoice & CSD-Ready</div><div class="pill-b">VAT-inclusive. VAT No. 4910306010 · CSD No. MAAA0862915.</div></div>
+  <!-- WIZARD -->
+  <div class="wcard">
+    <div class="whead">
+      <span class="whead-title">SCHOOL PROCUREMENT INTAKE</span>
+      <span class="whead-step" id="wsi">Step 1 of 5</span>
+    </div>
+    <div class="wbar"><div class="wbar-fill" id="wbf" style="width:20%"></div></div>
+    <div class="wbody">
+
+      <div class="ws on" id="ws1">
+        <p class="wq">What does your school need?</p>
+        <div class="ogrid">
+          <div class="opt" onclick="tog(this)"><span class="oi">📘</span>Textbooks &amp; LTSM</div>
+          <div class="opt" onclick="tog(this)"><span class="oi">💻</span>ICT &amp; Devices</div>
+          <div class="opt" onclick="tog(this)"><span class="oi">🎓</span>Teacher Training</div>
+          <div class="opt" onclick="tog(this)"><span class="oi">🧾</span>Administration</div>
+          <div class="opt ofull" onclick="tog(this)"><span class="oi">📦</span>Full school package</div>
+        </div>
+        <div class="wnav"><span></span><button class="wbtn primary" onclick="go(2)">Continue →</button></div>
+      </div>
+
+      <div class="ws" id="ws2">
+        <p class="wq">Tell us about your school</p>
+        <div class="wrow">
+          <div>
+            <span class="wlabel">School type</span>
+            <select class="winput" id="sType">
+              <option value="">Select</option>
+              <option>Primary (Gr R–7)</option>
+              <option>Secondary (Gr 8–12)</option>
+              <option>Combined (Gr R–12)</option>
+              <option>Special needs</option>
+              <option>TVET College</option>
+            </select>
           </div>
-          <div class="pillar">
-            <div class="pill-icon">⚡</div>
-            <div><div class="pill-t">24-Hour Turnaround</div><div class="pill-b">Standard quotes within one business day. Urgent closing dates accommodated.</div></div>
+          <div>
+            <span class="wlabel">Learner count</span>
+            <select class="winput" id="sCount">
+              <option value="">Select</option>
+              <option>Under 200</option>
+              <option>200–500</option>
+              <option>500–1000</option>
+              <option>Over 1000</option>
+            </select>
           </div>
-          <div class="pillar">
-            <div class="pill-icon">🤝</div>
-            <div><div class="pill-t">B-BBEE Level 1 Supplier</div><div class="pill-b">135% BBBEE procurement recognition under the DTI scorecard.</div></div>
-          </div>
-          <div class="pillar">
-            <div class="pill-icon">🚚</div>
-            <div><div class="pill-t">Nationwide Delivery</div><div class="pill-b">Joe Gqabi-based, supplying EC, Free State and nationwide via distributor network.</div></div>
-          </div>
+        </div>
+        <span class="wlabel">Province</span>
+        <select class="winput" id="sProv">
+          <option value="">Select province</option>
+          <option>Eastern Cape</option><option>Free State</option><option>Gauteng</option>
+          <option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option>
+          <option>North West</option><option>Northern Cape</option><option>Western Cape</option>
+        </select>
+        <div class="wnav">
+          <button class="wbtn" onclick="go(1)">← Back</button>
+          <button class="wbtn primary" onclick="go(3)">Continue →</button>
         </div>
       </div>
 
-      <!-- Right: form -->
-      <div class="r d2">
-        <div class="q-card" id="qCard">
-          <div class="q-card-t">Request a formal quote</div>
-          <div class="q-card-s">We'll reply with a PDF quotation, valid for 30 days.</div>
-          <div class="fl-row">
-            <div class="fl"><input type="text" id="q_name" placeholder=" "><label>Contact Name</label></div>
-            <div class="fl"><input type="text" id="q_role" placeholder=" "><label>Role / Title</label></div>
-          </div>
-          <div class="fl"><input type="text" id="q_inst" placeholder=" "><label>School / Institution</label></div>
-          <div class="fl-row">
-            <div class="fl"><input type="email" id="q_email" placeholder=" "><label>Email Address</label></div>
-            <div class="fl"><input type="tel" id="q_phone" placeholder=" "><label>Phone / WhatsApp</label></div>
-          </div>
-          <div style="font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;">Products Required</div>
-          <div class="ck-group">
-            <label class="ck-row"><input type="checkbox"> <span>LTSM / Textbooks</span></label>
-            <label class="ck-row"><input type="checkbox"> <span>ICT Equipment (laptops, desktops, networking)</span></label>
-            <label class="ck-row"><input type="checkbox"> <span>STEM & Coding Kits</span></label>
-            <label class="ck-row"><input type="checkbox"> <span>Training & CPD Programmes</span></label>
-            <label class="ck-row"><input type="checkbox"> <span>School Website / Digital Services</span></label>
-          </div>
-          <div class="fl"><textarea id="q_detail" placeholder=" "></textarea><label>Describe your requirement</label></div>
-          <div class="fl" style="position:relative;">
-            <input type="date" id="q_dead" placeholder=" ">
-            <label style="position:absolute;top:5px;left:13px;font-size:9.5px;color:var(--g);font-weight:700;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;">Closing date (if RFQ / tender)</label>
-          </div>
-          <button class="q-btn" onclick="qSub()">
-            Request formal quote
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg>
-          </button>
-          <div class="q-note">Ivy Africa (Pty) Ltd · Reg. 2016/041769/07 · VAT 4910306010</div>
+      <div class="ws" id="ws3">
+        <p class="wq">Upload your school's book list</p>
+        <div class="fdrop" id="wdrop">
+          <input type="file" id="wfi" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png">
+          <span class="fdrop-icon">📂</span>
+          <span class="fdrop-t">Drop your list here or click to browse</span>
+          <span class="fdrop-s">PDF, Word, Excel, CSV or photo · Max 10MB · Up to 5 files</span>
+        </div>
+        <div id="wfl"></div>
+        <p class="fnote">Most schools compile lists in Excel or Word — upload yours and we'll quote against it directly.</p>
+        <div class="wnav">
+          <button class="wbtn" onclick="go(2)">← Back</button>
+          <button class="wbtn primary" onclick="go(4)">Continue →</button>
         </div>
       </div>
+
+      <div class="ws" id="ws4">
+        <p class="wq">Budget &amp; timeline</p>
+        <span class="wlabel">Estimated budget</span>
+        <div class="ogrid ogrid3" style="margin-bottom:.9rem">
+          <div class="opt" onclick="single(this)">Under R50k</div>
+          <div class="opt" onclick="single(this)">R50k–R250k</div>
+          <div class="opt" onclick="single(this)">R250k–R1m</div>
+          <div class="opt" onclick="single(this)">R1m+</div>
+          <div class="opt" onclick="single(this)">To be quoted</div>
+        </div>
+        <span class="wlabel">Delivery needed</span>
+        <div class="ogrid">
+          <div class="opt" onclick="single(this)">This month</div>
+          <div class="opt" onclick="single(this)">This term</div>
+          <div class="opt" onclick="single(this)">This year</div>
+          <div class="opt" onclick="single(this)">Planning ahead</div>
+        </div>
+        <div class="wnav">
+          <button class="wbtn" onclick="go(3)">← Back</button>
+          <button class="wbtn primary" onclick="go(5)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="ws" id="ws5">
+        <p class="wq">Who should we contact?</p>
+        <div class="wrow">
+          <div>
+            <span class="wlabel">Full name</span>
+            <input type="text" class="winput" id="wName" placeholder="Principal / HOD">
+          </div>
+          <div>
+            <span class="wlabel">Role</span>
+            <select class="winput" id="wRole">
+              <option value="">Select</option>
+              <option>Principal</option><option>HOD</option>
+              <option>SGB Member</option><option>Finance Officer</option>
+              <option>Procurement Officer</option>
+            </select>
+          </div>
+        </div>
+        <span class="wlabel">School name</span>
+        <input type="text" class="winput" id="wSchool" placeholder="e.g. Kgomotso Secondary School">
+        <div class="wrow">
+          <div>
+            <span class="wlabel">Email</span>
+            <input type="email" class="winput" id="wEmail" placeholder="school@email.co.za">
+          </div>
+          <div>
+            <span class="wlabel">Phone</span>
+            <input type="tel" class="winput" id="wPhone" placeholder="0XX XXX XXXX">
+          </div>
+        </div>
+        <div class="wnav">
+          <button class="wbtn" onclick="go(4)">← Back</button>
+          <button class="wbtn orng" onclick="sendWiz()">Send to Ivy Africa →</button>
+        </div>
+      </div>
+
+      <div class="succ" id="wsucc">
+        <div class="scheck">✓</div>
+        <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Request sent to info@ivyafrica.co.za</p>
+        <p style="font-size:.8rem;color:var(--mut);">A specialist will contact you within 4 business hours.</p>
+        <button class="wbtn" style="margin-top:1rem" onclick="resetWiz()">New request</button>
+      </div>
+
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════ FOOTER ═══════════ -->
-<footer id="footer">
-  <div class="foot-inner">
-    <div class="foot-top">
-      <div>
-        <div class="foot-brand-name">Ivy Africa (Pty) Ltd</div>
-        <p class="foot-brand-desc">An institutional supply and technology company serving South African schools, government departments, and training organisations across the Joe Gqabi District and beyond.</p>
-        <div class="foot-reg">Reg: 2016/041769/07<br>VAT: 4910306010<br>CSD: MAAA0862915<br>2 Margaret Street, Aliwal North, Eastern Cape</div>
-      </div>
-      <div class="foot-col">
-        <div class="foot-col-h">Services</div>
-        <ul>
-          <li>LTSM Supply</li><li>ICT Procurement</li><li>STEM Kits</li>
-          <li>Training & CPD</li><li>School Websites</li><li>Tender Submissions</li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <div class="foot-col-h">Authorised Brands</div>
-        <ul>
-          <li>Dell · HP · Lenovo</li><li>Microsoft</li><li>Huawei · IBM</li>
-          <li>Sophos</li><li>Pinnacle</li><li>First Distribution</li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <div class="foot-col-h">Contact</div>
-        <ul>
-          <li><a href="mailto:info@ivyafrica.co.za">info@ivyafrica.co.za</a></li>
-          <li>Aliwal North, Eastern Cape</li>
-          <li>Joe Gqabi District</li>
-          <li style="margin-top:6px;color:rgba(255,255,255,.18);font-size:11px;">Mon–Fri · 08:00–17:00</li>
-        </ul>
-      </div>
+<!-- MAIN -->
+<div class="main">
+
+  <div class="cstrip rv">
+    <div class="ci"><div class="ci-l">Procurement</div><div class="ci-v">B-BBEE Level 1</div></div>
+    <div class="ci"><div class="ci-l">Tax Clearance</div><div class="ci-v">Valid — 2025</div></div>
+    <div class="ci"><div class="ci-l">SARS VAT</div><div class="ci-v">Registered Vendor</div></div>
+    <div class="ci"><div class="ci-l">Delivery</div><div class="ci-v">Nationwide</div></div>
+  </div>
+
+  <div class="shead rv">
+    <h2>Procurement Catalogue</h2>
+    <span class="shead-s">CAPS-aligned · 2025 edition</span>
+  </div>
+
+  <div class="cgrid rv">
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#003B6F"></span>Maskew Miller Longman</div>
+      <div class="ctitle">TAAL MET FLAIR / Mind the Gap</div>
+      <div class="cdesc">CAPS-approved study guides and learner books for all subjects, Grades 4–12. NSC exam preparation series included.</div>
+      <div class="cprice">From R89 per learner book</div>
+      <a class="clink" href="https://ivyafrica.co.za/ltsm/mml">View titles →</a>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 Ivy Africa (Pty) Ltd. All rights reserved.</span>
-      <div class="foot-badges">
-        <span class="foot-badge"><span class="foot-badge-dot"></span>B-BBEE Level 1</span>
-        <span class="foot-badge"><span class="foot-badge-dot"></span>VAT Registered</span>
-        <span class="foot-badge"><span class="foot-badge-dot"></span>CSD Active</span>
-      </div>
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#5B2D8E"></span>Platinum Series</div>
+      <div class="ctitle">Platinum Mathematics / Science</div>
+      <div class="cdesc">Full Platinum series: Mathematics, Natural Sciences, Social Sciences, Life Skills — Grades 4–9. Teacher's guides included.</div>
+      <div class="cprice">From R105 per learner book</div>
+      <a class="clink" href="https://ivyafrica.co.za/ltsm/platinum">View titles →</a>
     </div>
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#002147"></span>Oxford University Press SA</div>
+      <div class="ctitle">Oxford Successful Series</div>
+      <div class="cdesc">Oxford Successful and Headstart series for primary and secondary. Bilingual editions available for most titles.</div>
+      <div class="cprice">From R95 per learner book</div>
+      <a class="clink" href="https://ivyafrica.co.za/ltsm/oxford">View titles →</a>
+    </div>
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>ICT Infrastructure</div>
+      <div class="ctitle">Tablets, Laptops &amp; Computer Labs</div>
+      <div class="cdesc">Dell, HP, and Lenovo education devices. School-grade Android tablets from R1,850. Full lab fit-out and connectivity.</div>
+      <div class="cprice">From R1,850 per device</div>
+      <a class="clink" href="https://ivyafrica.co.za/ict">Get a lab quote →</a>
+    </div>
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Teacher Development</div>
+      <div class="ctitle">SACE-Accredited CPD Programmes</div>
+      <div class="cdesc">On-site and blended professional development. Subject-specific training aligned to DBE curriculum priorities.</div>
+      <div class="cprice">From R350 per educator</div>
+      <a class="clink" href="https://ivyafrica.co.za/training">View programmes →</a>
+    </div>
+    <div class="citem">
+      <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Via Afrika</div>
+      <div class="ctitle">Via Afrika Learning Series</div>
+      <div class="cdesc">Full CAPS coverage across all learning areas. eBook and print bundles available. Licensed for school networks.</div>
+      <div class="cprice">From R80 per learner book</div>
+      <a class="clink" href="https://ivyafrica.co.za/ltsm/via-afrika">View titles →</a>
+    </div>
+  </div>
+
+  <div class="shead rv">
+    <h2>Formal Quotation Request</h2>
+    <span class="shead-s">For SGB, treasury &amp; procurement officers</span>
+  </div>
+
+  <div class="qsec rv">
+    <div id="qform">
+      <div class="qgrid">
+        <div><label class="qlabel">School name</label><input type="text" class="qinput" id="qSchool" placeholder="Official school name"></div>
+        <div><label class="qlabel">EMIS number</label><input type="text" class="qinput" id="qEmis" placeholder="School EMIS number"></div>
+        <div><label class="qlabel">Contact person</label><input type="text" class="qinput" id="qContact" placeholder="Name and role"></div>
+        <div><label class="qlabel">Email address</label><input type="email" class="qinput" id="qEmail" placeholder="Official school email"></div>
+        <div><label class="qlabel">Phone number</label><input type="tel" class="qinput" id="qPhone" placeholder="School landline or cell"></div>
+        <div><label class="qlabel">Quote required by</label><input type="date" class="qinput" id="qDate"></div>
+        <div class="qfull">
+          <label class="qlabel">Upload book list / RFQ document</label>
+          <div class="qfdrop" id="qdrop">
+            <input type="file" id="qfi" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png">
+            <span style="font-size:1.4rem;display:block;margin-bottom:5px">📎</span>
+            <span style="font-size:.8rem;font-weight:600;color:#111;display:block;margin-bottom:2px">Drop your list or click to browse</span>
+            <span style="font-size:.72rem;color:var(--mut)">PDF, Word, Excel, CSV or image · Max 10MB each</span>
+          </div>
+          <div id="qfl"></div>
+        </div>
+        <div class="qfull">
+          <label class="qlabel">Additional requirements</label>
+          <textarea class="qinput" id="qNotes" rows="3" placeholder="Specify subjects, grades, quantities or delivery instructions not in your uploaded list."></textarea>
+        </div>
+      </div>
+      <button class="qsubmit" onclick="sendQuote()">Submit to info@ivyafrica.co.za</button>
+    </div>
+    <div class="succ" id="qsucc">
+      <div class="scheck">✓</div>
+      <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem">Quotation request sent to info@ivyafrica.co.za</p>
+      <p style="font-size:.8rem;color:var(--mut)">Your formal quotation will be prepared within 24 hours.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="fl">© 2025 Ivy Africa Education Suppliers &nbsp;·&nbsp; VAT No. 4580XXXXXX &nbsp;·&nbsp; <a href="mailto:info@ivyafrica.co.za">info@ivyafrica.co.za</a></div>
+  <div class="flinks">
+    <a href="https://ivyafrica.co.za/terms">Terms</a>
+    <a href="https://ivyafrica.co.za/delivery">Delivery policy</a>
+    <a href="https://ivyafrica.co.za/contact">Contact</a>
   </div>
 </footer>
 
-<!-- ═══════════ MODAL ═══════════ -->
-<div class="modal-bg" id="mBg" onclick="mClose(event)">
-  <div class="modal-card">
-    <button class="modal-x" onclick="mDismiss()">✕</button>
-    <div class="modal-badge" id="mBadge">LTSM Catalogue</div>
-    <h3 class="modal-h">Get the catalogue</h3>
-    <p class="modal-p">Enter your details and we'll send the PDF to your inbox with current pricing for your school.</p>
-    <div class="fl"><input type="text" id="m_name" placeholder=" "><label>Full Name</label></div>
-    <div class="fl"><input type="text" id="m_sch" placeholder=" "><label>School / Institution</label></div>
-    <div class="fl"><input type="email" id="m_email" placeholder=" "><label>Email Address</label></div>
-    <button class="modal-btn" onclick="mSub()">
-      Send me the catalogue
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="2" y1="7" x2="12" y2="7"/><polyline points="8,3 12,7 8,11"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast">
-  <div class="toast-ico">
-    <svg width="10" height="10" viewBox="0 0 10 8" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="1 4 4 7 9 1"/></svg>
-  </div>
-  <span id="tMsg"></span>
-</div>
-
 <script>
-/* ─── Cursor ───────────────────── */
-const cD = document.getElementById('cD'), cR = document.getElementById('cR');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-(function anim() {
-  cD.style.cssText = `left:${mx}px;top:${my}px`;
-  rx += (mx-rx)*.11; ry += (my-ry)*.11;
-  cR.style.cssText = `left:${rx}px;top:${ry}px`;
-  requestAnimationFrame(anim);
-})();
-document.querySelectorAll('button,a,.wiz-tile,.wiz-chip,input[type=range]').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('chover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('chover'));
+(function(){
+'use strict';
+
+/* ── CURSOR BALL ── */
+var ball = document.getElementById('cball');
+var bx = window.innerWidth/2, by = window.innerHeight/2;
+var tx = bx, ty = by;
+
+document.addEventListener('mousemove', function(e){
+  tx = e.clientX; ty = e.clientY;
 });
 
-/* ─── Nav scroll ───────────────── */
-window.addEventListener('scroll', () =>
-  document.getElementById('nav').classList.toggle('scrolled', scrollY > 10), {passive:true});
-
-/* ─── Scroll reveal ────────────── */
-new IntersectionObserver((ents, obs) =>
-  ents.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } }),
-  {threshold: .1}
-).observe || (function(){
-  document.querySelectorAll('.r').forEach(el => el.classList.add('vis'));
+(function loop(){
+  bx += (tx - bx) * 0.14;
+  by += (ty - by) * 0.14;
+  ball.style.left = Math.round(bx) + 'px';
+  ball.style.top  = Math.round(by) + 'px';
+  requestAnimationFrame(loop);
 })();
-const ro = new IntersectionObserver((ents, obs) =>
-  ents.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } }),
-  {threshold: .1});
-document.querySelectorAll('.r').forEach(el => ro.observe(el));
 
-/* ─── Wizard ───────────────────── */
-const TOTAL = 7;
-let cur = 1;
-const bLabels = [
-  'Under R5,000','R5,000 – R10,000','R10,000 – R20,000','R20,000 – R30,000',
-  'R30,000 – R50,000','R50,000 – R75,000','R75,000 – R100,000','R100,000 – R150,000',
-  'R150,000 – R200,000','R200,000 – R300,000','R300,000 – R500,000',
-  'R500,000 – R750,000','R750,000 – R1M','R1M – R2M','Over R2M'
+document.querySelectorAll('a, button, .opt, .wbtn, .fdrop, .qfdrop, .clink, .ncta, .qsubmit').forEach(function(el){
+  el.addEventListener('mouseenter', function(){ ball.classList.add('big'); });
+  el.addEventListener('mouseleave', function(){ ball.classList.remove('big'); });
+});
+
+/* ── TYPEWRITER ── */
+var phrases = [
+  'Your school\'s LTSM, ICT\n& training — sourced,\nquoted, delivered.',
+  'Upload your book list.\nWe quote. You procure.\nSimple.'
 ];
+var tw = document.getElementById('tw');
+var pi = 0, ci = 0, del = false;
+function type(){
+  var ph = phrases[pi];
+  var shown = ph.slice(0, ci).replace(/\n/g,'<br>');
+  tw.innerHTML = shown;
+  if(!del){
+    if(ci < ph.length){ ci++; setTimeout(type, 42); }
+    else { setTimeout(function(){ del=true; type(); }, 3200); }
+  } else {
+    if(ci > 0){ ci--; setTimeout(type, 16); }
+    else { del=false; pi=(pi+1)%phrases.length; setTimeout(type, 350); }
+  }
+}
+type();
 
-function updProg() {
-  document.getElementById('wFill').style.width = (cur/TOTAL*100)+'%';
-  document.getElementById('stepNum').textContent = cur;
+/* ── SCROLL REVEAL ── */
+var rvEls = document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:0.08});
+  rvEls.forEach(function(el){ io.observe(el); });
+} else {
+  rvEls.forEach(function(el){ el.classList.add('in'); });
 }
-function go(from, to) {
-  document.getElementById('ws'+from).classList.remove('active');
-  cur = to;
-  document.getElementById('ws'+to).classList.add('active');
-  updProg();
-}
-function tile(el, gid, multi) {
-  if (!multi) document.querySelectorAll('#'+gid+' .wiz-tile').forEach(t => t.classList.remove('sel'));
+
+/* ── WIZARD NAV ── */
+var wStep = 1;
+window.go = function(n){
+  var cur = document.getElementById('ws'+wStep);
+  var nxt = document.getElementById('ws'+n);
+  if(cur) cur.classList.remove('on');
+  if(nxt) nxt.classList.add('on');
+  wStep = n;
+  document.getElementById('wsi').textContent = 'Step '+n+' of 5';
+  document.getElementById('wbf').style.width = (n/5*100)+'%';
+};
+window.tog = function(el){ el.classList.toggle('sel'); };
+window.single = function(el){
+  var grid = el.closest('.ogrid');
+  if(grid) grid.querySelectorAll('.opt').forEach(function(o){ if(o!==el) o.classList.remove('sel'); });
   el.classList.toggle('sel');
+};
+
+/* ── WIZARD FILES ── */
+var wFiles = [];
+function renderWF(){
+  document.getElementById('wfl').innerHTML = wFiles.map(function(f,i){
+    return '<div class="fitem"><span class="fn">'+f.name+'</span><span class="fsz">'+
+      (f.size/1024/1024).toFixed(1)+'MB</span>'+
+      '<button class="frm" onclick="rmWF('+i+')">×</button></div>';
+  }).join('');
 }
-function budg(v) {
-  document.getElementById('bNum').innerHTML = bLabels[v]+' <small>approx.</small>';
-}
-function wizSub() {
-  const n = document.getElementById('c_name').value.trim();
-  const e = document.getElementById('c_email').value.trim();
-  if (!n || !e) { toast('Please enter your name and email.'); return; }
-  document.querySelectorAll('.wiz-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('wizOk').classList.add('active');
-  document.getElementById('wFill').style.width = '100%';
-  document.getElementById('stepNum').textContent = '✓';
-  toast('Quote request submitted — we\'ll be in touch within 24 hours.');
-}
-function wizReset() {
-  cur = 1;
-  document.querySelectorAll('.wiz-tile').forEach(t => t.classList.remove('sel'));
-  document.querySelectorAll('.wiz-chip').forEach(c => c.classList.remove('sel'));
-  ['c_name','c_role','c_school','c_email','c_phone','c_notes'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value='';
+window.rmWF = function(i){ wFiles.splice(i,1); renderWF(); };
+function addWF(files){
+  Array.from(files).forEach(function(f){
+    if(wFiles.length>=5){ toast('Max 5 files'); return; }
+    if(f.size>10*1024*1024){ toast(f.name+' exceeds 10MB'); return; }
+    wFiles.push(f);
   });
-  document.getElementById('bSlider').value = 4; budg(4);
-  document.getElementById('wizOk').classList.remove('active');
-  document.getElementById('ws1').classList.add('active');
-  updProg();
+  renderWF();
 }
-function scrollWiz() {
-  document.getElementById('wizPanel').scrollIntoView({behavior:'smooth', block:'center'});
-}
-
-/* ─── Modal ────────────────────── */
-const cNames = {ltsm:'LTSM Catalogue',ict:'ICT & STEM Catalogue',training:'Training Catalogue',general:'Full Product Catalogue'};
-function openModal(t) {
-  document.getElementById('mBadge').textContent = cNames[t]||'Catalogue';
-  document.getElementById('mBg').classList.add('open');
-}
-function mClose(e) { if(e.target===document.getElementById('mBg')) mDismiss(); }
-function mDismiss() { document.getElementById('mBg').classList.remove('open'); }
-function mSub() {
-  const n = document.getElementById('m_name').value.trim();
-  const e = document.getElementById('m_email').value.trim();
-  if (!n||!e) { toast('Please enter your name and email.'); return; }
-  mDismiss();
-  toast('Catalogue on its way — check your inbox.');
-  ['m_name','m_sch','m_email'].forEach(id => document.getElementById(id).value='');
-}
-document.addEventListener('keydown', e => { if(e.key==='Escape') mDismiss(); });
-
-/* ─── Quote form ───────────────── */
-function qSub() {
-  const n = document.getElementById('q_name').value.trim();
-  const e = document.getElementById('q_email').value.trim();
-  if (!n||!e) { toast('Please provide your name and email.'); return; }
-  document.getElementById('qCard').innerHTML = `
-    <div style="text-align:center;padding:52px 0;">
-      <div style="width:60px;height:60px;border-radius:50%;border:2px solid var(--g);display:grid;place-items:center;margin:0 auto 20px;animation:popIn .5s var(--ease-spring) both;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 7"/></svg>
-      </div>
-      <div style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.4px;margin-bottom:10px;">Quote request received.</div>
-      <p style="font-size:13.5px;color:var(--muted);max-width:280px;margin:0 auto;line-height:1.6;">We'll send a PDF quotation to <strong style="color:var(--ink)">${e}</strong> within one business day.</p>
-    </div>`;
-  toast('Formal quote request submitted.');
+var wfi = document.getElementById('wfi');
+if(wfi) wfi.addEventListener('change', function(){ addWF(this.files); });
+var wdrop = document.getElementById('wdrop');
+if(wdrop){
+  wdrop.addEventListener('dragover',function(e){ e.preventDefault(); wdrop.classList.add('over'); });
+  wdrop.addEventListener('dragleave',function(){ wdrop.classList.remove('over'); });
+  wdrop.addEventListener('drop',function(e){ e.preventDefault(); wdrop.classList.remove('over'); addWF(e.dataTransfer.files); });
 }
 
-/* ─── Toast ────────────────────── */
-let tT;
-function toast(msg) {
-  const el = document.getElementById('toast');
-  document.getElementById('tMsg').textContent = msg;
-  el.classList.add('show');
-  clearTimeout(tT);
-  tT = setTimeout(() => el.classList.remove('show'), 4200);
+/* ── QUOTE FILES ── */
+var qFiles = [];
+function renderQF(){
+  document.getElementById('qfl').innerHTML = qFiles.map(function(f,i){
+    return '<div class="fitem" style="margin-top:3px"><span class="fn">'+f.name+'</span><span class="fsz">'+
+      (f.size/1024/1024).toFixed(1)+'MB</span>'+
+      '<button class="frm" onclick="rmQF('+i+')">×</button></div>';
+  }).join('');
+}
+window.rmQF = function(i){ qFiles.splice(i,1); renderQF(); };
+function addQF(files){
+  Array.from(files).forEach(function(f){
+    if(qFiles.length>=5){ toast('Max 5 files'); return; }
+    if(f.size>10*1024*1024){ toast(f.name+' exceeds 10MB'); return; }
+    qFiles.push(f);
+  });
+  renderQF();
+}
+var qfi = document.getElementById('qfi');
+if(qfi) qfi.addEventListener('change', function(){ addQF(this.files); });
+var qdrop = document.getElementById('qdrop');
+if(qdrop){
+  qdrop.addEventListener('dragover',function(e){ e.preventDefault(); qdrop.classList.add('over'); });
+  qdrop.addEventListener('dragleave',function(){ qdrop.classList.remove('over'); });
+  qdrop.addEventListener('drop',function(e){ e.preventDefault(); qdrop.classList.remove('over'); addQF(e.dataTransfer.files); });
 }
 
-/* ─── Init ─────────────────────── */
-updProg(); budg(4);
+/* ── SEND WIZARD ── */
+window.sendWiz = function(){
+  var name   = (document.getElementById('wName').value||'').trim();
+  var school = (document.getElementById('wSchool').value||'').trim();
+  var email  = (document.getElementById('wEmail').value||'').trim();
+  if(!name||!school||!email){ toast('Please fill in name, school and email'); return; }
+  var needs = Array.from(document.querySelectorAll('#ws1 .opt.sel')).map(function(o){ return o.textContent.trim(); }).join(', ');
+  var budget= Array.from(document.querySelectorAll('#ws4 .opt.sel')).map(function(o){ return o.textContent.trim(); }).join(', ');
+  var body  = 'School Procurement Request — Ivy Africa Portal\n\n'+
+    'School: '+school+'\nContact: '+name+' ('+( document.getElementById('wRole').value||'')+')'+
+    '\nEmail: '+email+'\nPhone: '+(document.getElementById('wPhone').value||'')+
+    '\nType: '+(document.getElementById('sType').value||'')+
+    ' | Learners: '+(document.getElementById('sCount').value||'')+
+    ' | Province: '+(document.getElementById('sProv').value||'')+
+    '\nNeeds: '+needs+'\nBudget: '+budget+
+    '\nUploaded files: '+(wFiles.map(function(f){return f.name;}).join(', ')||'None');
+  var ml = 'mailto:info@ivyafrica.co.za?subject='+
+    encodeURIComponent('School Procurement Request — '+school)+
+    '&body='+encodeURIComponent(body);
+  var a = document.createElement('a');
+  a.href = ml; a.style.display='none';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  Array.from(document.querySelectorAll('.ws')).forEach(function(el){ el.classList.remove('on'); });
+  document.getElementById('wsucc').classList.add('on');
+  document.getElementById('wsi').textContent = 'Submitted ✓';
+  document.getElementById('wbf').style.width = '100%';
+};
+
+window.resetWiz = function(){
+  document.getElementById('wsucc').classList.remove('on');
+  Array.from(document.querySelectorAll('.ws')).forEach(function(el){ el.classList.remove('on'); });
+  wStep=1; document.getElementById('ws1').classList.add('on');
+  document.getElementById('wsi').textContent='Step 1 of 5';
+  document.getElementById('wbf').style.width='20%';
+  document.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('sel'); });
+  ['wName','wSchool','wEmail','wPhone'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  wFiles=[]; renderWF();
+};
+
+/* ── SEND QUOTE ── */
+window.sendQuote = function(){
+  var school  = (document.getElementById('qSchool').value||'').trim();
+  var contact = (document.getElementById('qContact').value||'').trim();
+  var email   = (document.getElementById('qEmail').value||'').trim();
+  if(!school||!contact||!email){ toast('Please fill in school name, contact and email'); return; }
+  var body = 'Formal Quotation Request — Ivy Africa Portal\n\n'+
+    'School: '+school+'\nEMIS: '+(document.getElementById('qEmis').value||'')+
+    '\nContact: '+contact+'\nEmail: '+email+
+    '\nPhone: '+(document.getElementById('qPhone').value||'')+
+    '\nQuote required by: '+(document.getElementById('qDate').value||'Not specified')+
+    '\nUploaded files: '+(qFiles.map(function(f){return f.name;}).join(', ')||'None')+
+    '\n\nAdditional requirements:\n'+(document.getElementById('qNotes').value||'—');
+  var a = document.createElement('a');
+  a.href = 'mailto:info@ivyafrica.co.za?subject='+
+    encodeURIComponent('Formal Quotation Request — '+school)+
+    '&body='+encodeURIComponent(body);
+  a.style.display='none';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  document.getElementById('qform').style.display='none';
+  document.getElementById('qsucc').classList.add('on');
+};
+
+/* ── TOAST ── */
+window.toast = function(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  setTimeout(function(){ t.classList.remove('on'); }, 3000);
+};
+
+})();
 </script>
 </body>
 </html>
