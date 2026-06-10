@@ -873,8 +873,10 @@ window.handleWizSubmit=function(e){
   document.getElementById('hBudget').value=budget||'Not selected';
   document.getElementById('hFiles').value=wFiles.map(function(f){return f.name;}).join(', ')||'None';
   var fd=new FormData(e.target);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:new URLSearchParams(fd).toString()})
+  // Attach actual wizard files into FormData
+  wFiles.forEach(function(f,i){ fd.append('file_'+i, f, f.name); });
+  // No Content-Type header — browser sets multipart boundary automatically
+  fetch('/',{method:'POST',body:fd})
     .then(function(){
       Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
       document.getElementById('wsucc').classList.add('on');
@@ -926,8 +928,10 @@ window.handleQSubmit=function(e){
   e.preventDefault();
   document.getElementById('qhFiles').value=qFiles.map(function(f){return f.name;}).join(', ')||'None';
   var fd=new FormData(e.target);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:new URLSearchParams(fd).toString()})
+  // Attach actual quote files into FormData
+  qFiles.forEach(function(f,i){ fd.append('file_'+i, f, f.name); });
+  // No Content-Type header — browser sets multipart boundary automatically
+  fetch('/',{method:'POST',body:fd})
     .then(function(){
       document.getElementById('qformWrap').style.display='none';
       document.getElementById('qsucc').classList.add('on');
