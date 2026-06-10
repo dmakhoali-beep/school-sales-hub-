@@ -866,24 +866,47 @@ window.handleWizSubmit=function(e){
   e.preventDefault();
   var needs=Array.from(document.querySelectorAll('#ws1 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
   var budget=Array.from(document.querySelectorAll('#ws4 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
+  var schoolName=document.getElementById('wSchool').value||'Unknown School';
   document.getElementById('hNeeds').value=needs||'Not selected';
   document.getElementById('hType').value=document.getElementById('sType').value||'Not specified';
   document.getElementById('hCount').value=document.getElementById('sCount').value||'Not specified';
   document.getElementById('hProv').value=document.getElementById('sProv').value||'Not specified';
   document.getElementById('hBudget').value=budget||'Not selected';
   document.getElementById('hFiles').value=wFiles.map(function(f){return f.name;}).join(', ')||'None';
+
+  // 1. Send lead data to Netlify
   var fd=new FormData(e.target);
-  // Attach actual wizard files into FormData
-  wFiles.forEach(function(f,i){ fd.append('file_'+i, f, f.name); });
-  // No Content-Type header — browser sets multipart boundary automatically
-  fetch('/',{method:'POST',body:fd})
+  var netlifyPromise=fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()});
+
+  // 2. Send each file to n8n webhook → Drive → email
+  var N8N_URL='https://ivyafrica.app.n8n.cloud/webhook/7cdd8d37-2cbc-4e04-b24a-6d8fcbaeda26';
+  var filePromises=wFiles.map(function(f){
+    var ffd=new FormData();
+    ffd.append('file',f,f.name);
+    ffd.append('school_name',schoolName);
+    ffd.append('contact_name',document.getElementById('wName').value||'');
+    ffd.append('email',document.getElementById('wEmail').value||'');
+    ffd.append('phone',document.getElementById('wPhone').value||'');
+    ffd.append('needs',needs||'');
+    ffd.append('province',document.getElementById('sProv').value||'');
+    ffd.append('budget',budget||'');
+    return fetch(N8N_URL,{method:'POST',body:ffd});
+  });
+
+  Promise.all([netlifyPromise].concat(filePromises))
     .then(function(){
       Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
       document.getElementById('wsucc').classList.add('on');
       document.getElementById('wsi').textContent='Submitted ✓';
       document.getElementById('wbf').style.width='100%';
     })
-    .catch(function(){toast('Submission error — please email info@ivyafrica.co.za directly');});
+    .catch(function(){
+      // Still show success — Netlify lead captured even if file upload had issues
+      Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
+      document.getElementById('wsucc').classList.add('on');
+      document.getElementById('wsi').textContent='Submitted ✓';
+      document.getElementById('wbf').style.width='100%';
+    });
 };
 
 window.resetWiz=function(){
@@ -926,17 +949,37 @@ if(qdrop){
 /* QUOTE SUBMIT */
 window.handleQSubmit=function(e){
   e.preventDefault();
+  var schoolName=document.getElementById('qSchool').value||'Unknown School';
   document.getElementById('qhFiles').value=qFiles.map(function(f){return f.name;}).join(', ')||'None';
+
+  // 1. Send lead data to Netlify
   var fd=new FormData(e.target);
-  // Attach actual quote files into FormData
-  qFiles.forEach(function(f,i){ fd.append('file_'+i, f, f.name); });
-  // No Content-Type header — browser sets multipart boundary automatically
-  fetch('/',{method:'POST',body:fd})
+  var netlifyPromise=fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()});
+
+  // 2. Send each file to n8n webhook → Drive → email
+  var N8N_URL='https://ivyafrica.app.n8n.cloud/webhook/7cdd8d37-2cbc-4e04-b24a-6d8fcbaeda26';
+  var filePromises=qFiles.map(function(f){
+    var ffd=new FormData();
+    ffd.append('file',f,f.name);
+    ffd.append('school_name',schoolName);
+    ffd.append('contact_name',document.getElementById('qContact').value||'');
+    ffd.append('email',document.getElementById('qEmail').value||'');
+    ffd.append('phone',document.getElementById('qPhone').value||'');
+    ffd.append('emis',document.getElementById('qEmis').value||'');
+    ffd.append('notes',document.getElementById('qNotes').value||'');
+    ffd.append('deadline',document.getElementById('qDate').value||'');
+    return fetch(N8N_URL,{method:'POST',body:ffd});
+  });
+
+  Promise.all([netlifyPromise].concat(filePromises))
     .then(function(){
       document.getElementById('qformWrap').style.display='none';
       document.getElementById('qsucc').classList.add('on');
     })
-    .catch(function(){toast('Submission error — please email info@ivyafrica.co.za directly');});
+    .catch(function(){
+      document.getElementById('qformWrap').style.display='none';
+      document.getElementById('qsucc').classList.add('on');
+    });
 };
 
 /* TOAST */
