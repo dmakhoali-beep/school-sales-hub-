@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ivy Africa | School Procurement</title>
+<title>Ivy Africa | School Procurement Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -15,21 +15,11 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:#fff;color:#111;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 
-/* ── CURSOR BALL ── */
-#cball{
-  position:fixed;width:22px;height:22px;
-  border-radius:50%;
-  background:var(--orange);
-  pointer-events:none;z-index:99999;
-  top:0;left:0;
-  transform:translate(-50%,-50%);
-  transition:width .25s,height .25s,background .25s,opacity .25s;
-  mix-blend-mode:multiply;
-  will-change:transform;
-}
+/* CURSOR */
+#cball{position:fixed;width:22px;height:22px;border-radius:50%;background:var(--orange);pointer-events:none;z-index:99999;top:0;left:0;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,opacity .25s;mix-blend-mode:multiply;will-change:transform;}
 #cball.big{width:48px;height:48px;background:var(--green);opacity:.7;}
 
-/* ── NAV ── */
+/* NAV */
 nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 2rem;}
 .nlogo{display:flex;align-items:center;gap:9px;font-family:'Source Serif 4',serif;font-size:1.1rem;font-weight:700;color:var(--green);text-decoration:none;}
 .nmark{width:30px;height:30px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;}
@@ -39,7 +29,7 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .ncta{background:var(--orange)!important;color:#fff!important;padding:.4rem 1rem;border-radius:4px;transition:background .15s!important;}
 .ncta:hover{background:var(--o2)!important;}
 
-/* ── TICKER ── */
+/* TICKER */
 .ticker-wrap{background:var(--bg2);border-bottom:1px solid var(--bdr);overflow:hidden;padding:.55rem 0;position:relative;}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none;}
 .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--bg2),transparent);}
@@ -56,11 +46,10 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .tdot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.55;}
 .tsep{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 .75rem;white-space:nowrap;}
 
-/* ── HERO ── */
+/* HERO */
 .hero{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 3rem;display:grid;grid-template-columns:1fr 400px;gap:3.5rem;align-items:start;border-bottom:1px solid var(--bdr);}
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.875rem;}
 .hero h1{font-family:'Source Serif 4',serif;font-size:2.6rem;font-weight:700;line-height:1.16;letter-spacing:-.02em;color:#111;margin-bottom:1.2rem;min-height:9rem;}
-.hero h1 span{color:var(--green);}
 .tw-cursor{display:inline-block;border-right:3px solid var(--orange);padding-right:3px;animation:blink .75s step-end infinite;}
 @keyframes blink{50%{border-color:transparent;}}
 .hero-sub{font-size:.975rem;color:var(--mut);line-height:1.75;margin-bottom:1.75rem;}
@@ -68,7 +57,7 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .ti{font-size:.78rem;color:var(--mut);}
 .ti strong{display:block;font-size:.72rem;color:#111;margin-bottom:1px;}
 
-/* ── WIZARD ── */
+/* WIZARD */
 .wcard{border:1px solid var(--bdr);border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);}
 .whead{background:var(--green);padding:.875rem 1.125rem;display:flex;justify-content:space-between;align-items:center;}
 .whead-title{font-size:.75rem;font-weight:600;color:#fff;letter-spacing:.04em;}
@@ -82,7 +71,7 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 @keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 .ogrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.9rem;}
 .ogrid3{grid-template-columns:1fr 1fr 1fr;}
-.opt{padding:.575rem .7rem;border:1px solid var(--bdr);border-radius:4px;font-size:.8rem;font-weight:500;color:#111;background:#fff;display:flex;align-items:center;gap:7px;line-height:1.3;transition:border-color .15s,background .15s;user-select:none;}
+.opt{padding:.575rem .7rem;border:1px solid var(--bdr);border-radius:4px;font-size:.8rem;font-weight:500;color:#111;background:#fff;display:flex;align-items:center;gap:7px;line-height:1.3;transition:border-color .15s,background .15s;user-select:none;cursor:pointer;}
 .opt:hover{border-color:var(--green);background:#F0F7F3;}
 .opt.sel{border-color:var(--green);background:#F0F7F3;color:var(--green);}
 .opt.sel::before{content:'✓';font-size:.68rem;font-weight:700;flex-shrink:0;}
@@ -100,7 +89,7 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .wbtn.orng{background:var(--orange);color:#fff;border-color:var(--orange);}
 .wbtn.orng:hover{background:var(--o2);}
 
-/* ── FILE UPLOAD ── */
+/* FILE DROP */
 .fdrop{border:2px dashed #D0D0D0;border-radius:6px;padding:1.25rem;text-align:center;position:relative;transition:border-color .2s,background .2s;background:#fff;margin-bottom:.6rem;cursor:pointer;}
 .fdrop:hover,.fdrop.over{border-color:var(--green);background:#F0F7F3;}
 .fdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
@@ -110,41 +99,60 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .fitem{display:flex;align-items:center;gap:7px;padding:.375rem .6rem;background:var(--bg2);border-radius:4px;font-size:.75rem;margin-bottom:3px;}
 .fn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;}
 .fsz{color:var(--mut);flex-shrink:0;}
-.frm{background:none;border:none;color:#aaa;font-size:1rem;cursor:pointer;padding:0 2px;line-height:1;font-family:'Inter',sans-serif;}
+.frm{background:none;border:none;color:#aaa;font-size:1rem;cursor:pointer;padding:0 2px;line-height:1;}
 .frm:hover{color:#c00;}
 .fnote{font-size:.72rem;color:var(--mut);line-height:1.5;margin-top:.4rem;}
 
-/* ── MAIN ── */
+/* SUCCESS */
+.succ{display:none;text-align:center;padding:1.75rem 1rem;}
+.succ.on{display:block;}
+.scheck{width:42px;height:42px;border-radius:50%;background:#E6F4ED;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .9rem;animation:pop .4s ease;}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+
+/* MAIN */
 .main{max-width:1180px;margin:0 auto;padding:2.75rem 2rem;}
 .shead{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:.45rem;margin-bottom:1.6rem;}
 .shead h2{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:700;letter-spacing:-.01em;}
 .shead-s{font-size:.78rem;color:var(--mut);}
 
-/* ── REVEAL ── */
+/* REVEAL */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
 .rv.in{opacity:1;transform:none;}
 
-/* ── COMPLIANCE STRIP ── */
-.cstrip{background:var(--green);color:#fff;border-radius:6px;padding:1.1rem 1.4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.75rem;}
+/* COMPLIANCE */
+.cstrip{background:var(--green);color:#fff;border-radius:6px;padding:1.1rem 1.4rem;display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-bottom:2.75rem;}
 .ci{text-align:center;}
-.ci-l{font-size:.62rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
-.ci-v{font-size:.85rem;font-weight:600;}
+.ci-l{font-size:.6rem;opacity:.55;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
+.ci-v{font-size:.78rem;font-weight:600;}
 
-/* ── CATALOGUE ── */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--bdr);border-radius:6px;overflow:hidden;margin-bottom:2.75rem;}
+/* CATALOGUE TABS */
+.cat-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem;}
+.ctab{padding:.45rem 1rem;border:1px solid var(--bdr);border-radius:20px;font-size:.8rem;font-weight:500;color:var(--mut);background:#fff;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.ctab:hover{border-color:var(--green);color:var(--green);}
+.ctab.active{background:var(--green);color:#fff;border-color:var(--green);}
+.cat-panel{display:none;}
+.cat-panel.on{display:block;}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--bdr);border-radius:6px;overflow:hidden;margin-bottom:1.5rem;}
 .citem{background:#fff;padding:1.35rem 1.15rem;border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);transition:background .15s;}
 .citem:hover{background:var(--bg2);}
 .citem:nth-child(3n){border-right:none;}
 .citem:nth-last-child(-n+3){border-bottom:none;}
 .ctag{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:4px;margin-bottom:.45rem;}
-.cdot{width:7px;height:7px;border-radius:50%;}
+.cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .ctitle{font-family:'Source Serif 4',serif;font-size:.975rem;font-weight:600;color:#111;line-height:1.3;margin-bottom:.35rem;}
 .cdesc{font-size:.78rem;color:var(--mut);line-height:1.55;margin-bottom:.8rem;}
 .cprice{font-size:.72rem;font-weight:600;color:var(--green);margin-bottom:.55rem;}
-.clink{font-size:.78rem;font-weight:600;color:var(--green);text-decoration:none;}
+.clink{font-size:.78rem;font-weight:600;color:var(--green);text-decoration:none;display:inline-flex;align-items:center;gap:3px;}
 .clink:hover{text-decoration:underline;}
 
-/* ── QUOTE ── */
+/* DOWNLOAD STRIP */
+.dl-strip{background:var(--bg2);border:1px solid var(--bdr);border-radius:6px;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.75rem;}
+.dl-text h3{font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.2rem;}
+.dl-text p{font-size:.8rem;color:var(--mut);}
+.dl-btn{background:var(--orange);color:#fff;border:none;padding:.55rem 1.25rem;border-radius:4px;font-size:.825rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s;}
+.dl-btn:hover{background:var(--o2);}
+
+/* QUOTE FORM */
 .qsec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:1.75rem;margin-bottom:2.75rem;}
 .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;}
 .qlabel{display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px;}
@@ -157,25 +165,18 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .qfdrop:hover,.qfdrop.over{border-color:var(--green);background:#F0F7F3;}
 .qfdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
 
-/* ── SUCCESS ── */
-.succ{display:none;text-align:center;padding:1.75rem 1rem;}
-.succ.on{display:block;}
-.scheck{width:42px;height:42px;border-radius:50%;background:#E6F4ED;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .9rem;animation:pop .4s ease;}
-@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-
-/* ── TOAST ── */
+/* TOAST */
 #toast{position:fixed;bottom:1.75rem;left:50%;transform:translateX(-50%) translateY(60px);background:#111;color:#fff;padding:.65rem 1.35rem;border-radius:6px;font-size:.825rem;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.35rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
-.fl{font-size:.75rem;color:var(--mut);}
+.fl{font-size:.75rem;color:var(--mut);line-height:1.7;}
 .fl a{color:var(--green);text-decoration:none;}
 .flinks{display:flex;gap:1.35rem;}
 .flinks a{font-size:.75rem;color:var(--mut);text-decoration:none;}
 .flinks a:hover{color:#111;}
 
-/* ── RESPONSIVE ── */
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;}
   .cgrid{grid-template-columns:1fr 1fr;}
@@ -184,22 +185,16 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
   .cstrip{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:580px){
-  .hero{padding:2rem 1.25rem;}
-  .hero h1{font-size:2rem;min-height:auto;}
-  .cgrid{grid-template-columns:1fr;}
-  .ogrid{grid-template-columns:1fr;}
-  .main{padding:2rem 1.25rem;}
-  nav{padding:0 1.25rem;}
+  .hero{padding:2rem 1.25rem;}.hero h1{font-size:2rem;min-height:auto;}
+  .cgrid{grid-template-columns:1fr;}.ogrid{grid-template-columns:1fr;}
+  .main{padding:2rem 1.25rem;}nav{padding:0 1.25rem;}
   .cstrip{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR BALL -->
 <div id="cball"></div>
-
-<!-- TOAST -->
 <div id="toast"></div>
 
 <!-- NAV -->
@@ -212,13 +207,13 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
     <a href="https://ivyafrica.co.za/ict">ICT</a>
     <a href="https://ivyafrica.co.za/training">Training</a>
     <a href="https://ivyafrica.co.za/contact">Contact</a>
-    <a href="https://ivyafrica.co.za/quote" class="ncta">Request a Quote</a>
+    <a href="#quote" class="ncta">Request a Quote</a>
   </div>
 </nav>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker" id="tickerEl">
+  <div class="ticker">
     <span class="tsep">Authorised distributor —</span>
     <span class="tbadge tb-mml"><span class="tdot"></span>Maskew Miller Longman</span>
     <span class="tbadge tb-plat"><span class="tdot"></span>Platinum Series</span>
@@ -240,11 +235,12 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
   <div>
     <p class="eyebrow">School Procurement Hub</p>
     <h1><span id="tw" class="tw-cursor"></span></h1>
-    <p class="hero-sub">One authorised supplier. All major publishers. CAPS-aligned materials from Grade R through Grade 12, plus ICT infrastructure and teacher development programmes.</p>
+    <p class="hero-sub">One authorised supplier. All major publishers. CAPS-aligned materials from Grade R through Grade 12, plus ICT, STEM, stationery and teacher development.</p>
     <div class="trust-row">
       <div class="ti"><strong>B-BBEE Level 1</strong>Contributor</div>
-      <div class="ti"><strong>CSD Registered</strong>MAAA0123456</div>
-      <div class="ti"><strong>VAT Registered</strong>4580XXXXXX</div>
+      <div class="ti"><strong>CSD</strong>MAAA 0862915</div>
+      <div class="ti"><strong>VAT</strong>4910306010</div>
+      <div class="ti"><strong>Reg No.</strong>2016/041769/07</div>
       <div class="ti"><strong>8 Provinces</strong>Active delivery</div>
     </div>
   </div>
@@ -262,8 +258,10 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
         <p class="wq">What does your school need?</p>
         <div class="ogrid">
           <div class="opt" onclick="tog(this)"><span class="oi">📘</span>Textbooks &amp; LTSM</div>
+          <div class="opt" onclick="tog(this)"><span class="oi">🔬</span>STEM, Coding &amp; Robotics</div>
           <div class="opt" onclick="tog(this)"><span class="oi">💻</span>ICT &amp; Devices</div>
           <div class="opt" onclick="tog(this)"><span class="oi">🎓</span>Teacher Training</div>
+          <div class="opt" onclick="tog(this)"><span class="oi">✏️</span>Stationery &amp; Supplies</div>
           <div class="opt" onclick="tog(this)"><span class="oi">🧾</span>Administration</div>
           <div class="opt ofull" onclick="tog(this)"><span class="oi">📦</span>Full school package</div>
         </div>
@@ -277,10 +275,8 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
             <span class="wlabel">School type</span>
             <select class="winput" id="sType">
               <option value="">Select</option>
-              <option>Primary (Gr R–7)</option>
-              <option>Secondary (Gr 8–12)</option>
-              <option>Combined (Gr R–12)</option>
-              <option>Special needs</option>
+              <option>Primary (Gr R–7)</option><option>Secondary (Gr 8–12)</option>
+              <option>Combined (Gr R–12)</option><option>Special needs</option>
               <option>TVET College</option>
             </select>
           </div>
@@ -288,10 +284,8 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
             <span class="wlabel">Learner count</span>
             <select class="winput" id="sCount">
               <option value="">Select</option>
-              <option>Under 200</option>
-              <option>200–500</option>
-              <option>500–1000</option>
-              <option>Over 1000</option>
+              <option>Under 200</option><option>200–500</option>
+              <option>500–1000</option><option>Over 1000</option>
             </select>
           </div>
         </div>
@@ -309,7 +303,7 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
       </div>
 
       <div class="ws" id="ws3">
-        <p class="wq">Upload your school's book list</p>
+        <p class="wq">Upload your school's book or supply list</p>
         <div class="fdrop" id="wdrop">
           <input type="file" id="wfi" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png">
           <span class="fdrop-icon">📂</span>
@@ -349,43 +343,55 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
 
       <div class="ws" id="ws5">
         <p class="wq">Who should we contact?</p>
-        <div class="wrow">
-          <div>
-            <span class="wlabel">Full name</span>
-            <input type="text" class="winput" id="wName" placeholder="Principal / HOD">
+        <!-- NETLIFY FORM — WIZARD -->
+        <form name="wizard-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="wizForm" onsubmit="handleWizSubmit(event)">
+          <input type="hidden" name="form-name" value="wizard-intake">
+          <input type="hidden" name="bot-field" style="display:none">
+          <input type="hidden" name="needs" id="hNeeds">
+          <input type="hidden" name="school_type" id="hType">
+          <input type="hidden" name="learner_count" id="hCount">
+          <input type="hidden" name="province" id="hProv">
+          <input type="hidden" name="budget" id="hBudget">
+          <input type="hidden" name="timeline" id="hTimeline">
+          <input type="hidden" name="uploaded_files" id="hFiles">
+          <div class="wrow">
+            <div>
+              <span class="wlabel">Full name *</span>
+              <input type="text" class="winput" name="contact_name" id="wName" placeholder="Principal / HOD" required>
+            </div>
+            <div>
+              <span class="wlabel">Role</span>
+              <select class="winput" name="role" id="wRole">
+                <option value="">Select</option>
+                <option>Principal</option><option>HOD</option>
+                <option>SGB Member</option><option>Finance Officer</option>
+                <option>Procurement Officer</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <span class="wlabel">Role</span>
-            <select class="winput" id="wRole">
-              <option value="">Select</option>
-              <option>Principal</option><option>HOD</option>
-              <option>SGB Member</option><option>Finance Officer</option>
-              <option>Procurement Officer</option>
-            </select>
+          <span class="wlabel">School name *</span>
+          <input type="text" class="winput" name="school_name" id="wSchool" placeholder="e.g. Kgomotso Secondary School" required>
+          <div class="wrow">
+            <div>
+              <span class="wlabel">Email *</span>
+              <input type="email" class="winput" name="email" id="wEmail" placeholder="school@email.co.za" required>
+            </div>
+            <div>
+              <span class="wlabel">Phone</span>
+              <input type="tel" class="winput" name="phone" id="wPhone" placeholder="0XX XXX XXXX">
+            </div>
           </div>
-        </div>
-        <span class="wlabel">School name</span>
-        <input type="text" class="winput" id="wSchool" placeholder="e.g. Kgomotso Secondary School">
-        <div class="wrow">
-          <div>
-            <span class="wlabel">Email</span>
-            <input type="email" class="winput" id="wEmail" placeholder="school@email.co.za">
+          <div class="wnav">
+            <button type="button" class="wbtn" onclick="go(4)">← Back</button>
+            <button type="submit" class="wbtn orng">Send to Ivy Africa →</button>
           </div>
-          <div>
-            <span class="wlabel">Phone</span>
-            <input type="tel" class="winput" id="wPhone" placeholder="0XX XXX XXXX">
-          </div>
-        </div>
-        <div class="wnav">
-          <button class="wbtn" onclick="go(4)">← Back</button>
-          <button class="wbtn orng" onclick="sendWiz()">Send to Ivy Africa →</button>
-        </div>
+        </form>
       </div>
 
       <div class="succ" id="wsucc">
         <div class="scheck">✓</div>
-        <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Request sent to info@ivyafrica.co.za</p>
-        <p style="font-size:.8rem;color:var(--mut);">A specialist will contact you within 4 business hours.</p>
+        <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Request sent — we'll be in touch within 4 hours</p>
+        <p style="font-size:.8rem;color:var(--mut);">Ivy Africa will contact you at the email provided with your personalised quote.</p>
         <button class="wbtn" style="margin-top:1rem" onclick="resetWiz()">New request</button>
       </div>
 
@@ -396,105 +402,359 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
 <!-- MAIN -->
 <div class="main">
 
+  <!-- COMPLIANCE STRIP -->
   <div class="cstrip rv">
-    <div class="ci"><div class="ci-l">Procurement</div><div class="ci-v">B-BBEE Level 1</div></div>
-    <div class="ci"><div class="ci-l">Tax Clearance</div><div class="ci-v">Valid — 2025</div></div>
-    <div class="ci"><div class="ci-l">SARS VAT</div><div class="ci-v">Registered Vendor</div></div>
+    <div class="ci"><div class="ci-l">B-BBEE</div><div class="ci-v">Level 1</div></div>
+    <div class="ci"><div class="ci-l">CSD Number</div><div class="ci-v">MAAA 0862915</div></div>
+    <div class="ci"><div class="ci-l">VAT Number</div><div class="ci-v">4910306010</div></div>
+    <div class="ci"><div class="ci-l">Company Reg</div><div class="ci-v">2016/041769/07</div></div>
     <div class="ci"><div class="ci-l">Delivery</div><div class="ci-v">Nationwide</div></div>
   </div>
 
+  <!-- CATALOGUE TABS -->
   <div class="shead rv">
     <h2>Procurement Catalogue</h2>
     <span class="shead-s">CAPS-aligned · 2025 edition</span>
   </div>
 
-  <div class="cgrid rv">
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#003B6F"></span>Maskew Miller Longman</div>
-      <div class="ctitle">TAAL MET FLAIR / Mind the Gap</div>
-      <div class="cdesc">CAPS-approved study guides and learner books for all subjects, Grades 4–12. NSC exam preparation series included.</div>
-      <div class="cprice">From R89 per learner book</div>
-      <a class="clink" href="https://ivyafrica.co.za/ltsm/mml">View titles →</a>
+  <div class="cat-tabs rv" id="catTabs">
+    <div class="ctab active" onclick="showTab('caps')">📘 CAPS Textbooks</div>
+    <div class="ctab" onclick="showTab('stem')">🔬 STEM, Coding &amp; Robotics</div>
+    <div class="ctab" onclick="showTab('training')">🎓 Teacher Training</div>
+    <div class="ctab" onclick="showTab('stationery')">✏️ School Stationery</div>
+    <div class="ctab" onclick="showTab('supplies')">📦 General Supplies</div>
+  </div>
+
+  <!-- TAB: CAPS TEXTBOOKS -->
+  <div class="cat-panel on rv" id="tab-caps">
+    <div class="cgrid">
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#003B6F"></span>Maskew Miller Longman</div>
+        <div class="ctitle">TAAL MET FLAIR / Mind the Gap</div>
+        <div class="cdesc">CAPS-approved study guides and learner books for all subjects, Grades 4–12. NSC exam preparation series included.</div>
+        <div class="cprice">From R89 per learner book</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/mml">View titles →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#5B2D8E"></span>Platinum Series</div>
+        <div class="ctitle">Platinum Mathematics / Science</div>
+        <div class="cdesc">Full Platinum series: Mathematics, Natural Sciences, Social Sciences, Life Skills — Grades 4–9. Teacher's guides included.</div>
+        <div class="cprice">From R105 per learner book</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/platinum">View titles →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#002147"></span>Oxford University Press SA</div>
+        <div class="ctitle">Oxford Successful Series</div>
+        <div class="cdesc">Oxford Successful and Headstart series for primary and secondary. Bilingual editions available for most titles.</div>
+        <div class="cprice">From R95 per learner book</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/oxford">View titles →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#C8102E"></span>Shuter &amp; Shooter</div>
+        <div class="ctitle">Shuter &amp; Shooter CAPS Series</div>
+        <div class="cdesc">Comprehensive CAPS-aligned titles across all learning areas. Widely used in township and rural schools across SA.</div>
+        <div class="cprice">From R82 per learner book</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/shuter">View titles →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Via Afrika</div>
+        <div class="ctitle">Via Afrika Learning Series</div>
+        <div class="cdesc">Full CAPS coverage across all learning areas. eBook and print bundles available. Licensed for school networks.</div>
+        <div class="cprice">From R80 per learner book</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/via-afrika">View titles →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Study Guides &amp; Exam Prep</div>
+        <div class="ctitle">NSC Exam Preparation Bundle</div>
+        <div class="cdesc">Grade 10–12 exam-focused study guides covering all major subjects. Ideal for matric intervention programmes.</div>
+        <div class="cprice">From R65 per study guide</div>
+        <a class="clink" href="https://ivyafrica.co.za/ltsm/exam-prep">View titles →</a>
+      </div>
     </div>
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#5B2D8E"></span>Platinum Series</div>
-      <div class="ctitle">Platinum Mathematics / Science</div>
-      <div class="cdesc">Full Platinum series: Mathematics, Natural Sciences, Social Sciences, Life Skills — Grades 4–9. Teacher's guides included.</div>
-      <div class="cprice">From R105 per learner book</div>
-      <a class="clink" href="https://ivyafrica.co.za/ltsm/platinum">View titles →</a>
-    </div>
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#002147"></span>Oxford University Press SA</div>
-      <div class="ctitle">Oxford Successful Series</div>
-      <div class="cdesc">Oxford Successful and Headstart series for primary and secondary. Bilingual editions available for most titles.</div>
-      <div class="cprice">From R95 per learner book</div>
-      <a class="clink" href="https://ivyafrica.co.za/ltsm/oxford">View titles →</a>
-    </div>
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>ICT Infrastructure</div>
-      <div class="ctitle">Tablets, Laptops &amp; Computer Labs</div>
-      <div class="cdesc">Dell, HP, and Lenovo education devices. School-grade Android tablets from R1,850. Full lab fit-out and connectivity.</div>
-      <div class="cprice">From R1,850 per device</div>
-      <a class="clink" href="https://ivyafrica.co.za/ict">Get a lab quote →</a>
-    </div>
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Teacher Development</div>
-      <div class="ctitle">SACE-Accredited CPD Programmes</div>
-      <div class="cdesc">On-site and blended professional development. Subject-specific training aligned to DBE curriculum priorities.</div>
-      <div class="cprice">From R350 per educator</div>
-      <a class="clink" href="https://ivyafrica.co.za/training">View programmes →</a>
-    </div>
-    <div class="citem">
-      <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Via Afrika</div>
-      <div class="ctitle">Via Afrika Learning Series</div>
-      <div class="cdesc">Full CAPS coverage across all learning areas. eBook and print bundles available. Licensed for school networks.</div>
-      <div class="cprice">From R80 per learner book</div>
-      <a class="clink" href="https://ivyafrica.co.za/ltsm/via-afrika">View titles →</a>
+    <div class="dl-strip">
+      <div class="dl-text">
+        <h3>Download the CAPS Textbook Catalogue</h3>
+        <p>Full 2025 title list with ISBNs, pricing, and publisher details — ready for SGB procurement approval.</p>
+      </div>
+      <a class="dl-btn" href="https://ivyafrica.co.za/catalogues/caps-2025.pdf" target="_blank">Download PDF →</a>
     </div>
   </div>
 
-  <div class="shead rv">
+  <!-- TAB: STEM -->
+  <div class="cat-panel rv" id="tab-stem">
+    <div class="cgrid">
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Coding Kits</div>
+        <div class="ctitle">Micro:bit &amp; Arduino Starter Kits</div>
+        <div class="cdesc">Hands-on coding kits for Grades 4–9. Aligned to the DBE Coding and Robotics curriculum. Includes teacher guides and lesson plans.</div>
+        <div class="cprice">From R450 per kit</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/coding">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Robotics</div>
+        <div class="ctitle">LEGO Education &amp; mBot Robotics</div>
+        <div class="cdesc">School robotics kits for beginner to advanced levels. Competition-ready sets available. Includes curriculum integration support.</div>
+        <div class="cprice">From R1,200 per set</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/robotics">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Science Lab</div>
+        <div class="ctitle">Science Lab Equipment &amp; Consumables</div>
+        <div class="cdesc">Complete lab fit-out packages for primary and secondary. CAPS-aligned experiment kits with safety equipment included.</div>
+        <div class="cprice">From R3,500 per lab pack</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/science">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Mathematics</div>
+        <div class="ctitle">Maths Manipulatives &amp; Resources</div>
+        <div class="cdesc">Fraction boards, geometric sets, calculators, and maths kits for Grades R–9. Durable classroom-grade materials.</div>
+        <div class="cprice">From R85 per learner kit</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/maths">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>3D Printing</div>
+        <div class="ctitle">3D Printers for Schools</div>
+        <div class="cdesc">Entry-level 3D printers for design and technology labs. Includes setup, training, and first-year filament supply.</div>
+        <div class="cprice">From R8,500 per unit</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/3d-printing">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Digital Literacy</div>
+        <div class="ctitle">Digital Literacy Classroom Packs</div>
+        <div class="cdesc">Offline-capable digital literacy programmes for schools with limited connectivity. USB-based content delivery included.</div>
+        <div class="cprice">From R220 per learner</div>
+        <a class="clink" href="https://ivyafrica.co.za/stem/digital">View range →</a>
+      </div>
+    </div>
+    <div class="dl-strip">
+      <div class="dl-text">
+        <h3>Download the STEM &amp; Robotics Catalogue</h3>
+        <p>Full product list with specifications, pricing, and DBE curriculum alignment notes.</p>
+      </div>
+      <a class="dl-btn" href="https://ivyafrica.co.za/catalogues/stem-2025.pdf" target="_blank">Download PDF →</a>
+    </div>
+  </div>
+
+  <!-- TAB: TEACHER TRAINING -->
+  <div class="cat-panel rv" id="tab-training">
+    <div class="cgrid">
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>SACE-Accredited</div>
+        <div class="ctitle">Subject-Specific CPD Workshops</div>
+        <div class="cdesc">On-site workshops for Mathematics, Science, Languages and Life Orientation. SACE points awarded. Minimum 10 educators.</div>
+        <div class="cprice">From R350 per educator</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/cpd">View programmes →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Leadership</div>
+        <div class="ctitle">School Management &amp; Leadership</div>
+        <div class="cdesc">Programmes for principals, deputies and HODs aligned to DBE leadership competency frameworks. Certificate issued on completion.</div>
+        <div class="cprice">From R650 per delegate</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/leadership">View programmes →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Technology</div>
+        <div class="ctitle">ICT Integration for Teachers</div>
+        <div class="cdesc">Practical training on using tablets, Google Classroom, and digital tools in CAPS lessons. Available in-person and blended.</div>
+        <div class="cprice">From R280 per educator</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/ict">View programmes →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Coding &amp; Robotics</div>
+        <div class="ctitle">Coding &amp; Robotics Teacher Certification</div>
+        <div class="cdesc">Equip teachers to deliver the new DBE Coding and Robotics curriculum. Hands-on, practical, includes kit familiarisation.</div>
+        <div class="cprice">From R480 per educator</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/coding">View programmes →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Foundation Phase</div>
+        <div class="ctitle">Early Literacy &amp; Numeracy Training</div>
+        <div class="cdesc">Structured programmes for Grade R–3 teachers focused on reading, phonics and early numeracy intervention strategies.</div>
+        <div class="cprice">From R320 per educator</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/foundation">View programmes →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#E8611A"></span>Wellness</div>
+        <div class="ctitle">Teacher Wellness &amp; Resilience</div>
+        <div class="cdesc">One-day and half-day wellness workshops addressing burnout, classroom stress, and professional resilience. Available schoolwide.</div>
+        <div class="cprice">From R180 per educator</div>
+        <a class="clink" href="https://ivyafrica.co.za/training/wellness">View programmes →</a>
+      </div>
+    </div>
+    <div class="dl-strip">
+      <div class="dl-text">
+        <h3>Download the Teacher Training Catalogue</h3>
+        <p>Full programme guide with SACE points, durations, costs and booking details for 2025.</p>
+      </div>
+      <a class="dl-btn" href="https://ivyafrica.co.za/catalogues/training-2025.pdf" target="_blank">Download PDF →</a>
+    </div>
+  </div>
+
+  <!-- TAB: STATIONERY -->
+  <div class="cat-panel rv" id="tab-stationery">
+    <div class="cgrid">
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Writing</div>
+        <div class="ctitle">Learner Writing Pack</div>
+        <div class="cdesc">Standard learner writing pack: HB pencils, Staedtler pens, rulers, erasers and sharpeners. Bulk school pricing available.</div>
+        <div class="cprice">From R28 per learner pack</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/writing">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Books &amp; Pads</div>
+        <div class="ctitle">Exercise Books &amp; A4 Pads</div>
+        <div class="cdesc">72-page and 96-page exercise books in bulk. A4 writing pads, graph paper, and subject-specific ruled books.</div>
+        <div class="cprice">From R4.50 per exercise book</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/books">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Art &amp; Craft</div>
+        <div class="ctitle">Art &amp; Creative Supplies</div>
+        <div class="cdesc">Wax crayons, watercolours, poster paint, brushes, construction paper and craft packs for Foundation and Intermediate Phase.</div>
+        <div class="cprice">From R35 per learner set</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/art">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Geometry</div>
+        <div class="ctitle">Maths Geometry Sets</div>
+        <div class="cdesc">School geometry sets including compass, protractor, set squares and ruler. Available in individual and bulk class packs.</div>
+        <div class="cprice">From R18 per set</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/geometry">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Filing</div>
+        <div class="ctitle">Portfolios &amp; Filing Solutions</div>
+        <div class="cdesc">Learner portfolios, plastic sleeves, display books and exam folders. Available in school branded and standard options.</div>
+        <div class="cprice">From R12 per portfolio</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/filing">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#555"></span>Calculators</div>
+        <div class="ctitle">Scientific Calculators</div>
+        <div class="cdesc">CASIO FX-82 and FX-991 — DBE approved for NSC examinations. Class sets of 30 available with carry case.</div>
+        <div class="cprice">From R145 per calculator</div>
+        <a class="clink" href="https://ivyafrica.co.za/stationery/calculators">View range →</a>
+      </div>
+    </div>
+    <div class="dl-strip">
+      <div class="dl-text">
+        <h3>Download the Stationery Price List</h3>
+        <p>Full 2025 stationery catalogue with bulk pricing tiers and order minimums.</p>
+      </div>
+      <a class="dl-btn" href="https://ivyafrica.co.za/catalogues/stationery-2025.pdf" target="_blank">Download PDF →</a>
+    </div>
+  </div>
+
+  <!-- TAB: GENERAL SUPPLIES -->
+  <div class="cat-panel rv" id="tab-supplies">
+    <div class="cgrid">
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Classroom</div>
+        <div class="ctitle">Classroom Furniture &amp; Boards</div>
+        <div class="cdesc">Learner desks, chairs, whiteboards, pinboards and teacher workstations. Available for full classroom fit-out quoting.</div>
+        <div class="cprice">Request quote</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/furniture">Get a quote →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Cleaning</div>
+        <div class="ctitle">School Cleaning &amp; Hygiene Supplies</div>
+        <div class="cdesc">Bulk cleaning consumables, hand sanitiser, soap dispensers and paper products for schools. Monthly supply contracts available.</div>
+        <div class="cprice">From R1,200 per monthly pack</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/cleaning">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>First Aid</div>
+        <div class="ctitle">First Aid Kits &amp; Safety Equipment</div>
+        <div class="cdesc">SANS-compliant first aid kits for schools. Fire extinguishers, safety signage, and emergency response equipment.</div>
+        <div class="cprice">From R380 per kit</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/safety">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Sport</div>
+        <div class="ctitle">Sports Equipment &amp; Uniforms</div>
+        <div class="cdesc">School sport equipment packs for netball, soccer, athletics and cricket. Custom branded sportswear available with minimum order.</div>
+        <div class="cprice">From R850 per sport pack</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/sport">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Printing</div>
+        <div class="ctitle">Printers, Toner &amp; Paper</div>
+        <div class="cdesc">Office printers, bulk A4 paper, toner cartridges and print management solutions for school offices and staffrooms.</div>
+        <div class="cprice">From R2,800 per printer</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/printing">View range →</a>
+      </div>
+      <div class="citem">
+        <div class="ctag"><span class="cdot" style="background:#1A4D2E"></span>Library</div>
+        <div class="ctitle">Library Books &amp; Resources</div>
+        <div class="cdesc">Curated library starter packs and top-up collections for primary and secondary school libraries. Age-appropriate, curriculum-linked.</div>
+        <div class="cprice">From R4,500 per starter pack</div>
+        <a class="clink" href="https://ivyafrica.co.za/supplies/library">View range →</a>
+      </div>
+    </div>
+    <div class="dl-strip">
+      <div class="dl-text">
+        <h3>Download the General Supplies Catalogue</h3>
+        <p>Full product and pricing list for school general supplies, furniture and consumables.</p>
+      </div>
+      <a class="dl-btn" href="https://ivyafrica.co.za/catalogues/supplies-2025.pdf" target="_blank">Download PDF →</a>
+    </div>
+  </div>
+
+  <!-- FORMAL QUOTE -->
+  <div id="quote" class="shead rv" style="margin-top:1rem;">
     <h2>Formal Quotation Request</h2>
     <span class="shead-s">For SGB, treasury &amp; procurement officers</span>
   </div>
 
   <div class="qsec rv">
-    <div id="qform">
-      <div class="qgrid">
-        <div><label class="qlabel">School name</label><input type="text" class="qinput" id="qSchool" placeholder="Official school name"></div>
-        <div><label class="qlabel">EMIS number</label><input type="text" class="qinput" id="qEmis" placeholder="School EMIS number"></div>
-        <div><label class="qlabel">Contact person</label><input type="text" class="qinput" id="qContact" placeholder="Name and role"></div>
-        <div><label class="qlabel">Email address</label><input type="email" class="qinput" id="qEmail" placeholder="Official school email"></div>
-        <div><label class="qlabel">Phone number</label><input type="tel" class="qinput" id="qPhone" placeholder="School landline or cell"></div>
-        <div><label class="qlabel">Quote required by</label><input type="date" class="qinput" id="qDate"></div>
-        <div class="qfull">
-          <label class="qlabel">Upload book list / RFQ document</label>
-          <div class="qfdrop" id="qdrop">
-            <input type="file" id="qfi" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png">
-            <span style="font-size:1.4rem;display:block;margin-bottom:5px">📎</span>
-            <span style="font-size:.8rem;font-weight:600;color:#111;display:block;margin-bottom:2px">Drop your list or click to browse</span>
-            <span style="font-size:.72rem;color:var(--mut)">PDF, Word, Excel, CSV or image · Max 10MB each</span>
+    <div id="qformWrap">
+      <!-- NETLIFY FORM — QUOTE -->
+      <form name="formal-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="qForm" onsubmit="handleQSubmit(event)">
+        <input type="hidden" name="form-name" value="formal-quote">
+        <input type="hidden" name="bot-field" style="display:none">
+        <input type="hidden" name="uploaded_files" id="qhFiles">
+        <div class="qgrid">
+          <div><label class="qlabel">School name *</label><input type="text" class="qinput" name="school_name" id="qSchool" placeholder="Official school name" required></div>
+          <div><label class="qlabel">EMIS number</label><input type="text" class="qinput" name="emis" id="qEmis" placeholder="School EMIS number"></div>
+          <div><label class="qlabel">Contact person *</label><input type="text" class="qinput" name="contact_name" id="qContact" placeholder="Name and role" required></div>
+          <div><label class="qlabel">Email address *</label><input type="email" class="qinput" name="email" id="qEmail" placeholder="Official school email" required></div>
+          <div><label class="qlabel">Phone number</label><input type="tel" class="qinput" name="phone" id="qPhone" placeholder="School landline or cell"></div>
+          <div><label class="qlabel">Quote required by</label><input type="date" class="qinput" name="deadline" id="qDate"></div>
+          <div class="qfull">
+            <label class="qlabel">Upload book list / RFQ document</label>
+            <div class="qfdrop" id="qdrop">
+              <input type="file" id="qfi" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png">
+              <span style="font-size:1.4rem;display:block;margin-bottom:5px">📎</span>
+              <span style="font-size:.8rem;font-weight:600;color:#111;display:block;margin-bottom:2px">Drop your list or click to browse</span>
+              <span style="font-size:.72rem;color:var(--mut)">PDF, Word, Excel, CSV or image · Max 10MB each</span>
+            </div>
+            <div id="qfl"></div>
           </div>
-          <div id="qfl"></div>
+          <div class="qfull">
+            <label class="qlabel">Additional requirements</label>
+            <textarea class="qinput" name="notes" id="qNotes" rows="3" placeholder="Specify subjects, grades, quantities or delivery instructions not in your uploaded list."></textarea>
+          </div>
         </div>
-        <div class="qfull">
-          <label class="qlabel">Additional requirements</label>
-          <textarea class="qinput" id="qNotes" rows="3" placeholder="Specify subjects, grades, quantities or delivery instructions not in your uploaded list."></textarea>
-        </div>
-      </div>
-      <button class="qsubmit" onclick="sendQuote()">Submit to info@ivyafrica.co.za</button>
+        <button type="submit" class="qsubmit">Submit to info@ivyafrica.co.za</button>
+      </form>
     </div>
     <div class="succ" id="qsucc">
       <div class="scheck">✓</div>
-      <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem">Quotation request sent to info@ivyafrica.co.za</p>
-      <p style="font-size:.8rem;color:var(--mut)">Your formal quotation will be prepared within 24 hours.</p>
+      <p style="font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem">Quotation request received</p>
+      <p style="font-size:.8rem;color:var(--mut)">Your formal quotation will be with you within 24 hours at the email address provided.</p>
     </div>
   </div>
 
 </div>
 
 <footer>
-  <div class="fl">© 2025 Ivy Africa Education Suppliers &nbsp;·&nbsp; VAT No. 4580XXXXXX &nbsp;·&nbsp; <a href="mailto:info@ivyafrica.co.za">info@ivyafrica.co.za</a></div>
+  <div class="fl">
+    © 2025 Ivy Africa Education Suppliers &nbsp;·&nbsp;
+    Reg No. 2016/041769/07 &nbsp;·&nbsp;
+    VAT 4910306010 &nbsp;·&nbsp;
+    CSD MAAA 0862915 &nbsp;·&nbsp;
+    <a href="mailto:info@ivyafrica.co.za">info@ivyafrica.co.za</a>
+  </div>
   <div class="flinks">
     <a href="https://ivyafrica.co.za/terms">Terms</a>
     <a href="https://ivyafrica.co.za/delivery">Delivery policy</a>
@@ -506,201 +766,180 @@ footer{border-top:1px solid var(--bdr);max-width:1180px;margin:0 auto;padding:1.
 (function(){
 'use strict';
 
-/* ── CURSOR BALL ── */
-var ball = document.getElementById('cball');
-var bx = window.innerWidth/2, by = window.innerHeight/2;
-var tx = bx, ty = by;
-
-document.addEventListener('mousemove', function(e){
-  tx = e.clientX; ty = e.clientY;
-});
-
+/* CURSOR */
+var ball=document.getElementById('cball');
+var bx=window.innerWidth/2,by=window.innerHeight/2,tx=bx,ty=by;
+document.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
 (function loop(){
-  bx += (tx - bx) * 0.14;
-  by += (ty - by) * 0.14;
-  ball.style.left = Math.round(bx) + 'px';
-  ball.style.top  = Math.round(by) + 'px';
+  bx+=(tx-bx)*.13; by+=(ty-by)*.13;
+  ball.style.left=Math.round(bx)+'px';
+  ball.style.top=Math.round(by)+'px';
   requestAnimationFrame(loop);
 })();
-
-document.querySelectorAll('a, button, .opt, .wbtn, .fdrop, .qfdrop, .clink, .ncta, .qsubmit').forEach(function(el){
-  el.addEventListener('mouseenter', function(){ ball.classList.add('big'); });
-  el.addEventListener('mouseleave', function(){ ball.classList.remove('big'); });
+document.querySelectorAll('a,button,.opt,.ctab,.fdrop,.qfdrop,.dl-btn').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ball.classList.add('big');});
+  el.addEventListener('mouseleave',function(){ball.classList.remove('big');});
 });
 
-/* ── TYPEWRITER ── */
-var phrases = [
-  'Your school\'s LTSM, ICT\n& training — sourced,\nquoted, delivered.',
-  'Upload your book list.\nWe quote. You procure.\nSimple.'
-];
-var tw = document.getElementById('tw');
-var pi = 0, ci = 0, del = false;
+/* TYPEWRITER */
+var phrases=['Your school\'s LTSM, ICT\n& STEM — sourced,\nquoted, delivered.','Upload your book list.\nWe quote. You procure.\nSimple.'];
+var tw=document.getElementById('tw'),pi=0,ci=0,del=false;
 function type(){
-  var ph = phrases[pi];
-  var shown = ph.slice(0, ci).replace(/\n/g,'<br>');
-  tw.innerHTML = shown;
+  var ph=phrases[pi];
+  tw.innerHTML=ph.slice(0,ci).replace(/\n/g,'<br>');
   if(!del){
-    if(ci < ph.length){ ci++; setTimeout(type, 42); }
-    else { setTimeout(function(){ del=true; type(); }, 3200); }
+    if(ci<ph.length){ci++;setTimeout(type,42);}
+    else{setTimeout(function(){del=true;type();},3200);}
   } else {
-    if(ci > 0){ ci--; setTimeout(type, 16); }
-    else { del=false; pi=(pi+1)%phrases.length; setTimeout(type, 350); }
+    if(ci>0){ci--;setTimeout(type,16);}
+    else{del=false;pi=(pi+1)%phrases.length;setTimeout(type,350);}
   }
 }
 type();
 
-/* ── SCROLL REVEAL ── */
-var rvEls = document.querySelectorAll('.rv');
+/* SCROLL REVEAL */
+var rvEls=document.querySelectorAll('.rv');
 if('IntersectionObserver' in window){
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
-  },{threshold:0.08});
-  rvEls.forEach(function(el){ io.observe(el); });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:0.07});
+  rvEls.forEach(function(el){io.observe(el);});
 } else {
-  rvEls.forEach(function(el){ el.classList.add('in'); });
+  rvEls.forEach(function(el){el.classList.add('in');});
 }
 
-/* ── WIZARD NAV ── */
-var wStep = 1;
-window.go = function(n){
-  var cur = document.getElementById('ws'+wStep);
-  var nxt = document.getElementById('ws'+n);
-  if(cur) cur.classList.remove('on');
-  if(nxt) nxt.classList.add('on');
-  wStep = n;
-  document.getElementById('wsi').textContent = 'Step '+n+' of 5';
-  document.getElementById('wbf').style.width = (n/5*100)+'%';
+/* CATALOGUE TABS */
+window.showTab=function(id){
+  document.querySelectorAll('.cat-panel').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.ctab').forEach(function(t){t.classList.remove('active');});
+  var panel=document.getElementById('tab-'+id);
+  if(panel){panel.classList.add('on');}
+  event.currentTarget.classList.add('active');
 };
-window.tog = function(el){ el.classList.toggle('sel'); };
-window.single = function(el){
-  var grid = el.closest('.ogrid');
-  if(grid) grid.querySelectorAll('.opt').forEach(function(o){ if(o!==el) o.classList.remove('sel'); });
+
+/* WIZARD */
+var wStep=1;
+window.go=function(n){
+  var c=document.getElementById('ws'+wStep);
+  var nx=document.getElementById('ws'+n);
+  if(c)c.classList.remove('on');
+  if(nx)nx.classList.add('on');
+  wStep=n;
+  document.getElementById('wsi').textContent='Step '+n+' of 5';
+  document.getElementById('wbf').style.width=(n/5*100)+'%';
+};
+window.tog=function(el){el.classList.toggle('sel');};
+window.single=function(el){
+  var g=el.closest('.ogrid');
+  if(g)g.querySelectorAll('.opt').forEach(function(o){if(o!==el)o.classList.remove('sel');});
   el.classList.toggle('sel');
 };
 
-/* ── WIZARD FILES ── */
-var wFiles = [];
+/* WIZARD FILES */
+var wFiles=[];
 function renderWF(){
-  document.getElementById('wfl').innerHTML = wFiles.map(function(f,i){
+  document.getElementById('wfl').innerHTML=wFiles.map(function(f,i){
     return '<div class="fitem"><span class="fn">'+f.name+'</span><span class="fsz">'+
-      (f.size/1024/1024).toFixed(1)+'MB</span>'+
-      '<button class="frm" onclick="rmWF('+i+')">×</button></div>';
+      (f.size/1024/1024).toFixed(1)+'MB</span><button class="frm" type="button" onclick="rmWF('+i+')">×</button></div>';
   }).join('');
 }
-window.rmWF = function(i){ wFiles.splice(i,1); renderWF(); };
+window.rmWF=function(i){wFiles.splice(i,1);renderWF();};
 function addWF(files){
   Array.from(files).forEach(function(f){
-    if(wFiles.length>=5){ toast('Max 5 files'); return; }
-    if(f.size>10*1024*1024){ toast(f.name+' exceeds 10MB'); return; }
+    if(wFiles.length>=5){toast('Max 5 files');return;}
+    if(f.size>10*1024*1024){toast(f.name+' exceeds 10MB');return;}
     wFiles.push(f);
   });
   renderWF();
 }
-var wfi = document.getElementById('wfi');
-if(wfi) wfi.addEventListener('change', function(){ addWF(this.files); });
-var wdrop = document.getElementById('wdrop');
+var wfi=document.getElementById('wfi');
+if(wfi)wfi.addEventListener('change',function(){addWF(this.files);});
+var wdrop=document.getElementById('wdrop');
 if(wdrop){
-  wdrop.addEventListener('dragover',function(e){ e.preventDefault(); wdrop.classList.add('over'); });
-  wdrop.addEventListener('dragleave',function(){ wdrop.classList.remove('over'); });
-  wdrop.addEventListener('drop',function(e){ e.preventDefault(); wdrop.classList.remove('over'); addWF(e.dataTransfer.files); });
+  wdrop.addEventListener('dragover',function(e){e.preventDefault();wdrop.classList.add('over');});
+  wdrop.addEventListener('dragleave',function(){wdrop.classList.remove('over');});
+  wdrop.addEventListener('drop',function(e){e.preventDefault();wdrop.classList.remove('over');addWF(e.dataTransfer.files);});
 }
 
-/* ── QUOTE FILES ── */
-var qFiles = [];
+/* WIZARD SUBMIT */
+window.handleWizSubmit=function(e){
+  e.preventDefault();
+  var needs=Array.from(document.querySelectorAll('#ws1 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
+  var budget=Array.from(document.querySelectorAll('#ws4 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
+  document.getElementById('hNeeds').value=needs||'Not selected';
+  document.getElementById('hType').value=document.getElementById('sType').value||'Not specified';
+  document.getElementById('hCount').value=document.getElementById('sCount').value||'Not specified';
+  document.getElementById('hProv').value=document.getElementById('sProv').value||'Not specified';
+  document.getElementById('hBudget').value=budget||'Not selected';
+  document.getElementById('hFiles').value=wFiles.map(function(f){return f.name;}).join(', ')||'None';
+  var fd=new FormData(e.target);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams(fd).toString()})
+    .then(function(){
+      Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
+      document.getElementById('wsucc').classList.add('on');
+      document.getElementById('wsi').textContent='Submitted ✓';
+      document.getElementById('wbf').style.width='100%';
+    })
+    .catch(function(){toast('Submission error — please email info@ivyafrica.co.za directly');});
+};
+
+window.resetWiz=function(){
+  document.getElementById('wsucc').classList.remove('on');
+  Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
+  wStep=1;document.getElementById('ws1').classList.add('on');
+  document.getElementById('wsi').textContent='Step 1 of 5';
+  document.getElementById('wbf').style.width='20%';
+  document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});
+  ['wName','wSchool','wEmail','wPhone'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  wFiles=[];renderWF();
+};
+
+/* QUOTE FILES */
+var qFiles=[];
 function renderQF(){
-  document.getElementById('qfl').innerHTML = qFiles.map(function(f,i){
+  document.getElementById('qfl').innerHTML=qFiles.map(function(f,i){
     return '<div class="fitem" style="margin-top:3px"><span class="fn">'+f.name+'</span><span class="fsz">'+
-      (f.size/1024/1024).toFixed(1)+'MB</span>'+
-      '<button class="frm" onclick="rmQF('+i+')">×</button></div>';
+      (f.size/1024/1024).toFixed(1)+'MB</span><button class="frm" type="button" onclick="rmQF('+i+')">×</button></div>';
   }).join('');
 }
-window.rmQF = function(i){ qFiles.splice(i,1); renderQF(); };
+window.rmQF=function(i){qFiles.splice(i,1);renderQF();};
 function addQF(files){
   Array.from(files).forEach(function(f){
-    if(qFiles.length>=5){ toast('Max 5 files'); return; }
-    if(f.size>10*1024*1024){ toast(f.name+' exceeds 10MB'); return; }
+    if(qFiles.length>=5){toast('Max 5 files');return;}
+    if(f.size>10*1024*1024){toast(f.name+' exceeds 10MB');return;}
     qFiles.push(f);
   });
   renderQF();
 }
-var qfi = document.getElementById('qfi');
-if(qfi) qfi.addEventListener('change', function(){ addQF(this.files); });
-var qdrop = document.getElementById('qdrop');
+var qfi=document.getElementById('qfi');
+if(qfi)qfi.addEventListener('change',function(){addQF(this.files);});
+var qdrop=document.getElementById('qdrop');
 if(qdrop){
-  qdrop.addEventListener('dragover',function(e){ e.preventDefault(); qdrop.classList.add('over'); });
-  qdrop.addEventListener('dragleave',function(){ qdrop.classList.remove('over'); });
-  qdrop.addEventListener('drop',function(e){ e.preventDefault(); qdrop.classList.remove('over'); addQF(e.dataTransfer.files); });
+  qdrop.addEventListener('dragover',function(e){e.preventDefault();qdrop.classList.add('over');});
+  qdrop.addEventListener('dragleave',function(){qdrop.classList.remove('over');});
+  qdrop.addEventListener('drop',function(e){e.preventDefault();qdrop.classList.remove('over');addQF(e.dataTransfer.files);});
 }
 
-/* ── SEND WIZARD ── */
-window.sendWiz = function(){
-  var name   = (document.getElementById('wName').value||'').trim();
-  var school = (document.getElementById('wSchool').value||'').trim();
-  var email  = (document.getElementById('wEmail').value||'').trim();
-  if(!name||!school||!email){ toast('Please fill in name, school and email'); return; }
-  var needs = Array.from(document.querySelectorAll('#ws1 .opt.sel')).map(function(o){ return o.textContent.trim(); }).join(', ');
-  var budget= Array.from(document.querySelectorAll('#ws4 .opt.sel')).map(function(o){ return o.textContent.trim(); }).join(', ');
-  var body  = 'School Procurement Request — Ivy Africa Portal\n\n'+
-    'School: '+school+'\nContact: '+name+' ('+( document.getElementById('wRole').value||'')+')'+
-    '\nEmail: '+email+'\nPhone: '+(document.getElementById('wPhone').value||'')+
-    '\nType: '+(document.getElementById('sType').value||'')+
-    ' | Learners: '+(document.getElementById('sCount').value||'')+
-    ' | Province: '+(document.getElementById('sProv').value||'')+
-    '\nNeeds: '+needs+'\nBudget: '+budget+
-    '\nUploaded files: '+(wFiles.map(function(f){return f.name;}).join(', ')||'None');
-  var ml = 'mailto:info@ivyafrica.co.za?subject='+
-    encodeURIComponent('School Procurement Request — '+school)+
-    '&body='+encodeURIComponent(body);
-  var a = document.createElement('a');
-  a.href = ml; a.style.display='none';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  Array.from(document.querySelectorAll('.ws')).forEach(function(el){ el.classList.remove('on'); });
-  document.getElementById('wsucc').classList.add('on');
-  document.getElementById('wsi').textContent = 'Submitted ✓';
-  document.getElementById('wbf').style.width = '100%';
+/* QUOTE SUBMIT */
+window.handleQSubmit=function(e){
+  e.preventDefault();
+  document.getElementById('qhFiles').value=qFiles.map(function(f){return f.name;}).join(', ')||'None';
+  var fd=new FormData(e.target);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams(fd).toString()})
+    .then(function(){
+      document.getElementById('qformWrap').style.display='none';
+      document.getElementById('qsucc').classList.add('on');
+    })
+    .catch(function(){toast('Submission error — please email info@ivyafrica.co.za directly');});
 };
 
-window.resetWiz = function(){
-  document.getElementById('wsucc').classList.remove('on');
-  Array.from(document.querySelectorAll('.ws')).forEach(function(el){ el.classList.remove('on'); });
-  wStep=1; document.getElementById('ws1').classList.add('on');
-  document.getElementById('wsi').textContent='Step 1 of 5';
-  document.getElementById('wbf').style.width='20%';
-  document.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('sel'); });
-  ['wName','wSchool','wEmail','wPhone'].forEach(function(id){
-    var el=document.getElementById(id); if(el) el.value='';
-  });
-  wFiles=[]; renderWF();
-};
-
-/* ── SEND QUOTE ── */
-window.sendQuote = function(){
-  var school  = (document.getElementById('qSchool').value||'').trim();
-  var contact = (document.getElementById('qContact').value||'').trim();
-  var email   = (document.getElementById('qEmail').value||'').trim();
-  if(!school||!contact||!email){ toast('Please fill in school name, contact and email'); return; }
-  var body = 'Formal Quotation Request — Ivy Africa Portal\n\n'+
-    'School: '+school+'\nEMIS: '+(document.getElementById('qEmis').value||'')+
-    '\nContact: '+contact+'\nEmail: '+email+
-    '\nPhone: '+(document.getElementById('qPhone').value||'')+
-    '\nQuote required by: '+(document.getElementById('qDate').value||'Not specified')+
-    '\nUploaded files: '+(qFiles.map(function(f){return f.name;}).join(', ')||'None')+
-    '\n\nAdditional requirements:\n'+(document.getElementById('qNotes').value||'—');
-  var a = document.createElement('a');
-  a.href = 'mailto:info@ivyafrica.co.za?subject='+
-    encodeURIComponent('Formal Quotation Request — '+school)+
-    '&body='+encodeURIComponent(body);
-  a.style.display='none';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  document.getElementById('qform').style.display='none';
-  document.getElementById('qsucc').classList.add('on');
-};
-
-/* ── TOAST ── */
-window.toast = function(msg){
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('on');
-  setTimeout(function(){ t.classList.remove('on'); }, 3000);
+/* TOAST */
+window.toast=function(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  setTimeout(function(){t.classList.remove('on');},3000);
 };
 
 })();
