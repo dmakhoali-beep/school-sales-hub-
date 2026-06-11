@@ -18,11 +18,9 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:#fff;color:#111;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 
-/* CURSOR */
 #cball{position:fixed;width:20px;height:20px;border-radius:50%;background:var(--orange);pointer-events:none;z-index:99999;top:0;left:0;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;mix-blend-mode:multiply;will-change:transform;}
 #cball.big{width:44px;height:44px;background:var(--green);opacity:.7;}
 
-/* NAV */
 nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 2rem;}
 .nlogo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nlogo img{height:38px;width:auto;}
@@ -32,7 +30,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .ncta{background:var(--orange)!important;color:#fff!important;padding:.45rem 1.1rem;border-radius:4px;font-weight:600!important;transition:background .15s!important;}
 .ncta:hover{background:var(--o2)!important;}
 
-/* TICKER */
 .ticker-wrap{background:var(--blue);overflow:hidden;padding:.5rem 0;position:relative;}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none;}
 .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--blue),transparent);}
@@ -49,7 +46,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .tdot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6;}
 .tsep{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 .75rem;white-space:nowrap;}
 
-/* MILESTONE BANNER */
 .milestone{background:linear-gradient(135deg,var(--green) 0%,var(--g2) 100%);color:#fff;text-align:center;padding:.75rem 2rem;position:relative;overflow:hidden;}
 .milestone::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
 .milestone-inner{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;position:relative;}
@@ -58,7 +54,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .milestone-text{font-size:.9rem;font-weight:500;opacity:.95;}
 .milestone-text strong{font-weight:700;}
 
-/* HERO */
 .hero{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 3rem;display:grid;grid-template-columns:1fr 400px;gap:3.5rem;align-items:start;border-bottom:1px solid var(--bdr);}
 .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem;}
 .eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--orange);}
@@ -70,7 +65,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .ti{font-size:.78rem;color:var(--mut);}
 .ti strong{display:block;font-size:.72rem;color:var(--blue);margin-bottom:1px;font-weight:700;}
 
-/* STATS ROW */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:2.5rem;}
 .stat-item{background:#fff;padding:1.25rem;text-align:center;}
 .stat-num{font-family:'Source Serif 4',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:.3rem;}
@@ -80,7 +74,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .stat-num.yellow{color:var(--yellow);}
 .stat-label{font-size:.72rem;color:var(--mut);font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
 
-/* WIZARD */
 .wcard{border:1px solid var(--bdr);border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 4px 24px rgba(27,58,107,.1);}
 .whead{background:var(--blue);padding:.875rem 1.125rem;display:flex;justify-content:space-between;align-items:center;}
 .whead-title{font-size:.75rem;font-weight:700;color:#fff;letter-spacing:.05em;}
@@ -112,7 +105,6 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .wbtn.orng{background:var(--orange);color:#fff;border-color:var(--orange);}
 .wbtn.orng:hover{background:var(--o2);}
 
-/* FILE DROP */
 .fdrop{border:2px dashed #D0D0D0;border-radius:6px;padding:1.25rem;text-align:center;position:relative;transition:all .2s;background:#fff;margin-bottom:.6rem;cursor:pointer;}
 .fdrop:hover,.fdrop.over{border-color:var(--green);background:#f0faf0;}
 .fdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
@@ -126,29 +118,24 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .frm:hover{color:#c00;}
 .fnote{font-size:.72rem;color:var(--mut);line-height:1.5;margin-top:.4rem;}
 
-/* SUCCESS */
 .succ{display:none;text-align:center;padding:1.75rem 1rem;}
 .succ.on{display:block;}
 .scheck{width:42px;height:42px;border-radius:50%;background:#e6f9e5;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto .9rem;animation:pop .4s ease;}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
-/* MAIN */
 .main{max-width:1180px;margin:0 auto;padding:2.75rem 2rem;}
 .shead{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--blue);padding-bottom:.45rem;margin-bottom:1.6rem;}
 .shead h2{font-family:'Source Serif 4',serif;font-size:1.3rem;font-weight:700;letter-spacing:-.01em;color:var(--blue);}
 .shead-s{font-size:.78rem;color:var(--mut);}
 
-/* REVEAL */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
 .rv.in{opacity:1;transform:none;}
 
-/* COMPLIANCE */
 .cstrip{background:var(--blue);color:#fff;border-radius:8px;padding:1.1rem 1.5rem;display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin-bottom:2.75rem;}
 .ci{text-align:center;}
 .ci-l{font-size:.6rem;opacity:.5;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
 .ci-v{font-size:.78rem;font-weight:600;}
 
-/* CATALOGUE TABS */
 .cat-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem;}
 .ctab{padding:.45rem 1rem;border:1px solid var(--bdr);border-radius:20px;font-size:.8rem;font-weight:500;color:var(--mut);background:#fff;cursor:pointer;transition:all .15s;white-space:nowrap;}
 .ctab:hover{border-color:var(--blue);color:var(--blue);}
@@ -168,14 +155,12 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .clink{font-size:.78rem;font-weight:600;color:var(--blue);text-decoration:none;}
 .clink:hover{color:var(--green);text-decoration:underline;}
 
-/* DOWNLOAD STRIP */
 .dl-strip{background:linear-gradient(135deg,var(--blue) 0%,var(--b2) 100%);border-radius:6px;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.75rem;}
 .dl-text h3{font-family:'Source Serif 4',serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:.2rem;}
 .dl-text p{font-size:.8rem;color:rgba(255,255,255,.7);}
 .dl-btn{background:var(--yellow);color:var(--blue);border:none;padding:.55rem 1.25rem;border-radius:4px;font-size:.825rem;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s;}
 .dl-btn:hover{background:#e6b800;}
 
-/* QUOTE */
 .qsec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:1.75rem;margin-bottom:2.75rem;}
 .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;}
 .qlabel{display:block;font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:4px;}
@@ -188,11 +173,9 @@ nav{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid va
 .qfdrop:hover,.qfdrop.over{border-color:var(--green);background:#f0faf0;}
 .qfdrop input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;}
 
-/* TOAST */
 #toast{position:fixed;bottom:1.75rem;left:50%;transform:translateX(-50%) translateY(60px);background:var(--blue);color:#fff;padding:.65rem 1.35rem;border-radius:6px;font-size:.825rem;font-weight:500;z-index:9999;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* FOOTER */
 .footer-wrap{background:var(--blue);color:#fff;margin-top:3rem;}
 footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;}
 .footer-brand img{height:40px;width:auto;margin-bottom:.75rem;filter:brightness(0) invert(1);}
@@ -229,23 +212,16 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
 <div id="cball"></div>
 <div id="toast"></div>
 
-<!-- NAV -->
 <nav>
   <a class="nlogo" href="https://ivyafrica.co.za">
     <svg height="38" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
-      <!-- Green circle -->
       <circle cx="45" cy="45" r="44" fill="#3AAA35"/>
-      <!-- Book pages in white -->
       <text x="45" y="38" font-family="Georgia,serif" font-size="28" font-weight="900" fill="white" text-anchor="middle" font-style="italic">ivy</text>
       <rect x="20" y="48" width="50" height="3" rx="1.5" fill="white" opacity=".6"/>
       <rect x="24" y="54" width="42" height="2.5" rx="1.25" fill="white" opacity=".4"/>
-      <!-- AFRICA wordmark -->
       <text x="105" y="52" font-family="Arial Black,Arial,sans-serif" font-size="36" font-weight="900" fill="#1B3A6B" letter-spacing="1">AFRICA</text>
-      <!-- Registered mark -->
       <text x="304" y="22" font-family="Arial,sans-serif" font-size="11" fill="#1B3A6B">®</text>
-      <!-- Tagline -->
       <text x="105" y="70" font-family="Arial,sans-serif" font-size="11" fill="#3AAA35" font-style="italic">Changing Lives, Two Steps A Time</text>
-      <!-- Dots -->
       <circle cx="258" cy="76" r="5" fill="#F5C518"/>
       <circle cx="272" cy="76" r="5" fill="#E8611A"/>
       <circle cx="286" cy="76" r="5" fill="#29ABE2"/>
@@ -260,7 +236,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
   </div>
 </nav>
 
-<!-- 10 YEAR MILESTONE BANNER -->
 <div class="milestone">
   <div class="milestone-inner">
     <div class="milestone-badge"><span>🎓</span> 10 YEARS</div>
@@ -269,7 +244,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
   </div>
 </div>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
     <span class="tsep">Authorised distributor —</span>
@@ -288,7 +262,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div>
     <p class="eyebrow">School Procurement Hub</p>
@@ -303,7 +276,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     </div>
   </div>
 
-  <!-- WIZARD -->
   <div class="wcard">
     <div class="whead">
       <span class="whead-title">SCHOOL PROCUREMENT INTAKE</span>
@@ -446,10 +418,8 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-  <!-- STATS -->
   <div class="stats-row rv">
     <div class="stat-item">
       <div class="stat-num green">10+</div>
@@ -469,7 +439,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     </div>
   </div>
 
-  <!-- COMPLIANCE -->
   <div class="cstrip rv">
     <div class="ci"><div class="ci-l">B-BBEE</div><div class="ci-v">Level 1</div></div>
     <div class="ci"><div class="ci-l">CSD Number</div><div class="ci-v">MAAA 0862915</div></div>
@@ -478,7 +447,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="ci"><div class="ci-l">Delivery</div><div class="ci-v">Nationwide</div></div>
   </div>
 
-  <!-- CATALOGUE TABS -->
   <div class="shead rv">
     <h2>Procurement Catalogue</h2>
     <span class="shead-s">CAPS-aligned · 2025 edition</span>
@@ -491,7 +459,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="ctab" onclick="showTab('supplies',this)">📦 General Supplies</div>
   </div>
 
-  <!-- CAPS -->
   <div class="cat-panel on rv" id="tab-caps">
     <div class="cgrid">
       <div class="citem"><div class="ctag"><span class="cdot" style="background:#003B6F"></span>Maskew Miller Longman</div><div class="ctitle">TAAL MET FLAIR / Mind the Gap</div><div class="cdesc">CAPS-approved study guides and learner books for all subjects, Grades 4–12. NSC exam preparation series included.</div><div class="cprice">From R89 per learner book</div><a class="clink" href="https://ivyafrica.co.za/ltsm/mml">View titles →</a></div>
@@ -504,7 +471,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="dl-strip"><div class="dl-text"><h3>Download the CAPS Textbook Catalogue</h3><p>Full 2025 title list with ISBNs, pricing and publisher details.</p></div><a class="dl-btn" href="https://ivyafrica.co.za/catalogues/caps-2025.pdf" target="_blank">Download PDF →</a></div>
   </div>
 
-  <!-- STEM -->
   <div class="cat-panel rv" id="tab-stem">
     <div class="cgrid">
       <div class="citem"><div class="ctag"><span class="cdot" style="background:#1B3A6B"></span>Coding Kits</div><div class="ctitle">Micro:bit &amp; Arduino Starter Kits</div><div class="cdesc">Hands-on coding kits for Grades 4–9. Aligned to the DBE Coding and Robotics curriculum. Includes teacher guides.</div><div class="cprice">From R450 per kit</div><a class="clink" href="https://ivyafrica.co.za/stem/coding">View range →</a></div>
@@ -517,7 +483,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="dl-strip"><div class="dl-text"><h3>Download the STEM &amp; Robotics Catalogue</h3><p>Full product list with specifications, pricing and DBE curriculum alignment.</p></div><a class="dl-btn" href="https://ivyafrica.co.za/catalogues/stem-2025.pdf" target="_blank">Download PDF →</a></div>
   </div>
 
-  <!-- TRAINING -->
   <div class="cat-panel rv" id="tab-training">
     <div class="cgrid">
       <div class="citem"><div class="ctag"><span class="cdot" style="background:#E8611A"></span>SACE-Accredited</div><div class="ctitle">Subject-Specific CPD Workshops</div><div class="cdesc">On-site workshops for Mathematics, Science, Languages and Life Orientation. SACE points awarded.</div><div class="cprice">From R350 per educator</div><a class="clink" href="https://ivyafrica.co.za/training/cpd">View programmes →</a></div>
@@ -530,7 +495,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="dl-strip"><div class="dl-text"><h3>Download the Teacher Training Catalogue</h3><p>Full programme guide with SACE points, durations and booking details for 2025.</p></div><a class="dl-btn" href="https://ivyafrica.co.za/catalogues/training-2025.pdf" target="_blank">Download PDF →</a></div>
   </div>
 
-  <!-- STATIONERY -->
   <div class="cat-panel rv" id="tab-stationery">
     <div class="cgrid">
       <div class="citem"><div class="ctag"><span class="cdot" style="background:#555"></span>Writing</div><div class="ctitle">Learner Writing Pack</div><div class="cdesc">Standard learner writing pack: HB pencils, Staedtler pens, rulers, erasers and sharpeners. Bulk pricing available.</div><div class="cprice">From R28 per learner pack</div><a class="clink" href="https://ivyafrica.co.za/stationery/writing">View range →</a></div>
@@ -543,7 +507,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="dl-strip"><div class="dl-text"><h3>Download the Stationery Price List</h3><p>Full 2025 stationery catalogue with bulk pricing tiers and order minimums.</p></div><a class="dl-btn" href="https://ivyafrica.co.za/catalogues/stationery-2025.pdf" target="_blank">Download PDF →</a></div>
   </div>
 
-  <!-- SUPPLIES -->
   <div class="cat-panel rv" id="tab-supplies">
     <div class="cgrid">
       <div class="citem"><div class="ctag"><span class="cdot" style="background:#3AAA35"></span>Classroom</div><div class="ctitle">Classroom Furniture &amp; Boards</div><div class="cdesc">Learner desks, chairs, whiteboards, pinboards and teacher workstations. Full classroom fit-out quoting available.</div><div class="cprice">Request quote</div><a class="clink" href="https://ivyafrica.co.za/supplies/furniture">Get a quote →</a></div>
@@ -556,7 +519,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
     <div class="dl-strip"><div class="dl-text"><h3>Download the General Supplies Catalogue</h3><p>Full product and pricing list for school general supplies, furniture and consumables.</p></div><a class="dl-btn" href="https://ivyafrica.co.za/catalogues/supplies-2025.pdf" target="_blank">Download PDF →</a></div>
   </div>
 
-  <!-- FORMAL QUOTE -->
   <div id="quote" class="shead rv" style="margin-top:1rem;">
     <h2>Formal Quotation Request</h2>
     <span class="shead-s">For SGB, treasury &amp; procurement officers</span>
@@ -598,7 +560,6 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer-wrap">
   <footer>
     <div class="footer-brand">
@@ -642,9 +603,9 @@ footer{max-width:1180px;margin:0 auto;padding:2rem;display:grid;grid-template-co
 <script>
 (function(){
 'use strict';
-var UPLOAD_URL='https://ivyafrica.app.n8n.cloud/webhook/7cdd8d37-2cbc-4e04-b24a-6d8fcbaeda26';
+var EMAIL_URL='https://ivyafrica.app.n8n.cloud/webhook/7cdd8d37-2cbc-4e04-b24a-6d8fcbaeda26';
+var DRIVE_URL='https://script.google.com/macros/s/AKfycbzvhbQa69UUb7a42xU3Ix_b3KbYNKt8v-VORvVQAG2WDTZ-On_smNxj0rRobSfMUi1W0g/exec';
 
-/* CURSOR */
 var ball=document.getElementById('cball');
 var bx=window.innerWidth/2,by=window.innerHeight/2,tx=bx,ty=by;
 document.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
@@ -654,7 +615,6 @@ document.querySelectorAll('a,button,.opt,.ctab,.fdrop,.qfdrop,.dl-btn').forEach(
   el.addEventListener('mouseleave',function(){ball.classList.remove('big');});
 });
 
-/* TYPEWRITER */
 var phrases=['Your school\'s LTSM, ICT\n& STEM — sourced,\nquoted, delivered.','10 years serving\nSouth African schools.\nTrust the difference.','Upload your book list.\nWe quote. You procure.\nSimple.'];
 var tw=document.getElementById('tw'),pi=0,ci=0,del=false;
 function type(){
@@ -665,14 +625,12 @@ function type(){
 }
 type();
 
-/* SCROLL REVEAL */
 var rvEls=document.querySelectorAll('.rv');
 if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.07});
   rvEls.forEach(function(el){io.observe(el);});
 }else{rvEls.forEach(function(el){el.classList.add('in');});}
 
-/* TABS */
 window.showTab=function(id,el){
   document.querySelectorAll('.cat-panel').forEach(function(p){p.classList.remove('on');});
   document.querySelectorAll('.ctab').forEach(function(t){t.classList.remove('active');});
@@ -681,7 +639,6 @@ window.showTab=function(id,el){
   if(el)el.classList.add('active');
 };
 
-/* WIZARD */
 var wStep=1;
 window.go=function(n){
   var c=document.getElementById('ws'+wStep),nx=document.getElementById('ws'+n);
@@ -697,7 +654,6 @@ window.single=function(el){
   el.classList.toggle('sel');
 };
 
-/* WIZARD FILES */
 var wFiles=[];
 function renderWF(){
   document.getElementById('wfl').innerHTML=wFiles.map(function(f,i){
@@ -711,12 +667,41 @@ var wfi=document.getElementById('wfi');if(wfi)wfi.addEventListener('change',func
 var wdrop=document.getElementById('wdrop');
 if(wdrop){wdrop.addEventListener('dragover',function(e){e.preventDefault();wdrop.classList.add('over');});wdrop.addEventListener('dragleave',function(){wdrop.classList.remove('over');});wdrop.addEventListener('drop',function(e){e.preventDefault();wdrop.classList.remove('over');addWF(e.dataTransfer.files);});}
 
-/* WIZARD SUBMIT */
+function fileToBase64(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result.split(',')[1]);};
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function sendFilesToDrive(files,schoolName){
+  if(!files.length)return Promise.resolve();
+  var jobs=files.map(function(f){
+    return fileToBase64(f).then(function(b64){
+      var params=new URLSearchParams();
+      params.append('data',b64);
+      params.append('mimeType',f.type||'application/octet-stream');
+      params.append('filename',(schoolName?schoolName+' - ':'')+f.name);
+      return fetch(DRIVE_URL,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:params.toString()
+      }).catch(function(){});
+    });
+  });
+  return Promise.all(jobs);
+}
+
 window.handleWizSubmit=function(e){
   e.preventDefault();
   var needs=Array.from(document.querySelectorAll('#ws1 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
   var budget=Array.from(document.querySelectorAll('#ws4 .opt.sel')).map(function(o){return o.textContent.trim();}).join(', ');
   var schoolName=document.getElementById('wSchool').value||'Unknown School';
+  var fileNames=wFiles.map(function(f){return f.name;}).join(', ')||'None';
+
   var fd=new FormData();
   fd.append('school_name',schoolName);
   fd.append('contact_name',document.getElementById('wName').value||'');
@@ -728,20 +713,20 @@ window.handleWizSubmit=function(e){
   fd.append('province',document.getElementById('sProv').value||'');
   fd.append('needs',needs||'Not selected');
   fd.append('budget',budget||'Not selected');
+  fd.append('files',fileNames);
   fd.append('form_type','wizard');
-  wFiles.forEach(function(f){fd.append('file',f,f.name);});
-  fetch(UPLOAD_URL,{method:'POST',body:fd})
-    .then(function(r){
-      Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
-      document.getElementById('wsucc').classList.add('on');
-      document.getElementById('wsi').textContent='Submitted ✓';
-      document.getElementById('wbf').style.width='100%';
-    }).catch(function(){
-      Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
-      document.getElementById('wsucc').classList.add('on');
-      document.getElementById('wsi').textContent='Submitted ✓';
-      document.getElementById('wbf').style.width='100%';
-    });
+
+  function finish(){
+    Array.from(document.querySelectorAll('.ws')).forEach(function(el){el.classList.remove('on');});
+    document.getElementById('wsucc').classList.add('on');
+    document.getElementById('wsi').textContent='Submitted ✓';
+    document.getElementById('wbf').style.width='100%';
+  }
+
+  Promise.all([
+    fetch(EMAIL_URL,{method:'POST',body:fd}).catch(function(){}),
+    sendFilesToDrive(wFiles,schoolName)
+  ]).then(finish).catch(finish);
 };
 window.resetWiz=function(){
   document.getElementById('wsucc').classList.remove('on');
@@ -753,7 +738,6 @@ window.resetWiz=function(){
   wFiles=[];renderWF();
 };
 
-/* QUOTE FILES */
 var qFiles=[];
 function renderQF(){
   document.getElementById('qfl').innerHTML=qFiles.map(function(f,i){
@@ -767,10 +751,11 @@ var qfi=document.getElementById('qfi');if(qfi)qfi.addEventListener('change',func
 var qdrop=document.getElementById('qdrop');
 if(qdrop){qdrop.addEventListener('dragover',function(e){e.preventDefault();qdrop.classList.add('over');});qdrop.addEventListener('dragleave',function(){qdrop.classList.remove('over');});qdrop.addEventListener('drop',function(e){e.preventDefault();qdrop.classList.remove('over');addQF(e.dataTransfer.files);});}
 
-/* QUOTE SUBMIT */
 window.handleQSubmit=function(e){
   e.preventDefault();
   var schoolName=document.getElementById('qSchool').value||'Unknown School';
+  var fileNames=qFiles.map(function(f){return f.name;}).join(', ')||'None';
+
   var fd=new FormData();
   fd.append('school_name',schoolName);
   fd.append('emis',document.getElementById('qEmis').value||'');
@@ -779,19 +764,20 @@ window.handleQSubmit=function(e){
   fd.append('phone',document.getElementById('qPhone').value||'');
   fd.append('deadline',document.getElementById('qDate').value||'');
   fd.append('notes',document.getElementById('qNotes').value||'');
+  fd.append('files',fileNames);
   fd.append('form_type','formal_quote');
-  qFiles.forEach(function(f){fd.append('file',f,f.name);});
-  fetch(UPLOAD_URL,{method:'POST',body:fd})
-    .then(function(r){
-      document.getElementById('qformWrap').style.display='none';
-      document.getElementById('qsucc').classList.add('on');
-    }).catch(function(){
-      document.getElementById('qformWrap').style.display='none';
-      document.getElementById('qsucc').classList.add('on');
-    });
+
+  function finish(){
+    document.getElementById('qformWrap').style.display='none';
+    document.getElementById('qsucc').classList.add('on');
+  }
+
+  Promise.all([
+    fetch(EMAIL_URL,{method:'POST',body:fd}).catch(function(){}),
+    sendFilesToDrive(qFiles,schoolName)
+  ]).then(finish).catch(finish);
 };
 
-/* TOAST */
 window.toast=function(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(function(){t.classList.remove('on');},3000);};
 
 })();
