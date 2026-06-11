@@ -784,55 +784,7 @@ window.handleQSubmit=function(e){
 /* TOAST */
 window.toast=function(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(function(){t.classList.remove('on');},3000);};
 
-})();  <!-- Contact Form Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-      <!-- Hidden Access Key -->
-      <input type="hidden" name="access_key" value="6100cdfa-d1a7-4f5d-b71a-2be68d5b1b53">
-
-      <!-- Form Fields -->
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-
-      <!-- Submit Button -->
-      <button type="submit">Submit</button>
-    </form>
-
-    <!-- Success/Error Messages -->
-    <div id="form-status"></div>
-  </section>
-
-  <!-- JavaScript for Feedback -->
-  <script>
-    const form = document.getElementById("contact-form");
-    const status = document.getElementById("form-status");
-
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault(); // stop default form submission
-      status.innerHTML = "⏳ Sending...";
-
-      try {
-        const response = await fetch(form.action, {
-          method: form.method,
-          body: new FormData(form)
-        });
-
-        if (response.ok) {
-          status.innerHTML = "✅ Thanks! Your message was sent successfully.";
-          form.reset(); // clear the form
-        } else {
-          status.innerHTML = "❌ Oops! Something went wrong. Please try again.";
-        }
-      } catch (error) {
-        status.innerHTML = "⚠️ Network error. Please check your connection.";
-      }
-    });
-  </script>
-</body>
-</html>
-
+})();
 </script>
 </body>
 </html>
