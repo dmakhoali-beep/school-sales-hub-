@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Quote | Ivy Africa School Procurement</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B3A6B;--navy2:#142d54;
+  --green:#3AAA35;--green2:#2d8a29;
+  --orange:#E8611A;--orange2:#c9541a;
+  --bg:#F4F4F0;--white:#fff;
+  --txt:#111;--muted:#666;--border:#E0DFDA;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo-mark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-circle{width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:13px;font-weight:900;color:#fff;font-style:italic;flex-shrink:0}
+.logo-text{font-family:'Arial Black',Arial,sans-serif;font-size:18px;font-weight:900;color:var(--navy);letter-spacing:1px}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:3px 9px}
+
+main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:2.5rem 1.25rem 3rem}
+.form-shell{width:100%;max-width:560px}
+
+.progress-wrap{margin-bottom:1.75rem}
+.progress-labels{display:flex;justify-content:space-between;margin-bottom:8px}
+.prog-label{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);transition:color .2s;display:flex;align-items:center;gap:4px}
+.prog-label.active{color:var(--navy)}
+.prog-label.done{color:var(--green)}
+.prog-num{width:18px;height:18px;border-radius:50%;border:1.5px solid currentColor;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.prog-label.done .prog-num{background:var(--green);border-color:var(--green);color:#fff}
+.progress-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--navy);border-radius:2px;transition:width .4s ease}
+
+.step-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;display:none}
+.step-card.active{display:block}
+.card-head{background:var(--navy);padding:20px 26px}
+.card-head-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:5px}
+.card-head-title{font-family:'Source Serif 4',serif;font-size:21px;font-weight:700;color:#fff;line-height:1.2}
+.card-head-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:5px;line-height:1.5}
+.card-body{padding:24px 26px}
+
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.opt-full{grid-column:1/-1}
+.opt-btn{padding:11px 14px;border:1.5px solid var(--border);border-radius:7px;background:var(--white);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--txt);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:8px;line-height:1.3;width:100%}
+.opt-btn:hover{border-color:var(--navy);background:#f0f4ff}
+.opt-btn.sel{border-color:var(--green);background:#f0faf0;color:#1a5c17;font-weight:600}
+.opt-btn.sel .opt-check{opacity:1}
+.opt-check{margin-left:auto;font-size:11px;font-weight:700;color:var(--green);opacity:0;transition:opacity .15s;flex-shrink:0}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;font-size:14px;color:var(--txt);background:var(--white);outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,58,107,0.07)}
+.field textarea{resize:vertical;min-height:72px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-note{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
+
+.upload-box{border:2px dashed var(--border);border-radius:8px;padding:22px 18px;text-align:center;background:#fafaf8;transition:all .2s;cursor:pointer;text-decoration:none;display:block;margin-bottom:6px}
+.upload-box:hover{border-color:var(--green);background:#f0faf0}
+.upload-icon{font-size:28px;display:block;margin-bottom:8px}
+.upload-title{font-size:14px;font-weight:700;color:var(--navy);display:block;margin-bottom:3px}
+.upload-sub{font-size:12px;color:var(--muted)}
+.upload-badge{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--muted);margin-top:10px}
+
+.step-nav{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--border);margin-top:8px}
+.btn-back{padding:9px 18px;border:1.5px solid var(--border);border-radius:6px;background:var(--white);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
+.btn-back:hover{border-color:#aaa;color:var(--txt)}
+.btn-next{padding:10px 24px;border:none;border-radius:6px;background:var(--navy);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:background .15s}
+.btn-next:hover{background:var(--navy2)}
+.btn-submit{padding:10px 24px;border:none;border-radius:6px;background:var(--orange);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:background .15s}
+.btn-submit:hover{background:var(--orange2)}
+
+.error-msg{font-size:12px;color:#c0392b;margin-top:5px;display:none}
+.field.has-error input,.field.has-error select{border-color:#c0392b}
+.field.has-error .error-msg{display:block}
+
+.success-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:40px 28px;text-align:center;display:none}
+.success-card.show{display:block}
+.success-icon{width:54px;height:54px;border-radius:50%;background:#f0faf0;border:1.5px solid #b8ddb5;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px}
+.success-title{font-family:'Source Serif 4',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.success-sub{font-size:13px;color:var(--muted);line-height:1.75;max-width:380px;margin:0 auto 20px}
+.success-detail{background:#f8f8f5;border:1px solid var(--border);border-radius:7px;padding:14px 18px;text-align:left;margin-bottom:18px}
+.success-detail p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.success-detail strong{color:var(--navy);font-weight:700}
+.comp-row{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;padding-top:16px;border-top:1px solid var(--border)}
+.comp-badge{font-size:11px;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:4px 10px}
+
+footer{background:var(--navy);padding:14px 2rem}
+footer p{font-size:11px;color:rgba(255,255,255,0.4);text-align:center;line-height:1.8}
+footer a{color:rgba(255,255,255,0.55);text-decoration:none}
+footer a:hover{color:#fff}
+
+@media(max-width:520px){
+  .opt-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  nav{padding:0 1rem}
+  .card-body{padding:18px 16px}
+  .card-head{padding:16px 18px}
+  main{padding:1.5rem 1rem 2.5rem}
+  .nav-tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo-mark" href="#">
+    <div class="logo-circle">ivy</div>
+    <div class="logo-text">AFRICA</div>
+  </a>
+  <span class="nav-tag">School Procurement Portal</span>
+</nav>
+
+<main>
+  <div class="form-shell">
+
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span class="prog-label active" id="pl1"><span class="prog-num">1</span> What you need</span>
+        <span class="prog-label" id="pl2"><span class="prog-num">2</span> Your school</span>
+        <span class="prog-label" id="pl3"><span class="prog-num">3</span> Contact &amp; files</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="pfill" style="width:33%"></div></div>
+    </div>
+
+    <!-- ═══ STEP 1: WHAT YOU NEED ═══ -->
+    <div class="step-card active" id="card1">
+      <div class="card-head">
+        <div class="card-head-eyebrow">Step 1 of 3</div>
+        <div class="card-head-title">What does your school need?</div>
+        <div class="card-head-sub">Select all that apply — we'll quote against each category.</div>
+      </div>
+      <div class="card-body">
+        <div class="opt-grid" id="needsGrid">
+          <button type="button" class="opt-btn" onclick="toggleOpt(this)">&#128218;<span>Textbooks &amp; LTSM</span><span class="opt-check">&#10003;</span></button>
+          <button type="button" class="opt-btn" onclick="toggleOpt(this)">&#128187;<span>ICT &amp; Devices</span><span class="opt-check">&#10003;</span></button>
+          <button type="button" class="opt-btn" onclick="toggleOpt(this)">&#128300;<span>STEM &amp; Robotics</span><span class="opt-check">&#10003;</span></button>
+          <button type="button" class="opt-btn" onclick="toggleOpt(this)">&#127891;<span>Teacher Training</span><span class="opt-check">&#10003;</span></button>
+          <button type="button" class="opt-btn" onclick="toggleOpt(this)">&#9999;&#65039;<span>Stationery &amp; Supplies</span><span class="opt-check">&#10003;</span></button>
+          <button type="button" class="opt-btn opt-full" onclick="toggleOpt(this)">&#128230;<span>Full school package — quote everything</span><span class="opt-check">&#10003;</span></button>
+        </div>
+
+        <div class="field">
+          <label>Estimated budget</label>
+          <select id="budget">
+            <option value="">Select a range</option>
+            <option>Under R50,000</option>
+            <option>R50,000 – R250,000</option>
+            <option>R250,000 – R1,000,000</option>
+            <option>Over R1,000,000</option>
+            <option>To be quoted</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>When do you need delivery?</label>
+          <select id="timeline">
+            <option value="">Select timeline</option>
+            <option>This month</option>
+            <option>This term</option>
+            <option>This year</option>
+            <option>Planning ahead</option>
+          </select>
+        </div>
+
+        <div class="step-nav">
+          <span></span>
+          <button class="btn-next" onclick="goStep(2)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 2: SCHOOL DETAILS ═══ -->
+    <div class="step-card" id="card2">
+      <div class="card-head">
+        <div class="card-head-eyebrow">Step 2 of 3</div>
+        <div class="card-head-title">Tell us about your school</div>
+        <div class="card-head-sub">This goes on your formal quotation document.</div>
+      </div>
+      <div class="card-body">
+        <div class="field" id="f-schoolName">
+          <label>School name *</label>
+          <input type="text" id="schoolName" placeholder="e.g. Kgomotso Secondary School">
+          <p class="error-msg">Please enter your school name.</p>
+        </div>
+        <div class="field-row">
+          <div class="field" id="f-schoolType">
+            <label>School type *</label>
+            <select id="schoolType">
+              <option value="">Select</option>
+              <option>Primary (Gr R–7)</option>
+              <option>Secondary (Gr 8–12)</option>
+              <option>Combined (Gr R–12)</option>
+              <option>Special needs</option>
+              <option>TVET College</option>
+            </select>
+            <p class="error-msg">Please select school type.</p>
+          </div>
+          <div class="field">
+            <label>Learner count</label>
+            <select id="learnerCount">
+              <option value="">Select</option>
+              <option>Under 200</option>
+              <option>200 – 500</option>
+              <option>500 – 1,000</option>
+              <option>Over 1,000</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field" id="f-province">
+            <label>Province *</label>
+            <select id="province">
+              <option value="">Select</option>
+              <option>Eastern Cape</option>
+              <option>Free State</option>
+              <option>Gauteng</option>
+              <option>KwaZulu-Natal</option>
+              <option>Limpopo</option>
+              <option>Mpumalanga</option>
+              <option>North West</option>
+              <option>Northern Cape</option>
+              <option>Western Cape</option>
+            </select>
+            <p class="error-msg">Please select a province.</p>
+          </div>
+          <div class="field">
+            <label>EMIS number</label>
+            <input type="text" id="emis" placeholder="Optional">
+          </div>
+        </div>
+        <div class="field">
+          <label>Additional requirements</label>
+          <textarea id="notes" placeholder="Specific subjects, grades, quantities, or delivery instructions..."></textarea>
+          <p class="field-note">Optional — you can also attach your book list or RFQ on the next step.</p>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(1)">&#8592; Back</button>
+          <button class="btn-next" onclick="goStep(3)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 3: CONTACT + FILE UPLOAD ═══ -->
+    <div class="step-card" id="card3">
+      <div class="card-head">
+        <div class="card-head-eyebrow">Step 3 of 3</div>
+        <div class="card-head-title">Contact details &amp; documents</div>
+        <div class="card-head-sub">Upload your book list or RFQ, then confirm who we quote to.</div>
+      </div>
+      <div class="card-body">
+
+        <!-- UPLOAD BLOCK -->
+        <div class="field">
+          <label>Upload book list / RFQ document</label>
+          <a id="driveUploadLink" href="https://1drv.ms/f/c/3925f9be0603fea5/IgCeMSNUeHhBQLzRozxN4xdMAWyaYAbzMwH7AyZ6-oOeM7c?e=554ytb" target="_blank" rel="noopener" class="upload-box">
+            <span class="upload-icon">&#128193;#9729;&#128193;#65039;</span>
+            <span class="upload-title">Upload your book list to our secure folder</span>
+            <span class="upload-sub">PDF, Word, Excel, CSV or image — uploads securely to our Microsoft OneDrive</span>
+            <span class="upload-badge">&#128279; Opens OneDrive — Schools RFQ Uploads</span>
+          </a>
+          <p class="field-note">Click to open our shared folder in a new tab. Upload your file there, then come back and complete this form. Not ready? You can also email it to <strong>info@ivyafrica.co.za</strong> after submitting.</p>
+        </div>
+
+        <div style="height:1px;background:var(--border);margin:18px 0"></div>
+
+        <div class="field-row">
+          <div class="field" id="f-contactName">
+            <label>Full name *</label>
+            <input type="text" id="contactName" placeholder="Principal / HOD name">
+            <p class="error-msg">Please enter your name.</p>
+          </div>
+          <div class="field">
+            <label>Your role</label>
+            <select id="role">
+              <option value="">Select</option>
+              <option>Principal</option>
+              <option>Deputy Principal</option>
+              <option>HOD</option>
+              <option>SGB Member</option>
+              <option>Finance Officer</option>
+              <option>Procurement Officer</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" id="f-email">
+          <label>Email address *</label>
+          <input type="email" id="email" placeholder="official.school@email.co.za">
+          <p class="error-msg">Please enter a valid email address.</p>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Phone number</label>
+            <input type="tel" id="phone" placeholder="0XX XXX XXXX">
+          </div>
+          <div class="field">
+            <label>Quote needed by</label>
+            <input type="date" id="deadline">
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" onclick="goStep(2)">&#8592; Back</button>
+          <button class="btn-submit" onclick="submitForm()">Send to Ivy Africa &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SUCCESS ═══ -->
+    <div class="success-card" id="successCard">
+      <div class="success-icon">&#10003;</div>
+      <div class="success-title">Quote request received</div>
+      <div class="success-sub">We'll have a formal, itemised quotation with you within 24 hours. Check your email — a copy of your submission has been sent to your inbox.</div>
+      <div class="success-detail">
+        <p>
+          <strong>Didn't upload your book list yet?</strong><br>
+          Email it directly to <a href="mailto:info@ivyafrica.co.za" style="color:var(--navy);font-weight:600;">info@ivyafrica.co.za</a> with your school name in the subject line and we'll match it to your request.
+        </p>
+      </div>
+      <em style="font-size:12px;color:#aaa;display:block;margin-bottom:14px;">Changing Lives, Two Steps A Time</em>
+      <div class="comp-row">
+        <span class="comp-badge">B-BBEE Level 1</span>
+        <span class="comp-badge">CSD MAAA 0862915</span>
+        <span class="comp-badge">VAT 4910306010</span>
+        <span class="comp-badge">100% Black-owned</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>
+    &copy; 2025 Ivy Africa (Pty) Ltd &nbsp;&middot;&nbsp; Reg 2016/041769/07 &nbsp;&middot;&nbsp;
+    <a href="mailto:info@ivyafrica.co.za">info@ivyafrica.co.za</a>
+    &nbsp;&middot;&nbsp; Proudly South African
+  </p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ─────────────────────────────────────────
+   * CONFIGURATION — update these two values
+   * ─────────────────────────────────────────
+   * 1. YOUR_INBOX: email address that receives quote requests
+   * 2. FORM_ACTION: your Google Form formResponse URL
+   *    Format: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+   * ───────────────────────────────────────── */
+  var FORMSPREE    = 'https://formspree.io/f/mwvjnwgl';
+  var FORM_ACTION  = 'https://docs.google.com/forms/d/e/1FAIpQLSfzjDRJOUOSob_EnK1aGi9YuUz21jMycRRMWmgWjlANV-QnTg/formResponse';
+
+  /* ─────────────────────────────────────────
+   * GOOGLE FORM ENTRY IDs
+   * From your pre-filled URL:
+   *   entry.1000057 — first question (customer type)
+   *   entry.1000020 — second field
+   *   entry.1000022 — third field
+   *   entry.1000025 — email
+   *   entry.1000026 — preferred contact
+   *
+   * NOTE: Your form only has 5 fields. The form
+   * below collects more — the extras go via mailto
+   * only. Map your actual form fields below.
+   * ───────────────────────────────────────── */
+  var ENTRY = {
+    customerType: 'entry.1000057',
+    schoolName:   'entry.1000020',
+    contactName:  'entry.1000022',
+    email:        'entry.1000025',
+    contactPref:  'entry.1000026'
+  };
+
+  /* ── STEP NAVIGATION ── */
+  window.goStep = function(n) {
+    if (n === 2) {
+      var needs = getNeeds();
+      if (!needs.length) {
+        alert('Please select at least one item your school needs.');
+        return;
+      }
+    }
+    if (n === 3) {
+      var ok = true;
+      if (!v('schoolName'))  { showErr('f-schoolName', true); ok = false; } else { showErr('f-schoolName', false); }
+      if (!v('schoolType'))  { showErr('f-schoolType', true); ok = false; } else { showErr('f-schoolType', false); }
+      if (!v('province'))    { showErr('f-province', true);   ok = false; } else { showErr('f-province', false); }
+      if (!ok) return;
+    }
+
+    for (var i = 1; i <= 3; i++) {
+      document.getElementById('card' + i).classList.toggle('active', i === n);
+    }
+    updateProgress(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  function updateProgress(n) {
+    ['pl1','pl2','pl3'].forEach(function(id, idx) {
+      var el = document.getElementById(id);
+      el.className = 'prog-label';
+      if (idx + 1 < n)  el.classList.add('done');
+      if (idx + 1 === n) el.classList.add('active');
+    });
+    document.getElementById('pfill').style.width = Math.round(n / 3 * 100) + '%';
+  }
+
+  /* ── OPTION TOGGLE ── */
+  window.toggleOpt = function(el) { el.classList.toggle('sel'); };
+
+  /* ── SUBMIT ── */
+  window.submitForm = function() {
+    var name  = v('contactName');
+    var email = v('email');
+    var ok = true;
+    if (!name)                  { showErr('f-contactName', true); ok = false; } else { showErr('f-contactName', false); }
+    if (!email || !email.includes('@')) { showErr('f-email', true); ok = false; } else { showErr('f-email', false); }
+    if (!ok) return;
+
+    var needs   = getNeeds().join(', ') || 'Not specified';
+    var school  = v('schoolName');
+    var type    = v('schoolType');
+    var count   = v('learnerCount') || 'Not specified';
+    var prov    = v('province');
+    var emis    = v('emis') || '—';
+    var notes   = v('notes') || '—';
+    var role    = v('role') || '—';
+    var phone   = v('phone') || '—';
+    var budget  = v('budget') || 'Not specified';
+    var timeline= v('timeline') || 'Not specified';
+    var deadline= v('deadline') || 'Not specified';
+
+    /* 1. GOOGLE FORM — silent background submission */
+    var params = new URLSearchParams();
+    params.append(ENTRY.customerType, 'School — ' + type);
+    params.append(ENTRY.schoolName,   school);
+    params.append(ENTRY.contactName,  name);
+    params.append(ENTRY.email,        email);
+    params.append(ENTRY.contactPref,  'Email');
+    fetch(FORM_ACTION, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    }).catch(function(){});
+
+    /* 2. FORMSPREE — silent POST, lands directly in info@ivyafrica.co.za */
+    fetch(FORMSPREE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject:      'Quote Request — ' + school + ' [' + prov + ']',
+        _replyto:      email,
+        'Items needed': needs,
+        'Budget':       budget,
+        'Timeline':     timeline,
+        'Deadline':     deadline,
+        'School name':  school,
+        'School type':  type,
+        'Learners':     count,
+        'Province':     prov,
+        'EMIS':         emis,
+        'Notes':        notes,
+        'Contact name': name,
+        'Role':         role,
+        'Email':        email,
+        'Phone':        phone
+      })
+    }).catch(function(){});
+
+    /* 3. SHOW SUCCESS */
+    setTimeout(function() {
+      for (var i = 1; i <= 3; i++) {
+        document.getElementById('card' + i).classList.remove('active');
+      }
+      document.getElementById('pfill').style.width = '100%';
+      ['pl1','pl2','pl3'].forEach(function(id) {
+        document.getElementById(id).className = 'prog-label done';
+      });
+      document.getElementById('successCard').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 400);
+  };
+
+  /* ── HELPERS ── */
+  function v(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function getNeeds() {
+    return Array.from(document.querySelectorAll('#needsGrid .opt-btn.sel'))
+      .map(function(b) {
+        return b.querySelector('span:not(.opt-check)').textContent.trim();
+      });
+  }
+  function showErr(fieldId, show) {
+    var el = document.getElementById(fieldId);
+    if (el) el.classList.toggle('has-error', show);
+  }
+
+})();
+</script>
+</body>
+</html>
